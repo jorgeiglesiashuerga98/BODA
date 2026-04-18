@@ -36,24 +36,28 @@
       -webkit-font-smoothing: antialiased;
     }
     body.locked { overflow: hidden; }
-
-    #preloader {
-      position: fixed; inset: 0; background: var(--bg); z-index: 9999;
-      display: flex; align-items: center; justify-content: center;
-      transition: opacity 1s ease, visibility 1s ease;
-    }
-    #preloader.fade { opacity: 0; visibility: hidden; }
-    .loader-logo { font-family: var(--header); font-size: 3rem; color: var(--accent); font-style: italic; animation: pulseFade 2s infinite; }
-    @keyframes pulseFade { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; transition: all 0.3s ease; }
+    .container { width: min(1000px, calc(100% - 40px)); margin: 0 auto; }
 
     .custom-cursor {
-      position: fixed; top: 0; left: 0; width: 10px; height: 10px;
-      background-color: var(--accent); border-radius: 50%;
-      pointer-events: none; z-index: 10000; transform: translate(-50%, -50%);
+      position: fixed; top: 0; left: 0;
+      width: 10px; height: 10px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
       transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border 0.3s ease;
       mix-blend-mode: multiply;
     }
-    .custom-cursor.hover { width: 50px; height: 50px; background-color: rgba(186, 150, 83, 0.15); border: 1px solid var(--accent); backdrop-filter: blur(2px); }
+    .custom-cursor.hover {
+      width: 50px; height: 50px;
+      background-color: rgba(186, 150, 83, 0.15);
+      border: 1px solid var(--accent);
+      backdrop-filter: blur(2px);
+    }
+    @media (hover: none) and (pointer: coarse) { .custom-cursor { display: none; } }
 
     .gate {
       position: fixed; inset: 0; z-index: 5000;
@@ -79,14 +83,15 @@
     .site.visible { opacity: 1; }
     .nav {
       position: fixed; top: 0; width: 100%; z-index: 100;
+      background: transparent; border-bottom: 1px solid transparent;
       transition: all 0.4s ease;
     }
     .nav-inner {
       width: min(1200px, calc(100% - 40px)); margin: 0 auto;
-      height: 75px; display: flex; align-items: center; justify-content: center; gap: 40px;
+      height: 75px; display: flex; align-items: center; justify-content: center; gap: 30px;
     }
-    .menu a { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; font-weight: 500; text-decoration: none; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
-    .nav-brand { font-family: var(--header); font-size: 1.5rem; font-style: italic; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.4); margin: 0 20px;}
+    .menu a { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+    .nav-brand { font-family: var(--header); font-size: 1.5rem; font-style: italic; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.4); margin: 0 15px;}
     
     .nav.scrolled { background: rgba(245, 243, 237, 0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
     .nav.scrolled .menu a, .nav.scrolled .nav-brand { color: var(--text); text-shadow: none; }
@@ -108,39 +113,67 @@
       background-attachment: fixed;
       color: #fff; text-align: center;
     }
+    @media (max-width: 768px) { .hero { background-attachment: scroll; } }
 
-    .section { padding: 100px 0; border-bottom: 1px solid var(--line); }
+    .hero h1 { font-family: var(--header); font-size: clamp(4rem, 10vw, 7.5rem); font-weight: 300; margin: 0; line-height: 1; }
+    
+    .section { padding: 120px 0; border-bottom: 1px solid var(--line); }
     .section-title { font-family: var(--header); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 300; color: var(--accent-dark); text-align: center; margin-bottom: 60px;}
 
-    .info-card {
-      background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);
-      padding: 40px 20px; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.3);
-      text-align: center;
-    }
-    .place-image { width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 4px; margin-bottom: 25px; }
+    .countdown-wrapper { text-align: center; padding: 80px 0; background: #fff; border-bottom: 1px solid var(--line); position: relative; z-index: 10;}
+    .countdown { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+    .count-item strong { display: block; font-family: var(--header); font-size: 3.5rem; color: var(--accent-dark); line-height: 1; }
+    .count-item span { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
 
+    .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; }
+    .info-card { text-align: center; padding: 20px; }
+    .place-image { width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 25px; filter: sepia(10%); }
+    
     .gallery { column-count: 3; column-gap: 20px; }
     .gallery-item { break-inside: avoid; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
     .gallery-item img { width: 100%; transition: transform 0.7s ease; filter: sepia(10%); }
-    .gallery-item:hover img { filter: none; transform: scale(1.03); }
+    .gallery-item:hover img { transform: scale(1.03); filter: none; }
 
-    .form-control { width: 100%; padding: 15px 0; background: transparent; border: none; border-bottom: 1px solid var(--line); font-family: var(--body); font-size: 1.1rem; margin-bottom: 30px; outline: none; transition: border-color 0.3s ease; }
-    .btn-solid { background: var(--accent-dark); color: #fff; padding: 15px 40px; border: none; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; width: 100%; position: relative; overflow: hidden; transition: 0.3s; }
+    .rsvp-container { max-width: 600px; margin: 0 auto; text-align: center; }
+    .form-control { width: 100%; padding: 12px 0; background: transparent; border: none; border-bottom: 1px solid var(--line); font-family: var(--body); font-size: 1.1rem; margin-bottom: 30px; outline: none; transition: border-color 0.3s; }
+    .form-control:focus { border-color: var(--accent); }
+    
+    .btn-solid { 
+      background: var(--accent-dark); color: #fff; padding: 15px 40px; border: none; 
+      text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; width: 100%; 
+      position: relative; overflow: hidden; transition: background 0.3s;
+    }
+    .btn-solid:hover { background: var(--accent); }
+    .btn-solid::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.25), transparent);
+      transform: skewX(-25deg); animation: sweep 5s infinite;
+    }
+    @keyframes sweep { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
+    
+    .modal-success { position: fixed; inset: 0; background: rgba(58, 49, 43, 0.9); z-index: 9999; display: none; place-items: center; backdrop-filter: blur(8px); }
+    .modal-success.show { display: grid; }
+    .modal-card { background: var(--bg); padding: 50px; border-radius: 4px; text-align: center; max-width: 450px; }
 
     .music-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: #fff; color: var(--accent-dark); border: 1px solid var(--line); z-index: 9000; display: none; align-items: center; justify-content: center; box-shadow: var(--shadow-soft); }
 
-    @media (max-width: 768px) { .gallery { column-count: 2; } .menu { display: none; } }
+    .radio-group { text-align: left; margin-bottom: 30px; }
+    .radio-group p { font-size: 0.8rem; text-transform: uppercase; color: var(--accent-dark); font-weight: 500; margin-bottom: 10px; }
+    .radio-options { display: flex; gap: 20px; }
+
+    @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; } .gallery { column-count: 2; } .menu { display: none; } }
   </style>
 </head>
 <body class="locked">
 
-  <div id="preloader"><div class="loader-logo">A & J</div></div>
   <div class="custom-cursor" id="customCursor"></div>
 
   <audio id="bgMusic" loop><source src="vuestra-cancion.mp3" type="audio/mpeg"></audio>
   <button id="musicToggle" class="music-btn">♪</button>
 
-  <div class="gate" id="gate"><button class="seal-btn" id="openInvitation"></button></div>
+  <div class="gate" id="gate">
+    <button class="seal-btn" id="openInvitation"></button>
+  </div>
 
   <div class="site" id="site">
     <nav class="nav" id="navbar">
@@ -155,123 +188,215 @@
 
     <header class="hero">
       <div class="hero-content">
-        <div style="font-size: 0.9rem; letter-spacing: 0.3em; margin-bottom: 20px; text-transform: uppercase;">14 . Noviembre . 2026</div>
-        <h1 class="shimmer-text" style="font-family: var(--header); font-size: clamp(4rem, 10vw, 7.5rem); font-weight: 300; margin: 0; line-height: 1;">Alba & Jorge</h1>
-        <div style="font-family: var(--header); font-style: italic; font-size: 1.8rem; margin-top: 25px; color: var(--accent);">Lleida</div>
+        <div class="hero-date">14 de Noviembre, 2026</div>
+        <h1 class="shimmer-text">Alba & Jorge</h1>
+        <div class="hero-location" style="color: var(--accent); font-family: var(--header); font-style: italic; font-size: 1.6rem; margin-top: 20px;">Lleida</div>
       </div>
     </header>
 
-    <section class="section" id="detalles">
-      <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-        <h2 class="section-title reveal">Cuándo & Dónde</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px;">
-          <div class="info-card reveal">
-            <img src="catedral.JPG" alt="Catedral de Lleida" class="place-image">
-            <div style="font-family: var(--header); font-style: italic; font-size: 1.4rem; color: var(--accent);">12:30 Hrs</div>
-            <h3 style="font-family: var(--header); font-size: 2rem; font-weight: 400; margin: 10px 0;">La Ceremonia</h3>
-            <p>Catedral Nueva de Lleida<br>Plaça de la Catedral, 25002 Lleida</p>
-            <a href="https://maps.app.goo.gl/P6nF4J2DaxrP8Z9p9" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">Ver Ubicación</a>
-          </div>
+    <div class="countdown-wrapper reveal">
+      <div class="container">
+        <div class="countdown">
+          <div class="count-item"><strong id="days">00</strong><span>Días</span></div>
+          <div class="count-item"><strong id="hours">00</strong><span>Horas</span></div>
+          <div class="count-item"><strong id="minutes">00</strong><span>Minutos</span></div>
+          <div class="count-item"><strong id="seconds">00</strong><span>Segundos</span></div>
+        </div>
+      </div>
+    </div>
 
+    <section class="section" id="detalles">
+      <div class="container">
+        <h2 class="section-title reveal">Cuándo & Dónde</h2>
+        <div class="info-grid">
           <div class="info-card reveal">
-            <img src="palau.JPG" alt="Palau de Margalef" class="place-image">
+            <img src="catedral.JPG" alt="Ceremonia" class="place-image">
+            <div style="font-family: var(--header); font-style: italic; font-size: 1.4rem; color: var(--accent);">12:30 Hrs</div>
+            <h3 style="font-family: var(--header); font-size: 2rem; font-weight: 400;">La Ceremonia</h3>
+            <p>Catedral Nueva de Lleida</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Catedral+Nueva+de+Lleida" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
+          </div>
+          <div class="info-card reveal">
+            <img src="palau.JPG" alt="Banquete" class="place-image">
             <div style="font-family: var(--header); font-style: italic; font-size: 1.4rem; color: var(--accent);">14:30 Hrs</div>
-            <h3 style="font-family: var(--header); font-size: 2rem; font-weight: 400; margin: 10px 0;">La Celebración</h3>
-            <p>Palau de Margalef<br>N-240, Km. 79, 25141 Torregrossa, Lleida</p>
-            <a href="https://maps.app.goo.gl/3fR1A1z8nZ3nE1N46" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">Ver Ubicación</a>
+            <h3 style="font-family: var(--header); font-size: 2rem; font-weight: 400;">La Celebración</h3>
+            <p>Palau de Margalef</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Palau+de+Margalef" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
           </div>
         </div>
       </div>
     </section>
 
     <section class="section" id="alojamiento" style="background-color: #fff;">
-      <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-        <h2 class="section-title reveal">Sugerencias de Alojamiento</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px;">
-          
-          <div class="info-card reveal" style="background: var(--bg);">
-            <img src="hotel_ibis.jpg" alt="Hotel Ibis Lleida" class="place-image">
-            <h3 style="font-family: var(--header); font-size: 1.8rem; font-weight: 400; margin: 10px 0;">Hotel Ibis Lérida</h3>
-            <p>Carrer Maria Montesori, 6, 25001 Lleida<br>Hotel moderno con gimnasio y bar 24h.</p>
-            <a href="https://maps.google.com/?cid=11914230438977137962&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">Ver Mapa</a>
+      <div class="container">
+        <h2 class="section-title reveal">Alojamiento</h2>
+        <div class="info-grid">
+          <div class="info-card reveal">
+            <img src="hotel1.jpeg" alt="Hotel Ibis" class="place-image">
+            <h3 style="font-family: var(--header); font-size: 1.8rem; font-weight: 400;">Hotel Ibis Lleida</h3>
+            <p>Calle Maria Montessori, 6, 25001 Lleida</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Ibis+Lleida" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
           </div>
-
-          <div class="info-card reveal" style="background: var(--bg);">
-            <img src="hotel_real.jpg" alt="Hotel Real Lleida" class="place-image">
-            <h3 style="font-family: var(--header); font-size: 1.8rem; font-weight: 400; margin: 10px 0;">Hotel Real Lleida</h3>
-            <p>Avinguda de Blondel, 22, 25002 Lleida<br>Ubicación céntrica junto al río Segre.</p>
-            <a href="https://maps.google.com/?cid=11035016181545771399&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">Ver Mapa</a>
+          <div class="info-card reveal">
+            <img src="hotel2.jpeg" alt="Hotel Real" class="place-image">
+            <h3 style="font-family: var(--header); font-size: 1.8rem; font-weight: 400;">Hotel Real Lleida</h3>
+            <p>Av. de Blondel, 22, 25002 Lleida</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Real+Lleida" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
           </div>
-
         </div>
       </div>
     </section>
 
     <section class="section" id="galeria">
-      <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+      <div class="container">
         <h2 class="section-title reveal">Nuestra Historia</h2>
         <div class="gallery">
-          <div class="gallery-item reveal"><img src="foto1.JPG"></div>
-          <div class="gallery-item reveal"><img src="foto2.JPG"></div>
-          <div class="gallery-item reveal"><img src="foto3.JPG"></div>
-          <div class="gallery-item reveal"><img src="foto4.JPG"></div>
-          <div class="gallery-item reveal"><img src="foto5.JPG"></div>
-          <div class="gallery-item reveal"><img src="foto6.JPG"></div>
-          <div class="gallery-item reveal"><img src="foto7.JPG"></div>
-          <div class="gallery-item reveal" style="border: 1px solid var(--accent);"><img src="foto8.JPG"></div>
+          <div class="gallery-item reveal"><img src="foto1.JPG" alt="1"></div>
+          <div class="gallery-item reveal"><img src="foto2.JPG" alt="2"></div>
+          <div class="gallery-item reveal"><img src="foto3.JPG" alt="3"></div>
+          <div class="gallery-item reveal"><img src="foto4.JPG" alt="4"></div>
+          <div class="gallery-item reveal"><img src="foto5.JPG" alt="5"></div>
+          <div class="gallery-item reveal"><img src="foto6.JPG" alt="6"></div>
+          <div class="gallery-item reveal"><img src="foto7.JPG" alt="7"></div>
+          <div class="gallery-item reveal"><img src="foto8.JPG" alt="8"></div>
         </div>
       </div>
     </section>
 
     <section class="section" id="rsvp">
-      <div class="container reveal" style="max-width: 600px; margin: 0 auto; text-align: center; padding: 0 20px;">
-        <h2 class="section-title">Confirmación</h2>
-        <form id="rsvpForm" action="https://formspree.io/f/xwvabeeb" method="POST">
-          <input type="text" name="nombre" class="form-control" placeholder="Nombre completo" required>
-          <input type="text" name="acompanante" class="form-control" placeholder="Nombre del acompañante (si aplica)">
-          
-          <div style="text-align: left; margin-bottom: 30px;">
-            <p style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent);">¿Nos acompañas?</p>
-            <div style="display: flex; gap: 20px; margin-top: 10px;">
-              <label style="display: flex; align-items: center; gap: 8px;"><input type="radio" name="asistencia" value="Si" required> ¡Sí!</label>
-              <label style="display: flex; align-items: center; gap: 8px;"><input type="radio" name="asistencia" value="No"> No puedo</label>
+      <div class="container">
+        <h2 class="section-title reveal">Confirmación</h2>
+        <div class="rsvp-container reveal">
+          <p style="font-family: var(--header); font-style: italic; font-size: 1.5rem; margin-bottom: 40px;">¿Nos acompañas?</p>
+          <form id="rsvpForm" action="https://formspree.io/f/xwvabeeb" method="POST">
+            
+            <input type="text" name="nombre" class="form-control" placeholder="Tu nombre completo" required>
+            
+            <input type="text" name="acompanante" class="form-control" placeholder="Nombre de tu acompañante (Opcional)">
+
+            <div class="radio-group">
+              <p>¿Asistirás?</p>
+              <div class="radio-options">
+                <label><input type="radio" name="asistencia" value="Si" required> ¡Sí!</label>
+                <label><input type="radio" name="asistencia" value="No"> No puedo</label>
+              </div>
             </div>
-          </div>
 
-          <div style="text-align: left; margin-bottom: 30px;">
-            <label style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem;">
-              <input type="checkbox" name="autobus" value="Si" style="width: 20px; height: 20px; accent-color: var(--accent-dark);">
-              Necesito plaza en el autobús
-            </label>
-          </div>
+            <div class="radio-group">
+              <p>¿Necesitas plaza de autobús?</p>
+              <div class="radio-options">
+                <label><input type="radio" name="autobus" value="Si"> Sí, por favor</label>
+                <label><input type="radio" name="autobus" value="No"> No, iré por mi cuenta</label>
+              </div>
+            </div>
 
-          <input type="text" name="alergias" class="form-control" placeholder="Alergias o dieta especial">
-          <input type="text" name="cancion" class="form-control" placeholder="Canción que no puede faltar">
-          
-          <button type="submit" class="btn-solid">Enviar Respuesta</button>
-        </form>
+            <input type="text" name="alergias" class="form-control" placeholder="Alergias o dieta (Opcional)">
+            <input type="text" name="cancion" class="form-control" placeholder="Canción que no puede faltar">
+            
+            <button type="submit" class="btn-solid">Enviar Confirmación</button>
+          </form>
+        </div>
       </div>
     </section>
 
-    <footer style="padding: 80px 0; text-align: center; background:#fff;">
-      <h2 class="shimmer-text" style="font-family: var(--header); font-size: 2.5rem; font-weight: 300;">Alba & Jorge</h2>
+    <footer style="padding: 80px 0; text-align: center;">
+      <h2 class="shimmer-text" style="font-family: var(--header); font-size: 2.5rem; font-weight: 400; margin: 0; display: inline-block;">Alba & Jorge</h2>
     </footer>
   </div>
 
+  <div class="modal-success" id="successModal"><div class="modal-card">
+    <h3 style="font-family: var(--header); font-size: 2rem; color: var(--accent-dark);">¡Gracias!</h3>
+    <p>Hemos recibido vuestra respuesta.</p>
+    <button onclick="document.getElementById('successModal').classList.remove('show')" class="btn-solid" style="margin-top: 20px;">Cerrar</button>
+  </div></div>
+
+  <div class="lightbox" id="lightbox" style="position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 20px; z-index: 9999; background: rgba(58, 49, 43, 0.92); backdrop-filter: blur(6px);">
+    <div style="position: relative; max-width: 95vw; max-height: 92vh;">
+      <button id="lightboxClose" style="position: absolute; top: -15px; right: -15px; width: 44px; height: 44px; border: none; border-radius: 50%; background: #fff; color: var(--text); font-size: 1.8rem; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">×</button>
+      <img id="lightboxImg" src="" alt="Foto ampliada" style="max-width: 95vw; max-height: 92vh; width: auto; height: auto; border-radius: 6px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+    </div>
+  </div>
+
   <script>
-    window.addEventListener('load', () => { setTimeout(() => { document.getElementById('preloader').classList.add('fade'); }, 1500); });
     const cursor = document.getElementById("customCursor");
-    document.addEventListener("mousemove", (e) => { cursor.style.left = e.clientX + "px"; cursor.style.top = e.clientY + "px"; });
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
+    });
+    
+    const interactives = document.querySelectorAll("a, button, input, .seal-btn, img, label");
+    interactives.forEach(el => {
+      el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
+      el.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
+    });
+
     const gate = document.getElementById("gate"), openBtn = document.getElementById("openInvitation"), site = document.getElementById("site"), bgMusic = document.getElementById("bgMusic"), musicBtn = document.getElementById("musicToggle");
+    
     openBtn.addEventListener("click", () => {
       gate.classList.add("hidden"); site.classList.add("visible"); document.body.classList.remove("locked"); musicBtn.style.display = "flex";
-      bgMusic.volume = 0.3; bgMusic.play().catch(() => {});
+      bgMusic.volume = 0.3; bgMusic.play().catch(() => console.log("Música manual"));
     });
+
+    musicBtn.addEventListener("click", () => {
+      if(bgMusic.paused) { bgMusic.play(); musicBtn.style.opacity = "1"; }
+      else { bgMusic.pause(); musicBtn.style.opacity = "0.5"; }
+    });
+
+    window.addEventListener("scroll", () => {
+      document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 80);
+    });
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    window.addEventListener("scroll", () => { document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 80); });
+
+    const weddingDate = new Date("2026-11-14T12:30:00").getTime();
+    setInterval(() => {
+      const dist = weddingDate - new Date().getTime();
+      if (dist < 0) return;
+      document.getElementById("days").innerText = Math.floor(dist / 86400000);
+      document.getElementById("hours").innerText = Math.floor((dist % 86400000) / 3600000);
+      document.getElementById("minutes").innerText = Math.floor((dist % 3600000) / 60000);
+      document.getElementById("seconds").innerText = Math.floor((dist % 60000) / 1000);
+    }, 1000);
+
+    const lightboxObj = document.getElementById("lightbox"), lightboxImgObj = document.getElementById("lightboxImg");
+    document.querySelectorAll(".gallery-item img").forEach(img => {
+      img.addEventListener("click", () => { lightboxImgObj.src = img.src; lightboxObj.style.display = "flex"; });
+    });
+    document.getElementById("lightboxClose").addEventListener("click", () => lightboxObj.style.display = "none");
+    lightboxObj.addEventListener("click", (e) => { if (e.target === lightboxObj) lightboxObj.style.display = "none"; });
+
+    document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = e.target, btn = f.querySelector('button');
+      const originalBtnText = btn.innerText;
+      
+      btn.innerText = "Enviando...";
+      btn.disabled = true;
+      
+      try {
+        const res = await fetch(f.action, { 
+          method: 'POST', 
+          body: new FormData(f), 
+          headers: { 'Accept': 'application/json' } 
+        });
+        
+        if (res.ok) { 
+          f.reset(); 
+          document.getElementById("successModal").classList.add("show"); 
+        } else {
+          const data = await res.json();
+          alert("Error: " + (data.error || "No se pudo enviar. Revisa Formspree."));
+        }
+      } catch (error) {
+        alert("Parece que hay un problema de conexión.");
+      } finally {
+        btn.innerText = originalBtnText;
+        btn.disabled = false;
+      }
+    });
   </script>
 </body>
 </html>
