@@ -8,11 +8,9 @@
   <style>
     :root {
       --bg: #f7f1ea;
-      --bg-soft: #fbf8f4;
-      --card: rgba(255, 255, 255, 0.78);
+      --card: rgba(255, 255, 255, 0.82);
       --text: #2f2925;
       --muted: #6e6258;
-      --accent: #9f7f67;
       --accent-dark: #7e624d;
       --line: #eadfd2;
       --shadow: 0 14px 40px rgba(69, 49, 35, 0.08);
@@ -44,10 +42,6 @@
       display: block;
     }
 
-    a {
-      color: inherit;
-    }
-
     .container {
       width: min(var(--max), calc(100% - 32px));
       margin: 0 auto;
@@ -58,7 +52,7 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(10px);
-      background: rgba(251, 248, 244, 0.8);
+      background: rgba(251, 248, 244, 0.85);
       border-bottom: 1px solid rgba(234, 223, 210, 0.8);
     }
 
@@ -119,7 +113,7 @@
 
     .hero-card {
       width: min(760px, 100%);
-      background: rgba(255, 255, 255, 0.58);
+      background: rgba(255, 255, 255, 0.60);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.45);
       border-radius: 30px;
@@ -240,8 +234,9 @@
 
     .place-photo {
       width: 100%;
-      height: 240px;
-      object-fit: cover;
+      height: 300px;
+      object-fit: contain;
+      background: #f5efe8;
       border-radius: 18px;
       margin-bottom: 18px;
     }
@@ -301,6 +296,27 @@
       font-size: 1.08rem;
     }
 
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-item {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 12px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.48);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+
     .faq {
       display: grid;
       gap: 18px;
@@ -350,6 +366,12 @@
       margin-top: 12px;
     }
 
+    @media (max-width: 980px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 860px) {
       .grid-2 {
         grid-template-columns: 1fr;
@@ -394,6 +416,14 @@
         font-size: 1.6rem;
       }
 
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item img {
+        height: 280px;
+      }
+
       .card,
       .intro-card,
       .faq-item,
@@ -411,6 +441,7 @@
       <div class="menu">
         <a href="#dia">El día</a>
         <a href="#lugares">Lugares</a>
+        <a href="#fotos">Fotos</a>
         <a href="#alojamiento">Alojamiento</a>
         <a href="#info">Información</a>
         <a href="#rsvp">Confirmación</a>
@@ -507,6 +538,26 @@
           <p>Después de la ceremonia</p>
           <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Palau+de+Margalef">Ver en Google Maps</a>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="fotos">
+    <div class="container">
+      <h2 class="section-title">Nuestros recuerdos</h2>
+      <p class="section-text">
+        Algunos momentos especiales de nuestro camino juntos.
+      </p>
+
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="foto1.JPG" alt="Jorge y Alba 1"></div>
+        <div class="gallery-item"><img src="foto2.JPG" alt="Jorge y Alba 2"></div>
+        <div class="gallery-item"><img src="foto3.JPG" alt="Jorge y Alba 3"></div>
+        <div class="gallery-item"><img src="foto4.JPG" alt="Jorge y Alba 4"></div>
+        <div class="gallery-item"><img src="foto5.JPG" alt="Jorge y Alba 5"></div>
+        <div class="gallery-item"><img src="foto6.JPG" alt="Jorge y Alba 6"></div>
+        <div class="gallery-item"><img src="foto7.JPG" alt="Jorge y Alba 7"></div>
+        <div class="gallery-item"><img src="foto8.JPG" alt="Jorge y Alba 8"></div>
       </div>
     </div>
   </section>
