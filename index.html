@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jorge & Alba | 14.11.2026</title>
+  <title>Alba & Jorge | 14.11.2026</title>
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
 
   <link rel="preload" href="sobre-invernal.jpg" as="image" media="(min-width: 769px)">
   <link rel="preload" href="sobre-invernal2.jpg" as="image" media="(max-width: 768px)">
 
-  <meta property="og:title" content="¡Nos casamos! Jorge & Alba" />
+  <meta property="og:title" content="¡Nos casamos! Alba & Jorge" />
   <meta property="og:description" content="Acompáñanos el 14 de noviembre de 2026 en Lleida. Descubre todos los detalles y confirma tu asistencia." />
   <meta property="og:image" content="sobre-invernal.jpg" />
 
@@ -88,10 +88,11 @@
     .nav.scrolled .menu a, .nav.scrolled .nav-brand { color: var(--text); text-shadow: none; }
     .nav.scrolled .nav-brand { color: var(--accent-dark); }
 
-    /* -------- SECCIONES -------- */
+    /* -------- HERO -------- */
     .hero {
       height: 100vh; display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(rgba(58, 49, 43, 0.4), rgba(58, 49, 43, 0.6)), url("https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1920&q=80") center/cover;
+      /* Nueva foto mucho más elegante y editorial para la portada */
+      background: linear-gradient(rgba(58, 49, 43, 0.4), rgba(58, 49, 43, 0.65)), url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80") center/cover;
       color: #fff; text-align: center;
     }
     .hero h1 { font-family: var(--header); font-size: clamp(4rem, 10vw, 7.5rem); font-weight: 300; margin: 0; line-height: 1; }
@@ -139,7 +140,7 @@
     <nav class="nav" id="navbar">
       <div class="nav-inner">
         <div class="menu"><a href="#detalles">Detalles</a></div>
-        <div class="nav-brand">J & A</div>
+        <div class="nav-brand">A & J</div>
         <div class="menu"><a href="#rsvp">Asistencia</a></div>
       </div>
     </nav>
@@ -147,7 +148,7 @@
     <header class="hero">
       <div class="hero-content">
         <div class="hero-date">14 de Noviembre, 2026</div>
-        <h1>Jorge & Alba</h1>
+        <h1>Alba & Jorge</h1>
         <div class="hero-location" style="color: var(--accent); font-family: var(--header); font-style: italic; font-size: 1.6rem; margin-top: 20px;">Lleida</div>
       </div>
     </header>
@@ -224,7 +225,7 @@
     </section>
 
     <footer style="padding: 80px 0; text-align: center;">
-      <h2 style="font-family: var(--header); font-size: 2.5rem; color: var(--accent-dark); font-weight: 300;">Jorge & Alba</h2>
+      <h2 style="font-family: var(--header); font-size: 2.5rem; color: var(--accent-dark); font-weight: 300;">Alba & Jorge</h2>
     </footer>
   </div>
 
@@ -233,6 +234,13 @@
     <p>Hemos recibido vuestra respuesta.</p>
     <button onclick="document.getElementById('successModal').classList.remove('show')" class="btn-solid" style="margin-top: 20px;">Cerrar</button>
   </div></div>
+
+  <div class="lightbox" id="lightbox" style="position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 20px; z-index: 9999; background: rgba(58, 49, 43, 0.92); backdrop-filter: blur(6px);">
+    <div style="position: relative; max-width: 95vw; max-height: 92vh;">
+      <button id="lightboxClose" style="position: absolute; top: -15px; right: -15px; width: 44px; height: 44px; border: none; border-radius: 50%; background: #fff; color: var(--text); font-size: 1.8rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">×</button>
+      <img id="lightboxImg" src="" alt="Foto ampliada" style="max-width: 95vw; max-height: 92vh; width: auto; height: auto; border-radius: 6px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+    </div>
+  </div>
 
   <script>
     const gate = document.getElementById("gate"), openBtn = document.getElementById("openInvitation"), site = document.getElementById("site"), bgMusic = document.getElementById("bgMusic"), musicBtn = document.getElementById("musicToggle");
@@ -265,6 +273,14 @@
       document.getElementById("minutes").innerText = Math.floor((dist % 3600000) / 60000);
       document.getElementById("seconds").innerText = Math.floor((dist % 60000) / 1000);
     }, 1000);
+
+    /* Lógica Lightbox */
+    const lightbox = document.getElementById("lightbox"), lightboxImg = document.getElementById("lightboxImg");
+    document.querySelectorAll(".gallery-item img").forEach(img => {
+      img.addEventListener("click", () => { lightboxImg.src = img.src; lightbox.style.display = "flex"; });
+    });
+    document.getElementById("lightboxClose").addEventListener("click", () => lightbox.style.display = "none");
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) lightbox.style.display = "none"; });
 
     document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
       e.preventDefault();
