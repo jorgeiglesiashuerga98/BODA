@@ -43,6 +43,10 @@
         var(--bg);
     }
 
+    body.locked {
+      overflow: hidden;
+    }
+
     img {
       display: block;
       max-width: 100%;
@@ -55,6 +59,194 @@
     .container {
       width: min(var(--max), calc(100% - 32px));
       margin: 0 auto;
+    }
+
+    /* PANTALLA SOBRE */
+    .intro-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at top left, #fffdf9 0%, transparent 25%),
+        radial-gradient(circle at bottom right, #efe2d3 0%, transparent 28%),
+        #f8f4ee;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .intro-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .envelope-scene {
+      width: min(92vw, 520px);
+      text-align: center;
+    }
+
+    .intro-text-top {
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 22px;
+    }
+
+    .envelope {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1.35 / 1;
+      margin: 0 auto 24px;
+      perspective: 1400px;
+    }
+
+    .envelope-back {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #f5eee4, #eadfce);
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(72, 50, 34, 0.14);
+      overflow: hidden;
+    }
+
+    .envelope-letter {
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      bottom: 12%;
+      height: 72%;
+      background: rgba(255,255,255,0.95);
+      border-radius: 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      transform: translateY(10%);
+      transition: transform 1s ease 0.15s, opacity 0.8s ease 0.15s;
+      z-index: 1;
+    }
+
+    .envelope-letter h2 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 500;
+    }
+
+    .envelope-letter p {
+      margin: 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .envelope-front {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .front-left,
+    .front-right,
+    .front-bottom {
+      position: absolute;
+      background: #eee1d0;
+    }
+
+    .front-left {
+      left: 0;
+      bottom: 0;
+      width: 50%;
+      height: 72%;
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+    }
+
+    .front-right {
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      height: 72%;
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+
+    .front-bottom {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 44%;
+      clip-path: polygon(0 100%, 50% 0, 100% 100%);
+      background: #e5d5c1;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 58%;
+      background: linear-gradient(180deg, #f7efe5, #eadbc8);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center;
+      transition: transform 1s ease;
+      z-index: 4;
+      box-shadow: inset 0 -10px 20px rgba(0,0,0,0.04);
+    }
+
+    .seal {
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      transform: translate(-50%, -50%);
+      width: 78px;
+      height: 78px;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at 30% 30%, #b89376, #8b6a52 70%);
+      color: #fffdf8;
+      font-size: 1.7rem;
+      cursor: pointer;
+      z-index: 6;
+      box-shadow: 0 10px 24px rgba(84, 56, 37, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.4s ease;
+    }
+
+    .seal:hover {
+      transform: translate(-50%, -50%) scale(1.04);
+    }
+
+    .seal-text {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .intro-overlay.opening .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .intro-overlay.opening .envelope-letter {
+      transform: translateY(-18%);
+    }
+
+    .intro-overlay.opening .seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    /* WEB */
+    .site-content {
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .site-content.visible {
+      opacity: 1;
     }
 
     .nav {
@@ -497,212 +689,246 @@
         padding-left: 18px;
         padding-right: 18px;
       }
+
+      .seal {
+        width: 68px;
+        height: 68px;
+      }
     }
   </style>
 </head>
-<body>
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="brand">Jorge & Alba</div>
-      <div class="menu">
-        <a href="#dia">El día</a>
-        <a href="#lugares">Lugares</a>
-        <a href="#fotos">Fotos</a>
-        <a href="#alojamiento">Alojamiento</a>
-        <a href="#info">Información</a>
-        <a href="#rsvp">Confirmación</a>
-      </div>
-    </div>
-  </nav>
+<body class="locked">
+  <div class="intro-overlay" id="introOverlay">
+    <div class="envelope-scene">
+      <div class="intro-text-top">Jorge & Alba</div>
 
-  <header class="hero container">
-    <div class="hero-box">
-      <div class="hero-card">
-        <div class="overline">Nuestra boda</div>
-        <h1>Jorge<br>& Alba</h1>
-        <p class="hero-quote">“Y por encima de todo esto, el amor, que es el vínculo de la perfección.”</p>
-        <p class="hero-verse">Colosenses 3:14</p>
-        <p class="hero-subtitle">Nos encantaría celebrar este día con vosotros</p>
-        <p class="hero-date">14 de noviembre de 2026 · 12:30 · Lleida</p>
+      <div class="envelope">
+        <div class="envelope-back"></div>
 
-        <div class="countdown">
-          <div class="count-item"><strong id="days">0</strong><span>días</span></div>
-          <div class="count-item"><strong id="hours">0</strong><span>horas</span></div>
-          <div class="count-item"><strong id="minutes">0</strong><span>minutos</span></div>
-          <div class="count-item"><strong id="seconds">0</strong><span>segundos</span></div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <section class="intro">
-    <div class="container">
-      <div class="intro-card">
-        Después de muchos momentos compartidos, por fin llega uno de los días más especiales de nuestra vida.
-        Nos hace muchísima ilusión celebrarlo con vosotros y compartir juntos cada instante.
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="dia">
-    <div class="container">
-      <h2 class="section-title">El gran día</h2>
-      <p class="section-text">
-        Aquí encontraréis toda la información importante para acompañarnos y disfrutar de este día con nosotros.
-      </p>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="time">12:30</div>
-          <div>
-            <strong>Ceremonia</strong>
-            Catedral Nueva de Lleida
-          </div>
+        <div class="envelope-letter">
+          <h2>Estás invitado</h2>
+          <p>Haz clic en el sello para abrir nuestra invitación</p>
         </div>
 
-        <div class="timeline-item">
-          <div class="time">14:30</div>
-          <div>
-            <strong>Cóctel y celebración</strong>
-            Palau de Margalef
-          </div>
+        <div class="envelope-front">
+          <div class="front-left"></div>
+          <div class="front-right"></div>
+          <div class="front-bottom"></div>
         </div>
 
-        <div class="timeline-item">
-          <div class="time">Tarde</div>
-          <div>
-            <strong>Comida, brindis y fiesta</strong>
-            Seguiremos celebrando juntos durante toda la tarde y la noche.
+        <div class="envelope-flap"></div>
+
+        <button class="seal" id="openInvitation" aria-label="Abrir invitación">✉</button>
+      </div>
+
+      <div class="seal-text">Pulsa el sello</div>
+    </div>
+  </div>
+
+  <div class="site-content" id="siteContent">
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="brand">Jorge & Alba</div>
+        <div class="menu">
+          <a href="#dia">El día</a>
+          <a href="#lugares">Lugares</a>
+          <a href="#fotos">Fotos</a>
+          <a href="#alojamiento">Alojamiento</a>
+          <a href="#info">Información</a>
+          <a href="#rsvp">Confirmación</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero container">
+      <div class="hero-box">
+        <div class="hero-card">
+          <div class="overline">Nuestra boda</div>
+          <h1>Jorge<br>& Alba</h1>
+          <p class="hero-quote">“Y por encima de todo esto, el amor, que es el vínculo de la perfección.”</p>
+          <p class="hero-verse">Colosenses 3:14</p>
+          <p class="hero-subtitle">Nos encantaría celebrar este día con vosotros</p>
+          <p class="hero-date">14 de noviembre de 2026 · 12:30 · Lleida</p>
+
+          <div class="countdown">
+            <div class="count-item"><strong id="days">0</strong><span>días</span></div>
+            <div class="count-item"><strong id="hours">0</strong><span>horas</span></div>
+            <div class="count-item"><strong id="minutes">0</strong><span>minutos</span></div>
+            <div class="count-item"><strong id="seconds">0</strong><span>segundos</span></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <section class="section" id="lugares">
-    <div class="container">
-      <h2 class="section-title">Lugares</h2>
-      <p class="section-text">
-        Os dejamos aquí las ubicaciones principales del día para que os resulte todo más fácil.
-      </p>
-
-      <div class="grid-2">
-        <article class="card">
-          <img src="catedral.jpg" alt="Catedral Nueva de Lleida" class="place-photo">
-          <h3>Ceremonia</h3>
-          <div class="eyeline"></div>
-          <p><strong>Catedral Nueva de Lleida</strong></p>
-          <p>14 de noviembre de 2026</p>
-          <p>12:30</p>
-          <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Catedral+Nueva+de+Lleida">Ver en Google Maps</a>
-        </article>
-
-        <article class="card">
-          <img src="palau.jpg" alt="Palau de Margalef" class="place-photo">
-          <h3>Celebración</h3>
-          <div class="eyeline"></div>
-          <p><strong>Palau de Margalef</strong></p>
-          <p>Cóctel, banquete y fiesta</p>
-          <p>Después de la ceremonia</p>
-          <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Palau+de+Margalef">Ver en Google Maps</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="fotos">
-    <div class="container">
-      <h2 class="section-title">Nuestros recuerdos</h2>
-      <p class="section-text">
-        Una pequeña selección de momentos que forman parte de nuestra historia.
-      </p>
-
-      <div class="gallery-grid">
-        <div class="gallery-item"><img src="foto1.JPG" alt="Jorge y Alba 1"></div>
-        <div class="gallery-item"><img src="foto2.JPG" alt="Jorge y Alba 2"></div>
-        <div class="gallery-item"><img src="foto3.JPG" alt="Jorge y Alba 3"></div>
-        <div class="gallery-item"><img src="foto4.JPG" alt="Jorge y Alba 4"></div>
-        <div class="gallery-item"><img src="foto5.JPG" alt="Jorge y Alba 5"></div>
-        <div class="gallery-item"><img src="foto6.JPG" alt="Jorge y Alba 6"></div>
-        <div class="gallery-item"><img src="foto7.JPG" alt="Jorge y Alba 7"></div>
-        <div class="gallery-item"><img src="foto8.JPG" alt="Jorge y Alba 8"></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="alojamiento">
-    <div class="container">
-      <h2 class="section-title">Alojamiento</h2>
-      <p class="section-text">
-        Si venís de fuera, aquí podréis consultar opciones recomendadas y algunas indicaciones prácticas.
-      </p>
-
-      <div class="grid-2">
-        <article class="card">
-          <h3>Hotel recomendado</h3>
-          <div class="eyeline"></div>
-          <p>Nombre del hotel</p>
-          <p>Dirección o zona</p>
-          <p>Aquí podéis añadir una nota breve para facilitar la estancia de los invitados.</p>
-        </article>
-
-        <article class="card">
-          <h3>Otra opción</h3>
-          <div class="eyeline"></div>
-          <p>Nombre del hotel</p>
-          <p>Dirección o zona</p>
-          <p>También podéis utilizar este espacio para transporte, parking o recomendaciones útiles.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="info">
-    <div class="container">
-      <h2 class="section-title">Información útil</h2>
-      <p class="section-text">
-        Algunas indicaciones que pueden ayudaros a organizar mejor el día.
-      </p>
-
-      <div class="faq">
-        <div class="faq-item">
-          <strong>Dress code</strong>
-          Podéis indicar aquí si queréis traje oscuro, etiqueta, cóctel o cualquier sugerencia de vestimenta.
-        </div>
-
-        <div class="faq-item">
-          <strong>Transporte</strong>
-          Si vais a organizar autobús o queréis dejar recomendaciones para llegar y volver con comodidad, este es el lugar ideal.
-        </div>
-
-        <div class="faq-item">
-          <strong>Niños</strong>
-          Aquí podéis aclarar esta información de forma sencilla para evitar dudas entre los invitados.
+    <section class="intro">
+      <div class="container">
+        <div class="intro-card">
+          Después de muchos momentos compartidos, por fin llega uno de los días más especiales de nuestra vida.
+          Nos hace muchísima ilusión celebrarlo con vosotros y compartir juntos cada instante.
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="rsvp">
-    <div class="container">
-      <div class="rsvp-box">
-        <h2 class="section-title">Confirmación de asistencia</h2>
-        <p class="section-text" style="margin-bottom: 20px;">
-          Nos haría muchísima ilusión contar con vosotros. Podéis confirmar vuestra asistencia por teléfono, WhatsApp o correo.
+    <section class="section" id="dia">
+      <div class="container">
+        <h2 class="section-title">El gran día</h2>
+        <p class="section-text">
+          Aquí encontraréis toda la información importante para acompañarnos y disfrutar de este día con nosotros.
         </p>
-        <p><strong>Jorge:</strong> +34 XXX XXX XXX</p>
-        <p><strong>Alba:</strong> +34 XXX XXX XXX</p>
-        <p><strong>Email:</strong> vuestrocorreo@ejemplo.com</p>
-      </div>
-    </div>
-  </section>
 
-  <footer class="footer">
-    <div class="container">
-      Gracias por acompañarnos en un día tan importante.
-      <div class="signature">Jorge & Alba</div>
-    </div>
-  </footer>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="time">12:30</div>
+            <div>
+              <strong>Ceremonia</strong>
+              Catedral Nueva de Lleida
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="time">14:30</div>
+            <div>
+              <strong>Cóctel y celebración</strong>
+              Palau de Margalef
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="time">Tarde</div>
+            <div>
+              <strong>Comida, brindis y fiesta</strong>
+              Seguiremos celebrando juntos durante toda la tarde y la noche.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lugares">
+      <div class="container">
+        <h2 class="section-title">Lugares</h2>
+        <p class="section-text">
+          Os dejamos aquí las ubicaciones principales del día para que os resulte todo más fácil.
+        </p>
+
+        <div class="grid-2">
+          <article class="card">
+            <img src="catedral.jpg" alt="Catedral Nueva de Lleida" class="place-photo">
+            <h3>Ceremonia</h3>
+            <div class="eyeline"></div>
+            <p><strong>Catedral Nueva de Lleida</strong></p>
+            <p>14 de noviembre de 2026</p>
+            <p>12:30</p>
+            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Catedral+Nueva+de+Lleida">Ver en Google Maps</a>
+          </article>
+
+          <article class="card">
+            <img src="palau.jpg" alt="Palau de Margalef" class="place-photo">
+            <h3>Celebración</h3>
+            <div class="eyeline"></div>
+            <p><strong>Palau de Margalef</strong></p>
+            <p>Cóctel, banquete y fiesta</p>
+            <p>Después de la ceremonia</p>
+            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Palau+de+Margalef">Ver en Google Maps</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fotos">
+      <div class="container">
+        <h2 class="section-title">Nuestros recuerdos</h2>
+        <p class="section-text">
+          Una pequeña selección de momentos que forman parte de nuestra historia.
+        </p>
+
+        <div class="gallery-grid">
+          <div class="gallery-item"><img src="foto1.JPG" alt="Jorge y Alba 1"></div>
+          <div class="gallery-item"><img src="foto2.JPG" alt="Jorge y Alba 2"></div>
+          <div class="gallery-item"><img src="foto3.JPG" alt="Jorge y Alba 3"></div>
+          <div class="gallery-item"><img src="foto4.JPG" alt="Jorge y Alba 4"></div>
+          <div class="gallery-item"><img src="foto5.JPG" alt="Jorge y Alba 5"></div>
+          <div class="gallery-item"><img src="foto6.JPG" alt="Jorge y Alba 6"></div>
+          <div class="gallery-item"><img src="foto7.JPG" alt="Jorge y Alba 7"></div>
+          <div class="gallery-item"><img src="foto8.JPG" alt="Jorge y Alba 8"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="alojamiento">
+      <div class="container">
+        <h2 class="section-title">Alojamiento</h2>
+        <p class="section-text">
+          Si venís de fuera, aquí podréis consultar opciones recomendadas y algunas indicaciones prácticas.
+        </p>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3>Hotel recomendado</h3>
+            <div class="eyeline"></div>
+            <p>Nombre del hotel</p>
+            <p>Dirección o zona</p>
+            <p>Aquí podéis añadir una nota breve para facilitar la estancia de los invitados.</p>
+          </article>
+
+          <article class="card">
+            <h3>Otra opción</h3>
+            <div class="eyeline"></div>
+            <p>Nombre del hotel</p>
+            <p>Dirección o zona</p>
+            <p>También podéis utilizar este espacio para transporte, parking o recomendaciones útiles.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="info">
+      <div class="container">
+        <h2 class="section-title">Información útil</h2>
+        <p class="section-text">
+          Algunas indicaciones que pueden ayudaros a organizar mejor el día.
+        </p>
+
+        <div class="faq">
+          <div class="faq-item">
+            <strong>Dress code</strong>
+            Podéis indicar aquí si queréis traje oscuro, etiqueta, cóctel o cualquier sugerencia de vestimenta.
+          </div>
+
+          <div class="faq-item">
+            <strong>Transporte</strong>
+            Si vais a organizar autobús o queréis dejar recomendaciones para llegar y volver con comodidad, este es el lugar ideal.
+          </div>
+
+          <div class="faq-item">
+            <strong>Niños</strong>
+            Aquí podéis aclarar esta información de forma sencilla para evitar dudas entre los invitados.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rsvp">
+      <div class="container">
+        <div class="rsvp-box">
+          <h2 class="section-title">Confirmación de asistencia</h2>
+          <p class="section-text" style="margin-bottom: 20px;">
+            Nos haría muchísima ilusión contar con vosotros. Podéis confirmar vuestra asistencia por teléfono, WhatsApp o correo.
+          </p>
+          <p><strong>Jorge:</strong> +34 XXX XXX XXX</p>
+          <p><strong>Alba:</strong> +34 XXX XXX XXX</p>
+          <p><strong>Email:</strong> vuestrocorreo@ejemplo.com</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        Gracias por acompañarnos en un día tan importante.
+        <div class="signature">Jorge & Alba</div>
+      </div>
+    </footer>
+  </div>
 
   <div class="lightbox" id="lightbox">
     <div class="lightbox-content">
@@ -767,6 +993,20 @@
       if (e.key === "Escape") {
         lightbox.classList.remove("open");
       }
+    });
+
+    const introOverlay = document.getElementById("introOverlay");
+    const openInvitation = document.getElementById("openInvitation");
+    const siteContent = document.getElementById("siteContent");
+
+    openInvitation.addEventListener("click", () => {
+      introOverlay.classList.add("opening");
+
+      setTimeout(() => {
+        introOverlay.classList.add("hidden");
+        siteContent.classList.add("visible");
+        document.body.classList.remove("locked");
+      }, 1400);
     });
   </script>
 </body>
