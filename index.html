@@ -138,7 +138,6 @@
     /* -------- HERO INVERNAL -------- */
     .hero {
       height: 100vh; display: flex; align-items: center; justify-content: center;
-      /* Fondo de paisaje nevado/invernal */
       background: linear-gradient(rgba(28, 42, 57, 0.4), rgba(28, 42, 57, 0.6)), url("https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=1920&q=80") center/cover;
       color: #fff; text-align: center; padding-top: 70px;
     }
@@ -177,6 +176,10 @@
     /* -------- EL DÍA Y LUGARES -------- */
     .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; }
     .info-card { text-align: center; }
+    .place-image { 
+      width: 100%; height: 280px; object-fit: cover; border-radius: 4px; 
+      margin-bottom: 25px; filter: grayscale(15%) sepia(5%) hue-rotate(180deg); 
+    }
     .info-card h3 { font-family: var(--header); font-size: 2rem; font-weight: 400; margin: 0 0 10px; color: var(--text); }
     .info-card p { color: var(--muted); margin: 5px 0; }
     .info-card .time { font-family: var(--header); font-style: italic; font-size: 1.4rem; color: var(--accent); margin-bottom: 15px; }
@@ -193,8 +196,8 @@
 
     /* -------- GALERÍA -------- */
     .gallery { column-count: 3; column-gap: 20px; }
-    .gallery-item { break-inside: avoid; margin-bottom: 20px; overflow: hidden; }
-    .gallery-item img { width: 100%; transition: transform 0.7s ease, filter 0.5s ease; cursor: pointer; filter: grayscale(15%) sepia(5%) hue-rotate(180deg); } /* Da un tono ligeramente frío/invernal a las fotos */
+    .gallery-item { break-inside: avoid; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
+    .gallery-item img { width: 100%; transition: transform 0.7s ease, filter 0.5s ease; cursor: pointer; filter: grayscale(15%) sepia(5%) hue-rotate(180deg); } 
     .gallery-item:hover img { transform: scale(1.03); filter: grayscale(0%); }
 
     /* -------- FORMULARIO RSVP -------- */
@@ -308,6 +311,7 @@
         
         <div class="info-grid">
           <div class="info-card">
+            <img src="catedral.JPG" alt="Catedral Nueva de Lleida" class="place-image">
             <div class="time">12:30 Hrs</div>
             <h3>La Ceremonia</h3>
             <p>Catedral Nueva de Lleida</p>
@@ -316,6 +320,7 @@
           </div>
           
           <div class="info-card">
+            <img src="palau.JPG" alt="Palau de Margalef" class="place-image">
             <div class="time">14:30 Hrs</div>
             <h3>La Celebración</h3>
             <p>Palau de Margalef</p>
@@ -338,12 +343,14 @@
         </div>
         
         <div class="gallery">
-          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1543849557-0a4bdaeec285?auto=format&fit=crop&w=600&q=80" alt="Nosotros" loading="lazy"></div>
-          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517260739337-6799d239ce83?auto=format&fit=crop&w=600&q=80" alt="Nosotros" loading="lazy"></div>
-          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544645229-8739199d9b6d?auto=format&fit=crop&w=600&q=80" alt="Nosotros" loading="lazy"></div>
-          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1482855549413-2a6c9b1955a7?auto=format&fit=crop&w=600&q=80" alt="Nosotros" loading="lazy"></div>
-          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519750157634-b6d493a0f77c?auto=format&fit=crop&w=600&q=80" alt="Nosotros" loading="lazy"></div>
-          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1473260029517-5e60814986ad?auto=format&fit=crop&w=600&q=80" alt="Nosotros" loading="lazy"></div>
+          <div class="gallery-item"><img src="foto1.JPG" alt="Jorge y Alba 1" loading="lazy"></div>
+          <div class="gallery-item"><img src="foto2.JPG" alt="Jorge y Alba 2" loading="lazy"></div>
+          <div class="gallery-item"><img src="foto3.JPG" alt="Jorge y Alba 3" loading="lazy"></div>
+          <div class="gallery-item"><img src="foto4.JPG" alt="Jorge y Alba 4" loading="lazy"></div>
+          <div class="gallery-item"><img src="foto5.JPG" alt="Jorge y Alba 5" loading="lazy"></div>
+          <div class="gallery-item"><img src="foto6.JPG" alt="Jorge y Alba 6" loading="lazy"></div>
+          <div class="gallery-item"><img src="foto7.JPG" alt="Jorge y Alba 7" loading="lazy"></div>
+          <div class="gallery-item"><img src="foto8.JPG" alt="Jorge y Alba 8" loading="lazy"></div>
         </div>
       </div>
     </section>
