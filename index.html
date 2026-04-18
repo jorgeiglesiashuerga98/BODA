@@ -127,7 +127,20 @@
 
     .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; }
     .info-card { text-align: center; padding: 20px; }
-    .place-image { width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 25px; filter: sepia(10%); }
+    
+    /* ESTILO GENERAL DE IMÁGENES EN TARJETAS */
+    .place-image { width: 100%; height: 250px; border-radius: 4px; margin-bottom: 25px; filter: sepia(10%); }
+
+    /* CORRECCIÓN PARA NO RECORTAR CATEDRAL Y PALAU */
+    #detalles .place-image {
+      object-fit: contain; /* Asegura que la imagen completa quepa dentro, sin recortar */
+      background-color: rgba(0,0,0,0.03); /* Un fondo muy sutil para rellenar si la foto no es apaisada */
+    }
+
+    /* MANTENER RECORTE EN HOTELES PARA UNIFORMIDAD (Opcional) */
+    #alojamiento .place-image {
+      object-fit: cover;
+    }
     
     .gallery { column-count: 3; column-gap: 20px; }
     .gallery-item { break-inside: avoid; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
@@ -160,6 +173,7 @@
     .radio-group { text-align: left; margin-bottom: 30px; }
     .radio-group p { font-size: 0.8rem; text-transform: uppercase; color: var(--accent-dark); font-weight: 500; margin-bottom: 10px; }
     .radio-options { display: flex; gap: 20px; }
+    .radio-options label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
 
     @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; } .gallery { column-count: 2; } .menu { display: none; } }
   </style>
@@ -214,14 +228,14 @@
             <div style="font-family: var(--header); font-style: italic; font-size: 1.4rem; color: var(--accent);">12:30 Hrs</div>
             <h3 style="font-family: var(--header); font-size: 2rem; font-weight: 400;">La Ceremonia</h3>
             <p>Catedral Nueva de Lleida</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Catedral+Nueva+de+Lleida" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
+            <a href="https://maps.app.goo.gl/ChIJIzlzXWvgphIR6VuAUhGQ_zQ" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
           </div>
           <div class="info-card reveal">
             <img src="palau.JPG" alt="Banquete" class="place-image">
             <div style="font-family: var(--header); font-style: italic; font-size: 1.4rem; color: var(--accent);">14:30 Hrs</div>
             <h3 style="font-family: var(--header); font-size: 2rem; font-weight: 400;">La Celebración</h3>
             <p>Palau de Margalef</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Palau+de+Margalef" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
+            <a href="https://maps.app.goo.gl/n5FLwsPCphIRc0IzQNUS1rw" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
           </div>
         </div>
       </div>
@@ -235,13 +249,13 @@
             <img src="hotel1.jpeg" alt="Hotel Ibis" class="place-image">
             <h3 style="font-family: var(--header); font-size: 1.8rem; font-weight: 400;">Hotel Ibis Lleida</h3>
             <p>Calle Maria Montessori, 6, 25001 Lleida</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Ibis+Lleida" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
+            <a href="https://maps.app.goo.gl/dWN4dHvgphIRKu1gv3XZV6U" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
           </div>
           <div class="info-card reveal">
             <img src="hotel2.jpeg" alt="Hotel Real" class="place-image">
             <h3 style="font-family: var(--header); font-size: 1.8rem; font-weight: 400;">Hotel Real Lleida</h3>
             <p>Av. de Blondel, 22, 25002 Lleida</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Real+Lleida" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
+            <a href="https://maps.app.goo.gl/adf5uW7gphIRhyG5R8BAJJk" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
           </div>
         </div>
       </div>
