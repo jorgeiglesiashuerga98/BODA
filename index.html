@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alba & Jorge | 14.11.2026</title>
-  
+
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,89 +12,212 @@
 
   <style>
     :root {
-      --bg: #F5F3ED; 
+      --bg: #F5F3ED;
       --paper: #FFFFFF;
-      --text: #3A312B; 
-      --muted: #827871; 
-      --accent: #BA9653; 
-      --accent-dark: #8E1520; 
+      --text: #3A312B;
+      --muted: #827871;
+      --accent: #BA9653;
+      --accent-dark: #8E1520;
       --line: #E3DED5;
       --shadow-soft: 0 10px 40px rgba(58, 49, 43, 0.08);
       --header: 'Cormorant Garamond', serif;
       --body: 'Jost', sans-serif;
     }
 
-    * { box-sizing: border-box; cursor: none !important; }
-    @media (hover: none) and (pointer: coarse) { * { cursor: auto !important; } }
+    * { box-sizing: border-box; }
+
+    @media (hover: hover) and (pointer: fine) {
+      body, a, button, input, label, img {
+        cursor: none !important;
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      body, a, button, input, label, img {
+        cursor: auto !important;
+      }
+    }
 
     html { scroll-behavior: smooth; }
+
     body {
-      margin: 0; color: var(--text); font-family: var(--body);
-      line-height: 1.7; font-weight: 300; 
+      margin: 0;
+      color: var(--text);
+      font-family: var(--body);
+      line-height: 1.7;
+      font-weight: 300;
       background-color: var(--bg);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath d='M40 80c0-22.091 17.909-40 40-40C57.909 40 40 22.091 40 0 40 22.091 22.091 40 0 40c22.091 0 40 17.909 40 40z' fill='%23BA9653' fill-opacity='0.04'/%3E%3C/svg%3E");
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
+
     body.locked { overflow: hidden; }
+
     img { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; transition: all 0.3s ease; }
-    .container { width: min(1000px, calc(100% - 40px)); margin: 0 auto; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      width: min(1000px, calc(100% - 40px));
+      margin: 0 auto;
+    }
 
     .custom-cursor {
-      position: fixed; top: 0; left: 0;
-      width: 10px; height: 10px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 10px;
+      height: 10px;
       background-color: var(--accent);
       border-radius: 50%;
       pointer-events: none;
       z-index: 10000;
       transform: translate(-50%, -50%);
-      transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+      transition:
+        width 0.3s ease,
+        height 0.3s ease,
+        background-color 0.3s ease,
+        border 0.3s ease,
+        opacity 0.3s ease;
       mix-blend-mode: multiply;
+      opacity: 0;
     }
+
+    .custom-cursor.visible { opacity: 1; }
+
     .custom-cursor.hover {
-      width: 50px; height: 50px;
+      width: 42px;
+      height: 42px;
       background-color: rgba(186, 150, 83, 0.15);
       border: 1px solid var(--accent);
       backdrop-filter: blur(2px);
     }
-    @media (hover: none) and (pointer: coarse) { .custom-cursor { display: none; } }
+
+    @media (hover: none) and (pointer: coarse) {
+      .custom-cursor { display: none; }
+    }
 
     .gate {
-      position: fixed; inset: 0; z-index: 5000;
-      display: flex; align-items: center; justify-content: center;
-      background-image: url('sobre-invernal.jpg'); 
-      background-size: cover; background-position: center;
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('sobre-invernal.jpg');
+      background-size: cover;
+      background-position: center;
       transition: opacity 1.2s ease, visibility 1.2s ease, transform 1.2s ease;
       background-color: var(--bg);
     }
-    @media (max-width: 768px) { .gate { background-image: url('sobre-invernal2.jpg'); } }
-    .gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; transform: scale(1.05); }
-    
-    .seal-btn {
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      width: 160px; height: 160px; border-radius: 50%; border: none;
-      background: transparent; z-index: 6;
+
+    @media (max-width: 768px) {
+      .gate { background-image: url('sobre-invernal2.jpg'); }
     }
 
-    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-    .reveal.active { opacity: 1; transform: translateY(0); }
+    .gate.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: scale(1.05);
+    }
 
-    .site { opacity: 0; transition: opacity 1.5s ease; }
+    .seal-btn {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      z-index: 6;
+      padding: 0;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .site {
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
     .site.visible { opacity: 1; }
+
     .nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
-      background: transparent; border-bottom: 1px solid transparent;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: transparent;
+      border-bottom: 1px solid transparent;
       transition: all 0.4s ease;
     }
+
     .nav-inner {
-      width: min(1200px, calc(100% - 40px)); margin: 0 auto;
-      height: 75px; display: flex; align-items: center; justify-content: center; gap: 30px;
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto;
+      height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 26px;
     }
-    .menu a { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
-    .nav-brand { font-family: var(--header); font-size: 1.5rem; font-style: italic; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.4); margin: 0 15px;}
-    
-    .nav.scrolled { background: rgba(245, 243, 237, 0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-    .nav.scrolled .menu a, .nav.scrolled .nav-brand { color: var(--text); text-shadow: none; }
+
+    .menu {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .menu a {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 500;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      white-space: nowrap;
+    }
+
+    .nav-brand {
+      font-family: var(--header);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      margin: 0 14px;
+      white-space: nowrap;
+    }
+
+    .nav.scrolled {
+      background: rgba(245, 243, 237, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 6px 24px rgba(58, 49, 43, 0.05);
+    }
+
+    .nav.scrolled .menu a,
+    .nav.scrolled .nav-brand {
+      color: var(--text);
+      text-shadow: none;
+    }
+
     .nav.scrolled .nav-brand { color: var(--accent-dark); }
 
     .shimmer-text {
@@ -105,94 +228,370 @@
       background-clip: text;
       animation: shine 4s linear infinite;
     }
-    @keyframes shine { to { background-position: 200% center; } }
+
+    @keyframes shine {
+      to { background-position: 200% center; }
+    }
 
     .hero {
-      height: 100vh; display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(rgba(58, 49, 43, 0.4), rgba(58, 49, 43, 0.65)), url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80") center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(rgba(58, 49, 43, 0.4), rgba(58, 49, 43, 0.65)),
+        url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80") center/cover;
       background-attachment: fixed;
-      color: #fff; text-align: center;
-    }
-    @media (max-width: 768px) { .hero { background-attachment: scroll; } }
-
-    .hero h1 { font-family: var(--header); font-size: clamp(4rem, 10vw, 7.5rem); font-weight: 300; margin: 0; line-height: 1; }
-    
-    .section { padding: 120px 0; border-bottom: 1px solid var(--line); }
-    .section-title { font-family: var(--header); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 300; color: var(--accent-dark); text-align: center; margin-bottom: 60px;}
-
-    .countdown-wrapper { text-align: center; padding: 80px 0; background: #fff; border-bottom: 1px solid var(--line); position: relative; z-index: 10;}
-    .countdown { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-    .count-item strong { display: block; font-family: var(--header); font-size: 3.5rem; color: var(--accent-dark); line-height: 1; }
-    .count-item span { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
-
-    .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; }
-    .info-card { text-align: center; padding: 20px; }
-    
-    /* ESTILO DE IMÁGENES: Sin altura fija para evitar barras raras */
-    .place-image { 
-      width: 100%; 
-      height: auto; 
-      max-height: 400px; /* Evita que crezcan demasiado si la foto es muy vertical */
-      border-radius: 4px; 
-      margin-bottom: 25px; 
-      filter: sepia(10%); 
+      color: #fff;
+      text-align: center;
+      position: relative;
     }
 
-    .gallery { column-count: 3; column-gap: 20px; }
-    .gallery-item { break-inside: avoid; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
-    .gallery-item img { width: 100%; transition: transform 0.7s ease; filter: sepia(10%); }
-    .gallery-item:hover img { transform: scale(1.03); filter: none; }
-
-    .rsvp-container { max-width: 600px; margin: 0 auto; text-align: center; }
-    .form-control { width: 100%; padding: 12px 0; background: transparent; border: none; border-bottom: 1px solid var(--line); font-family: var(--body); font-size: 1.1rem; margin-bottom: 30px; outline: none; transition: border-color 0.3s; }
-    .form-control:focus { border-color: var(--accent); }
-    
-    .btn-solid { 
-      background: var(--accent-dark); color: #fff; padding: 15px 40px; border: none; 
-      text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; width: 100%; 
-      position: relative; overflow: hidden; transition: background 0.3s;
+    @media (max-width: 768px) {
+      .hero { background-attachment: scroll; }
     }
+
+    .hero h1 {
+      font-family: var(--header);
+      font-size: clamp(4rem, 10vw, 7.5rem);
+      font-weight: 300;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .hero-date {
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .hero-location {
+      color: var(--accent);
+      font-family: var(--header);
+      font-style: italic;
+      font-size: 1.6rem;
+      margin-top: 20px;
+    }
+
+    .section {
+      padding: 120px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-title {
+      font-family: var(--header);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 300;
+      color: var(--accent-dark);
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .countdown-wrapper {
+      text-align: center;
+      padding: 80px 0;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      z-index: 10;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .count-item strong {
+      display: block;
+      font-family: var(--header);
+      font-size: 3.5rem;
+      color: var(--accent-dark);
+      line-height: 1;
+      font-weight: 400;
+    }
+
+    .count-item span {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 60px;
+    }
+
+    .info-card {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .place-image {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      border-radius: 4px;
+      margin-bottom: 25px;
+      filter: sepia(10%);
+      box-shadow: var(--shadow-soft);
+      background: #fff;
+      object-fit: contain;
+    }
+
+    .gallery {
+      column-count: 3;
+      column-gap: 20px;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: var(--shadow-soft);
+      background: #fff;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      transition: transform 0.7s ease;
+      filter: sepia(10%);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.03);
+      filter: none;
+    }
+
+    .rsvp-container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 0;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--body);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      outline: none;
+      transition: border-color 0.3s;
+      color: var(--text);
+    }
+
+    .form-control:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-solid {
+      background: var(--accent-dark);
+      color: #fff;
+      padding: 15px 40px;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      font-family: var(--body);
+    }
+
     .btn-solid:hover { background: var(--accent); }
+
     .btn-solid::after {
-      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
       background: linear-gradient(to right, transparent, rgba(255,255,255,0.25), transparent);
-      transform: skewX(-25deg); animation: sweep 5s infinite;
+      transform: skewX(-25deg);
+      animation: sweep 5s infinite;
     }
-    @keyframes sweep { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
-    
-    .modal-success { position: fixed; inset: 0; background: rgba(58, 49, 43, 0.9); z-index: 9999; display: none; place-items: center; backdrop-filter: blur(8px); }
+
+    @keyframes sweep {
+      0% { left: -100%; }
+      20% { left: 200%; }
+      100% { left: 200%; }
+    }
+
+    .modal-success {
+      position: fixed;
+      inset: 0;
+      background: rgba(58, 49, 43, 0.9);
+      z-index: 9999;
+      display: none;
+      place-items: center;
+      backdrop-filter: blur(8px);
+      padding: 20px;
+    }
+
     .modal-success.show { display: grid; }
-    .modal-card { background: var(--bg); padding: 50px; border-radius: 4px; text-align: center; max-width: 450px; }
 
-    .music-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: #fff; color: var(--accent-dark); border: 1px solid var(--line); z-index: 9000; display: none; align-items: center; justify-content: center; box-shadow: var(--shadow-soft); }
+    .modal-card {
+      background: var(--bg);
+      padding: 50px;
+      border-radius: 4px;
+      text-align: center;
+      max-width: 450px;
+      width: 100%;
+    }
 
-    .radio-group { text-align: left; margin-bottom: 30px; }
-    .radio-group p { font-size: 0.8rem; text-transform: uppercase; color: var(--accent-dark); font-weight: 500; margin-bottom: 10px; }
-    .radio-options { display: flex; gap: 20px; }
-    .radio-options label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .music-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--accent-dark);
+      border: 1px solid var(--line);
+      z-index: 9000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-soft);
+      font-size: 1.2rem;
+    }
 
-    @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; } .gallery { column-count: 2; } .menu { display: none; } }
+    .radio-group {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    .radio-group p {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      font-weight: 500;
+      margin-bottom: 10px;
+      letter-spacing: 0.08em;
+    }
+
+    .radio-options {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .radio-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 9999;
+      background: rgba(58, 49, 43, 0.92);
+      backdrop-filter: blur(6px);
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 95vw;
+      max-height: 92vh;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--text);
+      font-size: 1.8rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 92vh;
+      width: auto;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    footer {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-family: var(--header);
+      font-size: 2.5rem;
+      font-weight: 400;
+      margin: 0;
+      display: inline-block;
+    }
+
+    @media (max-width: 768px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .gallery { column-count: 2; }
+      .menu { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .gallery { column-count: 1; }
+    }
   </style>
 </head>
 <body class="locked">
 
   <div class="custom-cursor" id="customCursor"></div>
 
-  <audio id="bgMusic" loop><source src="vuestra-cancion.mp3" type="audio/mpeg"></audio>
-  <button id="musicToggle" class="music-btn">♪</button>
+  <audio id="bgMusic" loop>
+    <source src="vuestra-cancion.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicToggle" class="music-btn" aria-label="Activar o pausar música">♪</button>
 
   <div class="gate" id="gate">
-    <button class="seal-btn" id="openInvitation"></button>
+    <button class="seal-btn" id="openInvitation" aria-label="Abrir invitación"></button>
   </div>
 
   <div class="site" id="site">
     <nav class="nav" id="navbar">
       <div class="nav-inner">
-        <div class="menu"><a href="#detalles">Detalles</a></div>
-        <div class="menu"><a href="#alojamiento">Alojamiento</a></div>
+        <div class="menu">
+          <a href="#detalles">Detalles</a>
+          <a href="#alojamiento">Alojamiento</a>
+        </div>
+
         <div class="nav-brand">A & J</div>
-        <div class="menu"><a href="#galeria">Historia</a></div>
-        <div class="menu"><a href="#rsvp">Asistencia</a></div>
+
+        <div class="menu">
+          <a href="#galeria">Fotos</a>
+          <a href="#info">Información</a>
+          <a href="#rsvp">Asistencia</a>
+        </div>
       </div>
     </nav>
 
@@ -200,7 +599,7 @@
       <div class="hero-content">
         <div class="hero-date">14 de Noviembre, 2026</div>
         <h1 class="shimmer-text">Alba & Jorge</h1>
-        <div class="hero-location" style="color: var(--accent); font-family: var(--header); font-style: italic; font-size: 1.6rem; margin-top: 20px;">Lleida</div>
+        <div class="hero-location">Lleida</div>
       </div>
     </header>
 
@@ -224,14 +623,15 @@
             <div style="font-family: var(--header); font-style: italic; font-size: 1.4rem; color: var(--accent);">12:30 Hrs</div>
             <h3 style="font-family: var(--header); font-size: 2rem; font-weight: 400;">La Ceremonia</h3>
             <p>Catedral Nueva de Lleida</p>
-            <a href="https://maps.app.goo.gl/IzlzXWv123" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Catedral+Nueva+de+Lleida" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
           </div>
+
           <div class="info-card reveal">
             <img src="palau.JPG" alt="Banquete" class="place-image">
             <div style="font-family: var(--header); font-style: italic; font-size: 1.4rem; color: var(--accent);">14:30 Hrs</div>
             <h3 style="font-family: var(--header); font-size: 2rem; font-weight: 400;">La Celebración</h3>
             <p>Palau de Margalef</p>
-            <a href="https://maps.app.goo.gl/Margalef456" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Palau+de+Margalef" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
           </div>
         </div>
       </div>
@@ -245,13 +645,14 @@
             <img src="hotel1.jpeg" alt="Hotel Ibis" class="place-image">
             <h3 style="font-family: var(--header); font-size: 1.8rem; font-weight: 400;">Hotel Ibis Lleida</h3>
             <p>Calle Maria Montessori, 6, 25001 Lleida</p>
-            <a href="https://maps.app.goo.gl/Ibis789" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Ibis+Lleida" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
           </div>
+
           <div class="info-card reveal">
             <img src="hotel2.jpeg" alt="Hotel Real" class="place-image">
             <h3 style="font-family: var(--header); font-size: 1.8rem; font-weight: 400;">Hotel Real Lleida</h3>
             <p>Av. de Blondel, 22, 25002 Lleida</p>
-            <a href="https://maps.app.goo.gl/Real101" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Real+Lleida" target="_blank" style="display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">Ver Ubicación</a>
           </div>
         </div>
       </div>
@@ -273,15 +674,27 @@
       </div>
     </section>
 
+    <section class="section" id="info">
+      <div class="container">
+        <h2 class="section-title reveal">Información</h2>
+        <div class="rsvp-container reveal" style="max-width: 760px;">
+          <p style="font-family: var(--header); font-style: italic; font-size: 1.5rem; margin-bottom: 40px;">Todo lo importante para el día</p>
+          <p><strong>Dress code:</strong> elegante.</p>
+          <p><strong>Autobús:</strong> podéis confirmarlo en el formulario de asistencia.</p>
+          <p><strong>Niños:</strong> aquí podéis añadir la información que queráis comunicar.</p>
+          <p><strong>Alojamiento:</strong> os dejamos arriba algunas opciones recomendadas.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="rsvp">
       <div class="container">
         <h2 class="section-title reveal">Confirmación</h2>
         <div class="rsvp-container reveal">
           <p style="font-family: var(--header); font-style: italic; font-size: 1.5rem; margin-bottom: 40px;">¿Nos acompañas?</p>
+
           <form id="rsvpForm" action="https://formspree.io/f/xwvabeeb" method="POST">
-            
             <input type="text" name="nombre" class="form-control" placeholder="Tu nombre completo" required>
-            
             <input type="text" name="acompanante" class="form-control" placeholder="Nombre de tu acompañante (Opcional)">
 
             <div class="radio-group">
@@ -302,54 +715,74 @@
 
             <input type="text" name="alergias" class="form-control" placeholder="Alergias o dieta (Opcional)">
             <input type="text" name="cancion" class="form-control" placeholder="Canción que no puede faltar">
-            
+
             <button type="submit" class="btn-solid">Enviar Confirmación</button>
           </form>
         </div>
       </div>
     </section>
 
-    <footer style="padding: 80px 0; text-align: center;">
-      <h2 class="shimmer-text" style="font-family: var(--header); font-size: 2.5rem; font-weight: 400; margin: 0; display: inline-block;">Alba & Jorge</h2>
+    <footer>
+      <h2 class="shimmer-text footer-name">Alba & Jorge</h2>
     </footer>
   </div>
 
-  <div class="modal-success" id="successModal"><div class="modal-card">
-    <h3 style="font-family: var(--header); font-size: 2rem; color: var(--accent-dark);">¡Gracias!</h3>
-    <p>Hemos recibido vuestra respuesta.</p>
-    <button onclick="document.getElementById('successModal').classList.remove('show')" class="btn-solid" style="margin-top: 20px;">Cerrar</button>
-  </div></div>
+  <div class="modal-success" id="successModal">
+    <div class="modal-card">
+      <h3 style="font-family: var(--header); font-size: 2rem; color: var(--accent-dark);">¡Gracias!</h3>
+      <p>Hemos recibido vuestra respuesta.</p>
+      <button onclick="document.getElementById('successModal').classList.remove('show')" class="btn-solid" style="margin-top: 20px;">Cerrar</button>
+    </div>
+  </div>
 
-  <div class="lightbox" id="lightbox" style="position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 20px; z-index: 9999; background: rgba(58, 49, 43, 0.92); backdrop-filter: blur(6px);">
-    <div style="position: relative; max-width: 95vw; max-height: 92vh;">
-      <button id="lightboxClose" style="position: absolute; top: -15px; right: -15px; width: 44px; height: 44px; border: none; border-radius: 50%; background: #fff; color: var(--text); font-size: 1.8rem; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">×</button>
-      <img id="lightboxImg" src="" alt="Foto ampliada" style="max-width: 95vw; max-height: 92vh; width: auto; height: auto; border-radius: 6px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button id="lightboxClose" class="lightbox-close">×</button>
+      <img id="lightboxImg" src="" alt="Foto ampliada">
     </div>
   </div>
 
   <script>
     const cursor = document.getElementById("customCursor");
-    document.addEventListener("mousemove", (e) => {
-      cursor.style.left = e.clientX + "px";
-      cursor.style.top = e.clientY + "px";
-    });
-    
-    const interactives = document.querySelectorAll("a, button, input, .seal-btn, img, label");
-    interactives.forEach(el => {
-      el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
-      el.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
-    });
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-    const gate = document.getElementById("gate"), openBtn = document.getElementById("openInvitation"), site = document.getElementById("site"), bgMusic = document.getElementById("bgMusic"), musicBtn = document.getElementById("musicToggle");
-    
+    if (finePointer) {
+      document.addEventListener("mousemove", (e) => {
+        cursor.classList.add("visible");
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+      });
+
+      const interactives = document.querySelectorAll("a, button, input, .seal-btn, img, label");
+      interactives.forEach(el => {
+        el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
+        el.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
+      });
+    }
+
+    const gate = document.getElementById("gate");
+    const openBtn = document.getElementById("openInvitation");
+    const site = document.getElementById("site");
+    const bgMusic = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicToggle");
+
     openBtn.addEventListener("click", () => {
-      gate.classList.add("hidden"); site.classList.add("visible"); document.body.classList.remove("locked"); musicBtn.style.display = "flex";
-      bgMusic.volume = 0.3; bgMusic.play().catch(() => console.log("Música manual"));
+      gate.classList.add("hidden");
+      site.classList.add("visible");
+      document.body.classList.remove("locked");
+      musicBtn.style.display = "flex";
+      bgMusic.volume = 0.3;
+      bgMusic.play().catch(() => console.log("Música manual"));
     });
 
     musicBtn.addEventListener("click", () => {
-      if(bgMusic.paused) { bgMusic.play(); musicBtn.style.opacity = "1"; }
-      else { bgMusic.pause(); musicBtn.style.opacity = "0.5"; }
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicBtn.style.opacity = "1";
+      } else {
+        bgMusic.pause();
+        musicBtn.style.opacity = "0.5";
+      }
     });
 
     window.addEventListener("scroll", () => {
@@ -357,45 +790,78 @@
     });
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("active");
+      });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
     const weddingDate = new Date("2026-11-14T12:30:00").getTime();
-    setInterval(() => {
+
+    function pad(n) {
+      return String(n).padStart(2, "0");
+    }
+
+    function updateCountdown() {
       const dist = weddingDate - new Date().getTime();
       if (dist < 0) return;
-      document.getElementById("days").innerText = Math.floor(dist / 86400000);
-      document.getElementById("hours").innerText = Math.floor((dist % 86400000) / 3600000);
-      document.getElementById("minutes").innerText = Math.floor((dist % 3600000) / 60000);
-      document.getElementById("seconds").innerText = Math.floor((dist % 60000) / 1000);
-    }, 1000);
 
-    const lightboxObj = document.getElementById("lightbox"), lightboxImgObj = document.getElementById("lightboxImg");
+      const days = Math.floor(dist / 86400000);
+      const hours = Math.floor((dist % 86400000) / 3600000);
+      const minutes = Math.floor((dist % 3600000) / 60000);
+      const seconds = Math.floor((dist % 60000) / 1000);
+
+      document.getElementById("days").innerText = pad(days);
+      document.getElementById("hours").innerText = pad(hours);
+      document.getElementById("minutes").innerText = pad(minutes);
+      document.getElementById("seconds").innerText = pad(seconds);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const lightboxObj = document.getElementById("lightbox");
+    const lightboxImgObj = document.getElementById("lightboxImg");
+
     document.querySelectorAll(".gallery-item img").forEach(img => {
-      img.addEventListener("click", () => { lightboxImgObj.src = img.src; lightboxObj.style.display = "flex"; });
+      img.addEventListener("click", () => {
+        lightboxImgObj.src = img.src;
+        lightboxObj.style.display = "flex";
+      });
     });
-    document.getElementById("lightboxClose").addEventListener("click", () => lightboxObj.style.display = "none");
-    lightboxObj.addEventListener("click", (e) => { if (e.target === lightboxObj) lightboxObj.style.display = "none"; });
+
+    document.getElementById("lightboxClose").addEventListener("click", () => {
+      lightboxObj.style.display = "none";
+    });
+
+    lightboxObj.addEventListener("click", (e) => {
+      if (e.target === lightboxObj) lightboxObj.style.display = "none";
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") lightboxObj.style.display = "none";
+    });
 
     document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const f = e.target, btn = f.querySelector('button');
+      const f = e.target;
+      const btn = f.querySelector("button");
       const originalBtnText = btn.innerText;
-      
+
       btn.innerText = "Enviando...";
       btn.disabled = true;
-      
+
       try {
-        const res = await fetch(f.action, { 
-          method: 'POST', 
-          body: new FormData(f), 
-          headers: { 'Accept': 'application/json' } 
+        const res = await fetch(f.action, {
+          method: "POST",
+          body: new FormData(f),
+          headers: { "Accept": "application/json" }
         });
-        
-        if (res.ok) { 
-          f.reset(); 
-          document.getElementById("successModal").classList.add("show"); 
+
+        if (res.ok) {
+          f.reset();
+          document.getElementById("successModal").classList.add("show");
         } else {
           const data = await res.json();
           alert("Error: " + (data.error || "No se pudo enviar. Revisa Formspree."));
