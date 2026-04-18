@@ -236,31 +236,23 @@
       left: 50%;
       top: 47%;
       transform: translate(-50%, -50%);
-      width: 86px;
-      height: 86px;
-      border-radius: 999px;
+      width: 96px;
+      height: 96px;
       border: none;
+      background: transparent;
+      padding: 0;
       cursor: pointer;
       z-index: 6;
-      color: #f8f8f4;
-      font-size: 1.05rem;
-      font-family: Georgia, "Times New Roman", serif;
-      letter-spacing: 0.08em;
-      background:
-        radial-gradient(circle at 30% 30%, #6f867d 0%, #5d736b 35%, #41524d 78%, #34423e 100%);
-      box-shadow:
-        0 10px 20px rgba(54, 68, 63, 0.24),
-        inset 0 2px 3px rgba(255,255,255,0.16),
-        inset 0 -4px 8px rgba(0,0,0,0.16);
+      box-shadow: 0 10px 20px rgba(54, 68, 63, 0.18);
       transition: transform 0.2s ease, opacity 0.4s ease;
     }
 
-    .seal::before {
-      content: "";
-      position: absolute;
-      inset: 8px;
+    .seal img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
       border-radius: 999px;
-      border: 1px solid rgba(244, 239, 231, 0.18);
     }
 
     .seal:hover {
@@ -743,8 +735,8 @@
       }
 
       .seal {
-        width: 74px;
-        height: 74px;
+        width: 82px;
+        height: 82px;
       }
     }
   </style>
@@ -772,10 +764,12 @@
 
         <div class="envelope-flap"></div>
 
-        <button class="seal" id="openInvitation" aria-label="Abrir invitación">J&A</button>
+        <button class="seal" id="openInvitation" aria-label="Abrir invitación">
+          <img src="sello.JPG" alt="Sello de la invitación">
+        </button>
       </div>
 
-      <div class="intro-text-bottom">Pulsa el sello de lacre</div>
+      <div class="intro-text-bottom">Pulsa el sello</div>
     </div>
   </div>
 
