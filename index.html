@@ -20,15 +20,15 @@
 
   <style>
     :root {
-      /* PALETA CÁLIDA INVERNAL */
-      --bg: #FAFAF7; /* Crema cálido texturizado */
+      /* PALETA DE COLORES EXTRAÍDA DEL SOBRE Y EL LACRE */
+      --bg: #F5F3ED; /* Crema cálido del papel */
       --paper: #FFFFFF;
-      --text: #2B2927; /* Gris carbón cálido */
-      --muted: #7A7571; /* Gris topo */
-      --accent: #C5A880; /* Dorado polvo */
-      --accent-dark: #9B1B30; /* Rojo lacre profundo */
-      --line: #E8E5DF;
-      --shadow-soft: 0 10px 40px rgba(43, 41, 39, 0.05);
+      --text: #3A312B; /* Marrón/Gris muy oscuro para el texto */
+      --muted: #827871; /* Gris pardo cálido */
+      --accent: #BA9653; /* Oro brillante del polvo espolvoreado */
+      --accent-dark: #8E1520; /* Rojo carmesí del sello de lacre */
+      --line: #E3DED5;
+      --shadow-soft: 0 10px 40px rgba(58, 49, 43, 0.08);
       --header: 'Cormorant Garamond', serif;
       --body: 'Jost', sans-serif;
     }
@@ -59,6 +59,7 @@
       background-position: center;
       transition: opacity 1.2s ease, visibility 1.2s ease, transform 1.2s ease;
       overflow: hidden;
+      background-color: #F5F3ED;
     }
     
     /* CAMBIO AUTOMÁTICO A VERSIÓN VERTICAL EN MÓVILES */
@@ -84,7 +85,7 @@
       display: flex; align-items: center; justify-content: center;
       transition: transform 0.3s ease, background 0.3s ease;
     }
-    .seal-btn:hover { background: rgba(155, 27, 48, 0.04); }
+    .seal-btn:hover { background: rgba(142, 21, 32, 0.05); } /* Brillo rojo sutil al pasar el ratón */
 
     /* -------- NAVEGACIÓN -------- */
     .site { opacity: 0; transition: opacity 1.5s ease; }
@@ -92,7 +93,7 @@
 
     .nav {
       position: fixed; top: 0; width: 100%; z-index: 100;
-      background: rgba(250, 250, 247, 0.95); backdrop-filter: blur(12px);
+      background: rgba(245, 243, 237, 0.95); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
     .nav-inner {
@@ -100,14 +101,15 @@
       height: 70px; display: flex; align-items: center; justify-content: center; gap: 40px;
     }
     .menu { display: flex; gap: 30px; }
-    .menu a { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text); }
+    .menu a { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text); font-weight: 400;}
     .menu a:hover { color: var(--accent-dark); }
-    .nav-brand { font-family: var(--header); font-size: 1.4rem; font-style: italic; margin: 0 20px; color: var(--text); }
+    .nav-brand { font-family: var(--header); font-size: 1.4rem; font-style: italic; margin: 0 20px; color: var(--accent-dark); }
 
     /* -------- HERO -------- */
     .hero {
       height: 100vh; display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(rgba(43, 41, 39, 0.3), rgba(43, 41, 39, 0.5)), url("https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=1920&q=80") center/cover;
+      /* Capa superpuesta cálida para que el texto sea legible y armonice con el resto */
+      background: linear-gradient(rgba(58, 49, 43, 0.4), rgba(58, 49, 43, 0.6)), url("https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=1920&q=80") center/cover;
       color: #fff; text-align: center; padding-top: 70px;
     }
     .hero-content { animation: fadeIn 2s ease forwards; }
@@ -116,7 +118,7 @@
       font-family: var(--header); font-size: clamp(4rem, 10vw, 7rem); 
       font-weight: 300; margin: 0; line-height: 1; text-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    .hero-location { font-family: var(--header); font-style: italic; font-size: 1.5rem; margin-top: 20px; color: #FDFDFD; }
+    .hero-location { font-family: var(--header); font-style: italic; font-size: 1.5rem; margin-top: 20px; color: var(--accent); }
 
     /* -------- SECCIONES -------- */
     .section { padding: 120px 0; border-bottom: 1px solid var(--line); }
@@ -125,15 +127,15 @@
     .section-header { text-align: center; margin-bottom: 60px; }
     .section-subtitle { 
       font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; 
-      color: var(--accent); margin-bottom: 10px; display: block;
+      color: var(--accent); margin-bottom: 10px; display: block; font-weight: 500;
     }
     .section-title { 
       font-family: var(--header); font-size: clamp(2.5rem, 5vw, 3.5rem); 
-      font-weight: 300; margin: 0; color: var(--text);
+      font-weight: 300; margin: 0; color: var(--accent-dark);
     }
 
     /* -------- CONTADOR -------- */
-    .countdown-wrapper { text-align: center; padding: 80px 0; background: #fff; border-bottom: 1px solid var(--line); }
+    .countdown-wrapper { text-align: center; padding: 80px 0; background: #fff; border-bottom: 1px solid var(--line); box-shadow: var(--shadow-soft); }
     .countdown { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
     .count-item { text-align: center; min-width: 80px; }
     .count-item strong { 
@@ -147,7 +149,7 @@
     .info-card { text-align: center; }
     .place-image { 
       width: 100%; height: 280px; object-fit: cover; border-radius: 4px; 
-      margin-bottom: 25px; filter: grayscale(10%) sepia(10%); 
+      margin-bottom: 25px; filter: sepia(15%) contrast(105%); 
     }
     .info-card h3 { font-family: var(--header); font-size: 2rem; font-weight: 400; margin: 0 0 10px; color: var(--text); }
     .info-card p { color: var(--muted); margin: 5px 0; }
@@ -157,17 +159,17 @@
       display: inline-block; margin-top: 25px; padding: 12px 30px;
       border: 1px solid var(--accent); background: transparent; color: var(--text);
       font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
-      transition: all 0.3s ease; cursor: pointer;
+      transition: all 0.3s ease; cursor: pointer; font-weight: 500;
     }
     .btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .btn-solid { background: var(--text); color: #fff; border-color: var(--text); }
-    .btn-solid:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+    .btn-solid { background: var(--accent-dark); color: #fff; border-color: var(--accent-dark); }
+    .btn-solid:hover { background: var(--accent); border-color: var(--accent); }
 
     /* -------- GALERÍA -------- */
     .gallery { column-count: 3; column-gap: 20px; }
     .gallery-item { break-inside: avoid; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
-    .gallery-item img { width: 100%; transition: transform 0.7s ease, filter 0.5s ease; cursor: pointer; filter: grayscale(10%) sepia(10%); } 
-    .gallery-item:hover img { transform: scale(1.03); filter: grayscale(0%); }
+    .gallery-item img { width: 100%; transition: transform 0.7s ease, filter 0.5s ease; cursor: pointer; filter: sepia(15%) contrast(105%); } 
+    .gallery-item:hover img { transform: scale(1.03); filter: sepia(0%) contrast(100%); }
 
     /* -------- FORMULARIO RSVP -------- */
     .rsvp-container { max-width: 600px; margin: 0 auto; text-align: center; }
@@ -176,7 +178,7 @@
     .form-group { margin-bottom: 30px; text-align: left; }
     .form-group label { 
       display: block; font-size: 0.75rem; letter-spacing: 0.15em; 
-      text-transform: uppercase; margin-bottom: 10px; color: var(--muted);
+      text-transform: uppercase; margin-bottom: 10px; color: var(--accent-dark); font-weight: 500;
     }
     .form-control {
       width: 100%; padding: 10px 0; background: transparent;
@@ -201,7 +203,7 @@
     }
 
     .footer { padding: 60px 0; text-align: center; background: #fff; }
-    .footer h2 { font-family: var(--header); font-size: 2.5rem; font-weight: 300; margin: 0; color: var(--text); }
+    .footer h2 { font-family: var(--header); font-size: 2.5rem; font-weight: 300; margin: 0; color: var(--accent-dark); }
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
