@@ -20,30 +20,59 @@
 
   <style>
     :root {
-      /* PALETA CÁLIDA ACORDE AL SOBRE */
       --bg: #F5F3ED; 
       --paper: #FFFFFF;
       --text: #3A312B; 
       --muted: #827871; 
-      --accent: #BA9653; /* Oro espolvoreado */
-      --accent-dark: #8E1520; /* Rojo lacre */
+      --accent: #BA9653; 
+      --accent-dark: #8E1520; 
       --line: #E3DED5;
       --shadow-soft: 0 10px 40px rgba(58, 49, 43, 0.08);
       --header: 'Cormorant Garamond', serif;
       --body: 'Jost', sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; cursor: none !important; /* Oculta el cursor por defecto en toda la web para usar el nuestro */ }
+    
+    /* En dispositivos táctiles devolvemos el cursor a la normalidad */
+    @media (hover: none) and (pointer: coarse) {
+      * { cursor: auto !important; }
+    }
+
     html { scroll-behavior: smooth; }
     body {
       margin: 0; color: var(--text); font-family: var(--body);
-      line-height: 1.7; font-weight: 300; background-color: var(--bg);
+      line-height: 1.7; font-weight: 300; 
+      background-color: var(--bg);
+      /* 4. MARCA DE AGUA ELEGANTE EN EL FONDO */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath d='M40 80c0-22.091 17.909-40 40-40C57.909 40 40 22.091 40 0 40 22.091 22.091 40 0 40c22.091 0 40 17.909 40 40z' fill='%23BA9653' fill-opacity='0.04'/%3E%3C/svg%3E");
       -webkit-font-smoothing: antialiased;
     }
     body.locked { overflow: hidden; }
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; transition: all 0.3s ease; }
     .container { width: min(1000px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* -------- 3. CURSOR PERSONALIZADO LÍQUIDO -------- */
+    .custom-cursor {
+      position: fixed; top: 0; left: 0;
+      width: 10px; height: 10px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+      mix-blend-mode: multiply;
+    }
+    .custom-cursor.hover {
+      width: 50px; height: 50px;
+      background-color: rgba(186, 150, 83, 0.15);
+      border: 1px solid var(--accent);
+      backdrop-filter: blur(2px);
+    }
+    /* Ocultar el cursor extra en móviles */
+    @media (hover: none) and (pointer: coarse) { .custom-cursor { display: none; } }
 
     /* -------- INVITACIÓN / SOBRE INMERSIVO -------- */
     .gate {
@@ -54,15 +83,13 @@
       transition: opacity 1.2s ease, visibility 1.2s ease, transform 1.2s ease;
       background-color: var(--bg);
     }
-    @media (max-width: 768px) {
-      .gate { background-image: url('sobre-invernal2.jpg'); }
-    }
+    @media (max-width: 768px) { .gate { background-image: url('sobre-invernal2.jpg'); } }
     .gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; transform: scale(1.05); }
     
     .seal-btn {
       position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
       width: 160px; height: 160px; border-radius: 50%; border: none;
-      background: transparent; cursor: pointer; z-index: 6;
+      background: transparent; z-index: 6;
     }
 
     /* -------- ANIMACIONES REVEAL -------- */
@@ -81,26 +108,41 @@
       width: min(1200px, calc(100% - 40px)); margin: 0 auto;
       height: 75px; display: flex; align-items: center; justify-content: center; gap: 40px;
     }
-    .menu a { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-    .nav-brand { font-family: var(--header); font-size: 1.5rem; font-style: italic; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.3); margin: 0 20px;}
+    .menu a { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+    .nav-brand { font-family: var(--header); font-size: 1.5rem; font-style: italic; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.4); margin: 0 20px;}
     
     .nav.scrolled { background: rgba(245, 243, 237, 0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
     .nav.scrolled .menu a, .nav.scrolled .nav-brand { color: var(--text); text-shadow: none; }
     .nav.scrolled .nav-brand { color: var(--accent-dark); }
 
-    /* -------- HERO -------- */
+    /* -------- 1. EFECTO PAN DE ORO (SHIMMER) -------- */
+    .shimmer-text {
+      background: linear-gradient(110deg, #BA9653 20%, #FFF3D4 40%, #FFF3D4 60%, #BA9653 80%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: shine 4s linear infinite;
+    }
+    @keyframes shine { to { background-position: 200% center; } }
+
+    /* -------- HERO CON 2. PARALLAX -------- */
     .hero {
       height: 100vh; display: flex; align-items: center; justify-content: center;
-      /* Nueva foto mucho más elegante y editorial para la portada */
       background: linear-gradient(rgba(58, 49, 43, 0.4), rgba(58, 49, 43, 0.65)), url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80") center/cover;
+      /* Propiedad Parallax */
+      background-attachment: fixed;
       color: #fff; text-align: center;
     }
+    /* En móviles quitamos el parallax porque suele dar saltos */
+    @media (max-width: 768px) { .hero { background-attachment: scroll; } }
+
     .hero h1 { font-family: var(--header); font-size: clamp(4rem, 10vw, 7.5rem); font-weight: 300; margin: 0; line-height: 1; }
     
     .section { padding: 120px 0; border-bottom: 1px solid var(--line); }
     .section-title { font-family: var(--header); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 300; color: var(--accent-dark); text-align: center; margin-bottom: 60px;}
 
-    .countdown-wrapper { text-align: center; padding: 80px 0; background: #fff; border-bottom: 1px solid var(--line); }
+    .countdown-wrapper { text-align: center; padding: 80px 0; background: #fff; border-bottom: 1px solid var(--line); position: relative; z-index: 10;}
     .countdown { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
     .count-item strong { display: block; font-family: var(--header); font-size: 3.5rem; color: var(--accent-dark); line-height: 1; }
     .count-item span { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
@@ -110,24 +152,38 @@
     
     .gallery { column-count: 3; column-gap: 20px; }
     .gallery-item { break-inside: avoid; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
-    .gallery-item img { width: 100%; transition: transform 0.7s ease; cursor: zoom-in; filter: sepia(10%); }
+    .gallery-item img { width: 100%; transition: transform 0.7s ease; filter: sepia(10%); }
     .gallery-item:hover img { transform: scale(1.03); filter: none; }
 
     /* -------- RSVP & MODAL -------- */
     .rsvp-container { max-width: 600px; margin: 0 auto; text-align: center; }
     .form-control { width: 100%; padding: 12px 0; background: transparent; border: none; border-bottom: 1px solid var(--line); font-family: var(--body); font-size: 1.1rem; margin-bottom: 30px; }
-    .btn-solid { background: var(--accent-dark); color: #fff; padding: 15px 40px; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; width: 100%; }
+    
+    /* Botones con destello metálico */
+    .btn-solid { 
+      background: var(--accent-dark); color: #fff; padding: 15px 40px; border: none; 
+      text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; width: 100%; 
+      position: relative; overflow: hidden;
+    }
+    .btn-solid::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.25), transparent);
+      transform: skewX(-25deg); animation: sweep 5s infinite;
+    }
+    @keyframes sweep { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
     
     .modal-success { position: fixed; inset: 0; background: rgba(58, 49, 43, 0.9); z-index: 9999; display: none; place-items: center; backdrop-filter: blur(8px); }
     .modal-success.show { display: grid; }
     .modal-card { background: var(--bg); padding: 50px; border-radius: 4px; text-align: center; max-width: 450px; }
 
-    .music-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: #fff; color: var(--accent-dark); border: 1px solid var(--line); cursor: pointer; z-index: 9000; display: none; align-items: center; justify-content: center; box-shadow: var(--shadow-soft); }
+    .music-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: #fff; color: var(--accent-dark); border: 1px solid var(--line); z-index: 9000; display: none; align-items: center; justify-content: center; box-shadow: var(--shadow-soft); }
 
     @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; } .gallery { column-count: 2; } .menu { display: none; } }
   </style>
 </head>
 <body class="locked">
+
+  <div class="custom-cursor" id="customCursor"></div>
 
   <audio id="bgMusic" loop><source src="vuestra-cancion.mp3" type="audio/mpeg"></audio>
   <button id="musicToggle" class="music-btn">♪</button>
@@ -148,7 +204,7 @@
     <header class="hero">
       <div class="hero-content">
         <div class="hero-date">14 de Noviembre, 2026</div>
-        <h1>Alba & Jorge</h1>
+        <h1 class="shimmer-text">Alba & Jorge</h1>
         <div class="hero-location" style="color: var(--accent); font-family: var(--header); font-style: italic; font-size: 1.6rem; margin-top: 20px;">Lleida</div>
       </div>
     </header>
@@ -225,7 +281,7 @@
     </section>
 
     <footer style="padding: 80px 0; text-align: center;">
-      <h2 style="font-family: var(--header); font-size: 2.5rem; color: var(--accent-dark); font-weight: 300;">Alba & Jorge</h2>
+      <h2 class="shimmer-text" style="font-family: var(--header); font-size: 2.5rem; font-weight: 400; margin: 0; display: inline-block;">Alba & Jorge</h2>
     </footer>
   </div>
 
@@ -237,12 +293,26 @@
 
   <div class="lightbox" id="lightbox" style="position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 20px; z-index: 9999; background: rgba(58, 49, 43, 0.92); backdrop-filter: blur(6px);">
     <div style="position: relative; max-width: 95vw; max-height: 92vh;">
-      <button id="lightboxClose" style="position: absolute; top: -15px; right: -15px; width: 44px; height: 44px; border: none; border-radius: 50%; background: #fff; color: var(--text); font-size: 1.8rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">×</button>
+      <button id="lightboxClose" style="position: absolute; top: -15px; right: -15px; width: 44px; height: 44px; border: none; border-radius: 50%; background: #fff; color: var(--text); font-size: 1.8rem; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">×</button>
       <img id="lightboxImg" src="" alt="Foto ampliada" style="max-width: 95vw; max-height: 92vh; width: auto; height: auto; border-radius: 6px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
     </div>
   </div>
 
   <script>
+    /* LÓGICA DEL CURSOR */
+    const cursor = document.getElementById("customCursor");
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
+    });
+    
+    // Expandir cursor sobre elementos interactivos
+    const interactives = document.querySelectorAll("a, button, input, .seal-btn, img");
+    interactives.forEach(el => {
+      el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
+      el.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
+    });
+
     const gate = document.getElementById("gate"), openBtn = document.getElementById("openInvitation"), site = document.getElementById("site"), bgMusic = document.getElementById("bgMusic"), musicBtn = document.getElementById("musicToggle");
     
     openBtn.addEventListener("click", () => {
@@ -274,13 +344,12 @@
       document.getElementById("seconds").innerText = Math.floor((dist % 60000) / 1000);
     }, 1000);
 
-    /* Lógica Lightbox */
-    const lightbox = document.getElementById("lightbox"), lightboxImg = document.getElementById("lightboxImg");
+    const lightboxObj = document.getElementById("lightbox"), lightboxImgObj = document.getElementById("lightboxImg");
     document.querySelectorAll(".gallery-item img").forEach(img => {
-      img.addEventListener("click", () => { lightboxImg.src = img.src; lightbox.style.display = "flex"; });
+      img.addEventListener("click", () => { lightboxImgObj.src = img.src; lightboxObj.style.display = "flex"; });
     });
-    document.getElementById("lightboxClose").addEventListener("click", () => lightbox.style.display = "none");
-    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) lightbox.style.display = "none"; });
+    document.getElementById("lightboxClose").addEventListener("click", () => lightboxObj.style.display = "none");
+    lightboxObj.addEventListener("click", (e) => { if (e.target === lightboxObj) lightboxObj.style.display = "none"; });
 
     document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
       e.preventDefault();
