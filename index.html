@@ -13,17 +13,17 @@
   <style>
     :root {
       --bg: #f5f3ed;
-      --paper: rgba(255,255,255,0.92);
+      --paper: rgba(255, 255, 255, 0.94);
       --paper-strong: #ffffff;
-      --text: #3a312b;
-      --muted: #827871;
+      --text: #342c27;
+      --muted: #847971;
       --accent: #ba9653;
       --accent-dark: #8e1520;
       --line: #e3ded5;
       --line-soft: #eee8df;
-      --shadow-soft: 0 10px 40px rgba(58, 49, 43, 0.08);
-      --shadow-medium: 0 18px 55px rgba(58, 49, 43, 0.10);
-      --radius: 8px;
+      --shadow-soft: 0 12px 40px rgba(58, 49, 43, 0.07);
+      --shadow-medium: 0 20px 60px rgba(58, 49, 43, 0.10);
+      --radius: 10px;
       --header: 'Cormorant Garamond', serif;
       --body: 'Jost', sans-serif;
     }
@@ -48,10 +48,10 @@
       margin: 0;
       color: var(--text);
       font-family: var(--body);
-      line-height: 1.75;
+      line-height: 1.8;
       font-weight: 300;
       background-color: var(--bg);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath d='M40 80c0-22.091 17.909-40 40-40C57.909 40 40 22.091 40 0 40 22.091 22.091 40 0 40c22.091 0 40 17.909 40 40z' fill='%23BA9653' fill-opacity='0.035'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath d='M40 80c0-22.091 17.909-40 40-40C57.909 40 40 22.091 40 0 40 22.091 22.091 40 0 40c22.091 0 40 17.909 40 40z' fill='%23BA9653' fill-opacity='0.03'/%3E%3C/svg%3E");
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
@@ -67,7 +67,7 @@
     }
 
     .container {
-      width: min(1080px, calc(100% - 40px));
+      width: min(1100px, calc(100% - 40px));
       margin: 0 auto;
     }
 
@@ -92,7 +92,7 @@
     .custom-cursor.hover {
       width: 42px;
       height: 42px;
-      background-color: rgba(186, 150, 83, 0.12);
+      background-color: rgba(186, 150, 83, 0.10);
       border: 1px solid var(--accent);
       backdrop-filter: blur(2px);
     }
@@ -169,9 +169,9 @@
     }
 
     .nav-inner {
-      width: min(1200px, calc(100% - 40px));
+      width: min(1240px, calc(100% - 40px));
       margin: 0 auto;
-      height: 78px;
+      height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -185,12 +185,12 @@
     }
 
     .menu a {
-      font-size: 0.74rem;
-      letter-spacing: 0.18em;
+      font-size: 0.72rem;
+      letter-spacing: 0.20em;
       text-transform: uppercase;
       color: #fff;
       font-weight: 500;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.35);
       white-space: nowrap;
       opacity: 0.95;
     }
@@ -202,19 +202,19 @@
 
     .nav-brand {
       font-family: var(--header);
-      font-size: 1.65rem;
+      font-size: 1.8rem;
       font-style: italic;
       color: #fff;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.35);
       margin: 0 18px;
       white-space: nowrap;
     }
 
     .nav.scrolled {
-      background: rgba(245, 243, 237, 0.96);
-      backdrop-filter: blur(12px);
+      background: rgba(245, 243, 237, 0.95);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line);
-      box-shadow: 0 8px 30px rgba(58, 49, 43, 0.05);
+      box-shadow: 0 8px 28px rgba(58, 49, 43, 0.05);
     }
 
     .nav.scrolled .menu a,
@@ -227,7 +227,9 @@
       color: var(--accent-dark);
     }
 
-    .nav.scrolled .nav-brand { color: var(--accent-dark); }
+    .nav.scrolled .nav-brand {
+      color: var(--accent-dark);
+    }
 
     .shimmer-text {
       background: linear-gradient(110deg, #BA9653 20%, #FFF3D4 40%, #FFF3D4 60%, #BA9653 80%);
@@ -244,17 +246,24 @@
 
     .hero {
       height: 100vh;
-      min-height: 760px;
+      min-height: 780px;
       display: flex;
       align-items: center;
       justify-content: center;
       background:
-        linear-gradient(rgba(58, 49, 43, 0.38), rgba(58, 49, 43, 0.68)),
+        linear-gradient(rgba(58, 49, 43, 0.34), rgba(58, 49, 43, 0.70)),
         url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80") center/cover;
       background-attachment: fixed;
       color: #fff;
       text-align: center;
       position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.12) 100%);
     }
 
     .hero::after {
@@ -273,6 +282,7 @@
         background-attachment: scroll;
         min-height: 640px;
       }
+
       .hero::after {
         height: 56px;
         bottom: 28px;
@@ -280,13 +290,15 @@
     }
 
     .hero-content {
+      position: relative;
+      z-index: 2;
       padding: 0 20px;
-      max-width: 900px;
+      max-width: 920px;
     }
 
     .hero-date {
       font-size: 0.82rem;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       margin-bottom: 20px;
       color: rgba(255,255,255,0.92);
@@ -294,50 +306,23 @@
 
     .hero h1 {
       font-family: var(--header);
-      font-size: clamp(4rem, 10vw, 7.8rem);
+      font-size: clamp(4.2rem, 10vw, 8.2rem);
       font-weight: 300;
       margin: 0;
-      line-height: 0.95;
+      line-height: 0.93;
     }
 
     .hero-location {
       color: var(--accent);
       font-family: var(--header);
       font-style: italic;
-      font-size: 1.75rem;
+      font-size: 1.85rem;
       margin-top: 24px;
-    }
-
-    .section {
-      padding: 120px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .section-alt {
-      background: rgba(255,255,255,0.55);
-    }
-
-    .section-title {
-      font-family: var(--header);
-      font-size: clamp(2.6rem, 5vw, 3.8rem);
-      font-weight: 300;
-      color: var(--accent-dark);
-      text-align: center;
-      margin: 0 0 18px;
-      line-height: 1.05;
-    }
-
-    .section-intro {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto 60px;
-      color: var(--muted);
-      font-size: 1rem;
     }
 
     .countdown-wrapper {
       text-align: center;
-      padding: 90px 0;
+      padding: 96px 0;
       background: #fff;
       border-bottom: 1px solid var(--line);
       position: relative;
@@ -347,13 +332,13 @@
     .countdown {
       display: flex;
       justify-content: center;
-      gap: 26px;
+      gap: 24px;
       flex-wrap: wrap;
     }
 
     .count-item {
-      min-width: 130px;
-      padding: 24px 18px;
+      min-width: 132px;
+      padding: 26px 18px;
       background: #fff;
       border: 1px solid var(--line-soft);
       box-shadow: var(--shadow-soft);
@@ -363,7 +348,7 @@
     .count-item strong {
       display: block;
       font-family: var(--header);
-      font-size: 3.4rem;
+      font-size: 3.5rem;
       color: var(--accent-dark);
       line-height: 1;
       font-weight: 400;
@@ -371,10 +356,37 @@
     }
 
     .count-item span {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
+      font-size: 0.70rem;
+      letter-spacing: 0.20em;
       text-transform: uppercase;
       color: var(--muted);
+    }
+
+    .section {
+      padding: 130px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-alt {
+      background: linear-gradient(to bottom, rgba(255,255,255,0.50), rgba(255,255,255,0.35));
+    }
+
+    .section-title {
+      font-family: var(--header);
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--accent-dark);
+      text-align: center;
+      margin: 0 0 18px;
+      line-height: 1.04;
+    }
+
+    .section-intro {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 66px;
+      color: var(--muted);
+      font-size: 1rem;
     }
 
     .info-grid {
@@ -385,7 +397,7 @@
 
     .info-card {
       text-align: center;
-      padding: 26px;
+      padding: 28px;
       background: var(--paper);
       border: 1px solid var(--line-soft);
       border-radius: var(--radius);
@@ -397,7 +409,7 @@
       height: auto;
       max-height: 400px;
       border-radius: 6px;
-      margin-bottom: 26px;
+      margin-bottom: 28px;
       filter: sepia(10%);
       object-fit: contain;
       background: #fff;
@@ -413,7 +425,7 @@
 
     .place-title {
       font-family: var(--header);
-      font-size: 2.1rem;
+      font-size: 2.15rem;
       font-weight: 400;
       margin: 0 0 8px;
       line-height: 1.05;
@@ -421,13 +433,13 @@
 
     .place-link {
       display: inline-block;
-      margin-top: 15px;
+      margin-top: 16px;
       border-bottom: 1px solid var(--accent);
       color: var(--text);
-      font-size: 0.76rem;
-      letter-spacing: 0.12em;
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      padding-bottom: 3px;
+      padding-bottom: 4px;
     }
 
     .place-link:hover {
@@ -461,35 +473,35 @@
     }
 
     .info-text-box {
-      max-width: 760px;
+      max-width: 780px;
       margin: 0 auto;
       text-align: center;
       background: var(--paper);
       border: 1px solid var(--line-soft);
       border-radius: var(--radius);
       box-shadow: var(--shadow-soft);
-      padding: 42px 32px;
+      padding: 48px 36px;
     }
 
     .info-text-box p {
-      margin: 10px 0;
+      margin: 12px 0;
     }
 
     .rsvp-container {
-      max-width: 640px;
+      max-width: 660px;
       margin: 0 auto;
       text-align: center;
       background: var(--paper);
       border: 1px solid var(--line-soft);
       border-radius: var(--radius);
       box-shadow: var(--shadow-soft);
-      padding: 42px 30px;
+      padding: 48px 34px;
     }
 
     .rsvp-lead {
       font-family: var(--header);
       font-style: italic;
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       margin: 0 0 36px;
     }
 
@@ -500,7 +512,7 @@
       border: none;
       border-bottom: 1px solid var(--line);
       font-family: var(--body);
-      font-size: 1.05rem;
+      font-size: 1.04rem;
       margin-bottom: 30px;
       outline: none;
       transition: border-color 0.3s;
@@ -508,7 +520,7 @@
     }
 
     .form-control::placeholder {
-      color: #9a9088;
+      color: #9b9088;
     }
 
     .form-control:focus {
@@ -521,7 +533,7 @@
       padding: 15px 40px;
       border: none;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.13em;
       font-weight: 500;
       width: 100%;
       position: relative;
@@ -549,6 +561,32 @@
       0% { left: -100%; }
       20% { left: 200%; }
       100% { left: 200%; }
+    }
+
+    .radio-group {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    .radio-group p {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      font-weight: 500;
+      margin-bottom: 12px;
+      letter-spacing: 0.14em;
+    }
+
+    .radio-options {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .radio-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .modal-success {
@@ -590,32 +628,6 @@
       justify-content: center;
       box-shadow: var(--shadow-soft);
       font-size: 1.2rem;
-    }
-
-    .radio-group {
-      text-align: left;
-      margin-bottom: 30px;
-    }
-
-    .radio-group p {
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      color: var(--accent-dark);
-      font-weight: 500;
-      margin-bottom: 12px;
-      letter-spacing: 0.12em;
-    }
-
-    .radio-options {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .radio-options label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .lightbox {
@@ -664,13 +676,13 @@
     }
 
     footer {
-      padding: 90px 0;
+      padding: 96px 0;
       text-align: center;
     }
 
     .footer-name {
       font-family: var(--header);
-      font-size: 2.7rem;
+      font-size: 2.9rem;
       font-weight: 400;
       margin: 0;
       display: inline-block;
@@ -683,9 +695,7 @@
 
     @media (max-width: 768px) {
       .menu { display: none; }
-      .count-item {
-        min-width: 120px;
-      }
+      .count-item { min-width: 120px; }
       .music-btn {
         bottom: 20px;
         right: 20px;
@@ -694,7 +704,7 @@
 
     @media (max-width: 600px) {
       .gallery { column-count: 1; }
-      .section { padding: 90px 0; }
+      .section { padding: 96px 0; }
       .countdown { gap: 16px; }
       .count-item {
         min-width: 130px;
@@ -707,7 +717,7 @@
       .info-text-box,
       .rsvp-container,
       .modal-card {
-        padding: 28px 20px;
+        padding: 30px 20px;
       }
     }
   </style>
@@ -796,14 +806,14 @@
         <div class="info-grid">
           <div class="info-card reveal">
             <img src="hotel1.jpeg" alt="Hotel Ibis" class="place-image">
-            <h3 class="place-title" style="font-size:1.9rem;">Hotel Ibis Lleida</h3>
+            <h3 class="place-title" style="font-size:1.95rem;">Hotel Ibis Lleida</h3>
             <p>Calle Maria Montessori, 6, 25001 Lleida</p>
             <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Ibis+Lleida" target="_blank" class="place-link">Ver ubicación</a>
           </div>
 
           <div class="info-card reveal">
             <img src="hotel2.jpeg" alt="Hotel Real" class="place-image">
-            <h3 class="place-title" style="font-size:1.9rem;">Hotel Real Lleida</h3>
+            <h3 class="place-title" style="font-size:1.95rem;">Hotel Real Lleida</h3>
             <p>Av. de Blondel, 22, 25002 Lleida</p>
             <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Real+Lleida" target="_blank" class="place-link">Ver ubicación</a>
           </div>
@@ -833,7 +843,7 @@
       <div class="container">
         <h2 class="section-title reveal">Información</h2>
         <div class="info-text-box reveal">
-          <p style="font-family: var(--header); font-style: italic; font-size: 1.55rem; margin-bottom: 26px;">Todo lo importante para el día</p>
+          <p style="font-family: var(--header); font-style: italic; font-size: 1.65rem; margin-bottom: 26px;">Todo lo importante para el día</p>
           <p><strong>Dress code:</strong> elegante.</p>
           <p><strong>Autobús:</strong> podéis confirmarlo en el formulario de asistencia.</p>
           <p><strong>Niños:</strong> aquí podéis añadir la información que queráis comunicar.</p>
