@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jorge & Alba | 14.11.2026</title>
   
+  <link rel="preload" href="sobre-invernal.jpg" as="image" media="(min-width: 769px)">
+  <link rel="preload" href="sobre-invernal2.jpg" as="image" media="(max-width: 768px)">
+
   <meta property="og:title" content="¡Nos casamos! Jorge & Alba" />
   <meta property="og:description" content="Acompáñanos el 14 de noviembre de 2026 en Lleida. Descubre todos los detalles y confirma tu asistencia." />
   <meta property="og:image" content="sobre-invernal.jpg" />
@@ -17,7 +20,7 @@
 
   <style>
     :root {
-      /* PALETA CÁLIDA INVERNAL (A juego con el nuevo sobre) */
+      /* PALETA CÁLIDA INVERNAL */
       --bg: #FAFAF7; /* Crema cálido texturizado */
       --paper: #FFFFFF;
       --text: #2B2927; /* Gris carbón cálido */
@@ -54,7 +57,7 @@
       background-image: url('sobre-invernal.jpg'); /* VERSIÓN ESCRITORIO */
       background-size: cover;
       background-position: center;
-      transition: opacity 1.2s ease, visibility 1.2s ease;
+      transition: opacity 1.2s ease, visibility 1.2s ease, transform 1.2s ease;
       overflow: hidden;
     }
     
@@ -65,7 +68,12 @@
       }
     }
 
-    .gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .gate.hidden { 
+      opacity: 0; 
+      visibility: hidden; 
+      pointer-events: none; 
+      transform: scale(1.05); /* Efecto de acercamiento al abrir */
+    }
     
     /* Botón invisible centrado sobre el sello de lacre de la imagen */
     .seal-btn {
@@ -76,7 +84,7 @@
       display: flex; align-items: center; justify-content: center;
       transition: transform 0.3s ease, background 0.3s ease;
     }
-    .seal-btn:hover { background: rgba(155, 27, 48, 0.04); } /* Brillo rojo muy sutil al pasar el ratón */
+    .seal-btn:hover { background: rgba(155, 27, 48, 0.04); }
 
     /* -------- NAVEGACIÓN -------- */
     .site { opacity: 0; transition: opacity 1.5s ease; }
@@ -363,7 +371,7 @@
     const site = document.getElementById("site");
 
     openBtn.addEventListener("click", () => {
-      // Ocultar sobre y mostrar web inmediatamente
+      // Activar la clase que añade el scale y oculta el sobre
       gate.classList.add("hidden");
       site.classList.add("visible");
       document.body.classList.remove("locked");
