@@ -7,7 +7,7 @@
   
   <meta property="og:title" content="¡Nos casamos! Jorge & Alba" />
   <meta property="og:description" content="Acompáñanos el 14 de noviembre de 2026 en Lleida. Descubre todos los detalles y confirma tu asistencia." />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1543849557-0a4bdaeec285?auto=format&fit=crop&w=1200&q=80" />
+  <meta property="og:image" content="sobre-invernal.jpg" />
   <meta property="og:url" content="https://vuestra-web-de-boda.com" />
   <meta property="og:type" content="website" />
 
@@ -17,15 +17,15 @@
 
   <style>
     :root {
-      /* PALETA DE INVIERNO */
-      --bg: #F0F4F8; /* Azul/Gris muy pálido, como la nieve a la sombra */
+      /* PALETA CÁLIDA INVERNAL (A juego con el nuevo sobre) */
+      --bg: #FAFAF7; /* Crema cálido texturizado */
       --paper: #FFFFFF;
-      --text: #1C2A39; /* Azul marino muy oscuro, casi negro */
-      --muted: #64748B; /* Gris pizarra frío */
-      --accent: #8FA6BA; /* Azul hielo / Plata */
-      --accent-dark: #5B748A; /* Azul acero oscuro */
-      --line: #E2E8F0;
-      --shadow-soft: 0 10px 40px rgba(28, 42, 57, 0.05);
+      --text: #2B2927; /* Gris carbón cálido */
+      --muted: #7A7571; /* Gris topo */
+      --accent: #C5A880; /* Dorado polvo */
+      --accent-dark: #9B1B30; /* Rojo lacre profundo */
+      --line: #E8E5DF;
+      --shadow-soft: 0 10px 40px rgba(43, 41, 39, 0.05);
       --header: 'Cormorant Garamond', serif;
       --body: 'Jost', sans-serif;
     }
@@ -47,75 +47,36 @@
     
     .container { width: min(1000px, calc(100% - 40px)); margin: 0 auto; }
 
-    /* -------- INVITACIÓN / SOBRE INVERNAL -------- */
+    /* -------- INVITACIÓN / SOBRE A PANTALLA COMPLETA -------- */
     .gate {
       position: fixed; inset: 0; z-index: 5000;
       display: flex; align-items: center; justify-content: center;
-      padding: 30px; background: var(--bg);
+      background-image: url('sobre-invernal.jpg'); /* VERSIÓN ESCRITORIO */
+      background-size: cover;
+      background-position: center;
       transition: opacity 1.2s ease, visibility 1.2s ease;
+      overflow: hidden;
     }
-    .gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .gate-inner { text-align: center; }
-    .gate-kicker { 
-      margin-bottom: 30px; font-family: var(--body); font-size: 0.8rem; 
-      letter-spacing: 0.4em; text-transform: uppercase; color: var(--text); 
-    }
-    .gate-hint { 
-      margin-top: 40px; font-size: 0.85rem; letter-spacing: 0.1em; 
-      color: var(--muted); text-transform: uppercase; 
-    }
-
-    .envelope {
-      position: relative; width: min(90vw, 700px); aspect-ratio: 1.5 / 1;
-      perspective: 2000px; transform-style: preserve-3d;
-      margin: 0 auto;
-    }
-    .envelope-base {
-      position: absolute; inset: 0; border-radius: 4px;
-      background: #EBF0F5; box-shadow: 0 20px 40px rgba(28, 42, 57, 0.1);
-      border: 1px solid #D9E2EC;
-    }
-    .letter {
-      position: absolute; left: 5%; right: 5%; bottom: 8%; height: 80%;
-      z-index: 1; border-radius: 2px;
-      background: #FFF; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      padding: 30px; transform: translateY(10%);
-      transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s, opacity 1s ease;
-    }
-    .letter h2 { 
-      margin: 0; font-family: var(--header); font-size: clamp(2rem, 5vw, 3rem); 
-      font-weight: 400; color: var(--text); font-style: italic;
-    }
-    .envelope-front { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
-    .front-left, .front-right, .front-bottom { position: absolute; background: #F4F7FA; border: 1px solid #E2E8F0;}
-    .front-left { left: 0; bottom: 0; width: 50%; height: 80%; clip-path: polygon(0 0, 100% 100%, 0 100%); }
-    .front-right { right: 0; bottom: 0; width: 50%; height: 80%; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
-    .front-bottom { left: 0; right: 0; bottom: 0; height: 50%; clip-path: polygon(0 100%, 50% 0, 100% 100%); }
     
-    .flap {
-      position: absolute; left: 0; right: 0; top: 0; height: 60%; z-index: 4;
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
-      background: #F8FAFC; border-bottom: 1px solid rgba(28, 42, 57, 0.05);
-      transform-origin: top center; transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-      transform-style: preserve-3d;
+    /* CAMBIO AUTOMÁTICO A VERSIÓN VERTICAL EN MÓVILES */
+    @media (max-width: 768px) {
+      .gate {
+        background-image: url('sobre-invernal2.jpg'); /* VERSIÓN MÓVIL */
+      }
     }
 
+    .gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    
+    /* Botón invisible centrado sobre el sello de lacre de la imagen */
     .seal-btn {
       position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      width: 70px; height: 70px; border-radius: 50%; border: none;
-      background: var(--text); /* Azul noche para el lacre */
-      color: #fff; font-family: var(--header);
-      font-size: 1.5rem; cursor: pointer; z-index: 6;
-      box-shadow: 0 4px 15px rgba(28, 42, 57, 0.3);
-      transition: transform 0.3s ease, opacity 0.4s ease, background 0.3s ease;
+      width: 150px; height: 150px; border-radius: 50%; border: none;
+      background: transparent;
+      cursor: pointer; z-index: 6;
       display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s ease, background 0.3s ease;
     }
-    .seal-btn:hover { transform: translate(-50%, -50%) scale(1.05); background: #0F172A; }
-
-    .gate.opening .flap { transform: rotateX(180deg); }
-    .gate.opening .letter { transform: translateY(-35%); }
-    .gate.opening .seal-btn { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    .seal-btn:hover { background: rgba(155, 27, 48, 0.04); } /* Brillo rojo muy sutil al pasar el ratón */
 
     /* -------- NAVEGACIÓN -------- */
     .site { opacity: 0; transition: opacity 1.5s ease; }
@@ -123,7 +84,7 @@
 
     .nav {
       position: fixed; top: 0; width: 100%; z-index: 100;
-      background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px);
+      background: rgba(250, 250, 247, 0.95); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
     .nav-inner {
@@ -132,22 +93,22 @@
     }
     .menu { display: flex; gap: 30px; }
     .menu a { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text); }
-    .menu a:hover { color: var(--accent); }
+    .menu a:hover { color: var(--accent-dark); }
     .nav-brand { font-family: var(--header); font-size: 1.4rem; font-style: italic; margin: 0 20px; color: var(--text); }
 
-    /* -------- HERO INVERNAL -------- */
+    /* -------- HERO -------- */
     .hero {
       height: 100vh; display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(rgba(28, 42, 57, 0.4), rgba(28, 42, 57, 0.6)), url("https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=1920&q=80") center/cover;
+      background: linear-gradient(rgba(43, 41, 39, 0.3), rgba(43, 41, 39, 0.5)), url("https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=1920&q=80") center/cover;
       color: #fff; text-align: center; padding-top: 70px;
     }
     .hero-content { animation: fadeIn 2s ease forwards; }
-    .hero-date { font-family: var(--body); font-size: 0.85rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 20px; color: #E2E8F0; }
+    .hero-date { font-family: var(--body); font-size: 0.85rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 20px; color: #FDFDFD; }
     .hero h1 { 
       font-family: var(--header); font-size: clamp(4rem, 10vw, 7rem); 
       font-weight: 300; margin: 0; line-height: 1; text-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    .hero-location { font-family: var(--header); font-style: italic; font-size: 1.5rem; margin-top: 20px; color: #E2E8F0; }
+    .hero-location { font-family: var(--header); font-style: italic; font-size: 1.5rem; margin-top: 20px; color: #FDFDFD; }
 
     /* -------- SECCIONES -------- */
     .section { padding: 120px 0; border-bottom: 1px solid var(--line); }
@@ -169,7 +130,7 @@
     .count-item { text-align: center; min-width: 80px; }
     .count-item strong { 
       display: block; font-family: var(--header); font-size: 3.5rem; 
-      font-weight: 300; line-height: 1; color: var(--accent); 
+      font-weight: 300; line-height: 1; color: var(--accent-dark); 
     }
     .count-item span { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
 
@@ -178,7 +139,7 @@
     .info-card { text-align: center; }
     .place-image { 
       width: 100%; height: 280px; object-fit: cover; border-radius: 4px; 
-      margin-bottom: 25px; filter: grayscale(15%) sepia(5%) hue-rotate(180deg); 
+      margin-bottom: 25px; filter: grayscale(10%) sepia(10%); 
     }
     .info-card h3 { font-family: var(--header); font-size: 2rem; font-weight: 400; margin: 0 0 10px; color: var(--text); }
     .info-card p { color: var(--muted); margin: 5px 0; }
@@ -197,7 +158,7 @@
     /* -------- GALERÍA -------- */
     .gallery { column-count: 3; column-gap: 20px; }
     .gallery-item { break-inside: avoid; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
-    .gallery-item img { width: 100%; transition: transform 0.7s ease, filter 0.5s ease; cursor: pointer; filter: grayscale(15%) sepia(5%) hue-rotate(180deg); } 
+    .gallery-item img { width: 100%; transition: transform 0.7s ease, filter 0.5s ease; cursor: pointer; filter: grayscale(10%) sepia(10%); } 
     .gallery-item:hover img { transform: scale(1.03); filter: grayscale(0%); }
 
     /* -------- FORMULARIO RSVP -------- */
@@ -249,23 +210,7 @@
 <body class="locked">
 
   <div class="gate" id="gate">
-    <div class="gate-inner">
-      <div class="gate-kicker">La Boda de</div>
-      <div class="envelope">
-        <div class="envelope-base"></div>
-        <div class="letter">
-          <h2>Jorge & Alba</h2>
-        </div>
-        <div class="envelope-front">
-          <div class="front-left"></div>
-          <div class="front-right"></div>
-          <div class="front-bottom"></div>
-        </div>
-        <div class="flap"></div>
-        <button class="seal-btn" id="openInvitation">J&A</button>
-      </div>
-      <div class="gate-hint">Abrir invitación</div>
-    </div>
+    <button class="seal-btn" id="openInvitation" aria-label="Abrir invitación"></button>
   </div>
 
   <div class="site" id="site">
@@ -399,7 +344,7 @@
             </div>
 
             <button type="submit" class="btn btn-solid" style="width: 100%; margin-top: 20px;">Enviar Confirmación</button>
-            <p id="form-status" style="display: none; margin-top: 20px; font-style: italic; color: var(--accent);"></p>
+            <p id="form-status" style="display: none; margin-top: 20px; font-style: italic; color: var(--accent-dark);"></p>
           </form>
         </div>
       </div>
@@ -412,18 +357,16 @@
   </div>
 
   <script>
-    /* Lógica del sobre inicial */
+    /* Lógica de apertura del sobre inmersivo */
     const gate = document.getElementById("gate");
     const openBtn = document.getElementById("openInvitation");
     const site = document.getElementById("site");
 
     openBtn.addEventListener("click", () => {
-      gate.classList.add("opening");
-      setTimeout(() => {
-        gate.classList.add("hidden");
-        site.classList.add("visible");
-        document.body.classList.remove("locked");
-      }, 1300);
+      // Ocultar sobre y mostrar web inmediatamente
+      gate.classList.add("hidden");
+      site.classList.add("visible");
+      document.body.classList.remove("locked");
     });
 
     /* Lógica del contador */
@@ -434,7 +377,7 @@
       const distance = weddingDate - now;
 
       if (distance < 0) {
-        document.querySelector('.countdown').innerHTML = "<h3 style='font-family: var(--header); font-size: 2.5rem; color: var(--accent); font-style: italic;'>¡Hoy es el gran día!</h3>";
+        document.querySelector('.countdown').innerHTML = "<h3 style='font-family: var(--header); font-size: 2.5rem; color: var(--accent-dark); font-style: italic;'>¡Hoy es el gran día!</h3>";
         return;
       }
 
@@ -452,7 +395,7 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    /* Lógica del formulario */
+    /* Lógica del formulario RSVP */
     const form = document.getElementById("rsvpForm");
     const status = document.getElementById("form-status");
 
