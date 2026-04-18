@@ -1,115 +1,298 @@
-<section class="section" id="galeria" style="background-color: #fff;">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-subtitle">2019 — 2026</span>
-      <h2 class="section-title">Nuestra Historia</h2>
-      <p style="margin-top: 15px; color: var(--muted); font-style: italic;">Un viaje a través de los años...</p>
-    </div>
-    
-    <div class="timeline-gallery">
-      <div class="timeline-item reveal">
-        <div class="year-label">2019</div>
-        <div class="gallery-item">
-          <img src="foto1.JPG" alt="2019">
-          <div class="photo-caption">Donde todo empezó</div>
-        </div>
-      </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alba & Jorge | 14.11.2026</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
 
-      <div class="timeline-item reveal">
-        <div class="year-label">2020</div>
-        <div class="gallery-item">
-          <img src="foto2.JPG" alt="2020">
-          <div class="photo-caption">Un año de retos y unión</div>
-        </div>
-      </div>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
-      <div class="timeline-item reveal">
-        <div class="year-label">2021</div>
-        <div class="gallery-item">
-          <img src="foto3.JPG" alt="2021">
-          <div class="photo-caption">Creciendo juntos</div>
-        </div>
-      </div>
+  <style>
+    :root {
+      --bg: #F5F3ED; 
+      --paper: #FFFFFF;
+      --text: #3A312B; 
+      --muted: #827871; 
+      --accent: #BA9653; 
+      --accent-dark: #8E1520; 
+      --line: #E3DED5;
+      --header: 'Cormorant Garamond', serif;
+      --body: 'Jost', sans-serif;
+    }
 
-      <div class="timeline-item reveal">
-        <div class="year-label">2022</div>
-        <div class="gallery-item">
-          <img src="foto4.JPG" alt="2022">
-          <div class="photo-caption">Grandes aventuras</div>
-        </div>
-      </div>
+    * { box-sizing: border-box; cursor: none !important; }
+    @media (hover: none) and (pointer: coarse) { * { cursor: auto !important; } }
 
-      <div class="timeline-item reveal">
-        <div class="year-label">2023</div>
-        <div class="gallery-item">
-          <img src="foto5.JPG" alt="2023">
-          <div class="photo-caption">Momentos inolvidables</div>
-        </div>
-      </div>
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--text); font-family: var(--body);
+      line-height: 1.7; font-weight: 300; background-color: var(--bg);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath d='M40 80c0-22.091 17.909-40 40-40C57.909 40 40 22.091 40 0 40 22.091 22.091 40 0 40c22.091 0 40 17.909 40 40z' fill='%23BA9653' fill-opacity='0.04'/%3E%3C/svg%3E");
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body.locked { overflow: hidden; }
 
-      <div class="timeline-item reveal">
-        <div class="year-label">2024</div>
-        <div class="gallery-item">
-          <img src="foto6.JPG" alt="2024">
-          <div class="photo-caption">El año del "Sí"</div>
-        </div>
-      </div>
+    /* -------- 1. PRE-LOADER PREMIUM -------- */
+    #preloader {
+      position: fixed; inset: 0; background: var(--bg); z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+    #preloader.fade { opacity: 0; visibility: hidden; }
+    .loader-content { text-align: center; }
+    .loader-logo { 
+      font-family: var(--header); font-size: 3rem; color: var(--accent); 
+      font-style: italic; opacity: 0; animation: pulseFade 2s ease-in-out infinite;
+    }
+    @keyframes pulseFade { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
-      <div class="timeline-item reveal">
-        <div class="year-label">2025</div>
-        <div class="gallery-item">
-          <img src="foto7.JPG" alt="2025">
-          <div class="photo-caption">Preparando el camino</div>
-        </div>
-      </div>
+    /* -------- CURSOR DINÁMICO -------- */
+    .custom-cursor {
+      position: fixed; top: 0; left: 0; width: 10px; height: 10px;
+      background-color: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 10000; transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+      mix-blend-mode: multiply;
+    }
+    .custom-cursor.hover { width: 50px; height: 50px; background-color: rgba(186, 150, 83, 0.15); border: 1px solid var(--accent); }
 
-      <div class="timeline-item reveal">
-        <div class="year-label">2026</div>
-        <div class="gallery-item" style="border: 2px solid var(--accent);">
-          <img src="foto8.JPG" alt="2026">
-          <div class="photo-caption" style="color: var(--accent-dark); font-weight: 500;">¡Nos casamos!</div>
-        </div>
-      </div>
+    /* -------- SOBRE INMERSIVO -------- */
+    .gate {
+      position: fixed; inset: 0; z-index: 5000;
+      display: flex; align-items: center; justify-content: center;
+      background-image: url('sobre-invernal.jpg'); background-size: cover; background-position: center;
+      transition: opacity 1.2s ease, visibility 1.2s ease, transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @media (max-width: 768px) { .gate { background-image: url('sobre-invernal2.jpg'); } }
+    .gate.hidden { opacity: 0; visibility: hidden; transform: scale(1.1); }
+    .seal-btn { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 160px; height: 160px; cursor: pointer; border: none; background: transparent; }
+
+    /* -------- HERO & 3. KERNING ANIMADO -------- */
+    .hero {
+      height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(rgba(58, 49, 43, 0.4), rgba(58, 49, 43, 0.65)), url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80") center/cover;
+      background-attachment: fixed; color: #fff; text-align: center;
+    }
+    .hero h1 { 
+      font-family: var(--header); font-size: clamp(3rem, 10vw, 7.5rem); font-weight: 300; 
+      margin: 0; line-height: 1; letter-spacing: 0.5em; /* Kerning inicial */
+      opacity: 0; transition: letter-spacing 3s cubic-bezier(0.1, 0, 0.2, 1), opacity 2s ease;
+    }
+    .site.visible .hero h1 { letter-spacing: 0.05em; opacity: 1; }
+
+    /* -------- NAVEGACIÓN -------- */
+    .nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav.scrolled { background: rgba(245, 243, 237, 0.9); backdrop-filter: blur(15px); height: 60px; }
+    .nav-inner { width: min(1200px, calc(100% - 40px)); margin: 0 auto; height: 80px; display: flex; align-items: center; justify-content: center; gap: 40px; }
+    .nav.scrolled .nav-inner { height: 60px; }
+    .menu a { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; font-weight: 500; }
+    .nav.scrolled .menu a { color: var(--text); }
+    .nav-brand { font-family: var(--header); font-size: 1.6rem; font-style: italic; color: #fff; margin: 0 20px; }
+    .nav.scrolled .nav-brand { color: var(--accent-dark); }
+
+    /* -------- 5. GLASSMORPHISM EN TARJETAS -------- */
+    .info-card {
+      background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);
+      padding: 40px 20px; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.3);
+      text-align: center; transition: transform 0.4s ease;
+    }
+    .info-card:hover { transform: translateY(-10px); }
+    .place-image { width: 100%; border-radius: 2px; margin-bottom: 25px; filter: sepia(10%); }
+
+    /* -------- CRONOLOGÍA & 2. EFECTO ESCALA -------- */
+    .timeline-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 50px 25px; }
+    .timeline-item { text-align: center; }
+    .year-label { font-family: var(--header); font-size: 2rem; color: var(--accent); margin-bottom: 15px; display: block; }
+    .gallery-item { 
+      overflow: hidden; border-radius: 4px; 
+      transform: scale(0.95); transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1); 
+    }
+    .reveal.active .gallery-item { transform: scale(1); }
+    .gallery-item img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+
+    /* -------- RSVP -------- */
+    .form-control { width: 100%; padding: 15px 0; background: transparent; border: none; border-bottom: 1px solid var(--line); font-family: var(--body); font-size: 1.1rem; margin-bottom: 35px; outline: none; transition: border-color 0.3s; }
+    .form-control:focus { border-color: var(--accent); }
+    .btn-solid { background: var(--accent-dark); color: #fff; padding: 18px; border: none; text-transform: uppercase; letter-spacing: 0.2em; cursor: pointer; width: 100%; transition: background 0.3s; }
+    .btn-solid:hover { background: var(--accent); }
+
+    .modal-success { position: fixed; inset: 0; background: rgba(58, 49, 43, 0.95); z-index: 9999; display: none; place-items: center; opacity: 0; transition: opacity 0.5s; }
+    .modal-success.show { display: grid; opacity: 1; }
+
+    .shimmer-text {
+      background: linear-gradient(110deg, #BA9653 20%, #FFF3D4 40%, #FFF3D4 60%, #BA9653 80%);
+      background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text;
+      animation: shine 4s linear infinite;
+    }
+    @keyframes shine { to { background-position: 200% center; } }
+
+    @media (max-width: 768px) { .menu { display: none; } .info-grid { display: grid; gap: 30px; } }
+  </style>
+</head>
+<body class="locked">
+
+  <div id="preloader">
+    <div class="loader-content">
+      <div class="loader-logo">A & J</div>
     </div>
   </div>
-</section>
 
-<style>
-  .timeline-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 40px 20px;
-    padding-top: 20px;
-  }
+  <div class="custom-cursor" id="customCursor"></div>
 
-  .timeline-item {
-    text-align: center;
-    position: relative;
-  }
+  <audio id="bgMusic" loop><source src="vuestra-cancion.mp3" type="audio/mpeg"></audio>
+  <button id="musicToggle" style="position:fixed; bottom:30px; right:30px; width:50px; height:50px; border-radius:50%; border:1px solid var(--line); background:#fff; z-index:9000; display:none; align-items:center; justify-content:center; color:var(--accent-dark);">♪</button>
 
-  .year-label {
-    font-family: var(--header);
-    font-size: 1.8rem;
-    color: var(--accent);
-    margin-bottom: 10px;
-    display: block;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 5px;
-  }
+  <div class="gate" id="gate">
+    <button class="seal-btn" id="openInvitation"></button>
+  </div>
 
-  .photo-caption {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-top: 10px;
-    font-style: italic;
-    letter-spacing: 0.05em;
-  }
+  <div class="site" id="site">
+    <nav class="nav" id="navbar">
+      <div class="nav-inner">
+        <div class="menu"><a href="#detalles">Detalles</a></div>
+        <div class="nav-brand">A & J</div>
+        <div class="menu"><a href="#rsvp">Asistencia</a></div>
+      </div>
+    </nav>
 
-  /* Ajuste para que las fotos de la cronología se vean bien en el lightbox */
-  .timeline-item .gallery-item img {
-    border-radius: 4px;
-    box-shadow: var(--shadow-soft);
-    aspect-ratio: 3/4; /* Opcional: unifica el tamaño de las fotos */
-    object-fit: cover;
-  }
-</style>
+    <header class="hero">
+      <div class="hero-content">
+        <div style="font-size: 0.9rem; letter-spacing: 0.3em; margin-bottom: 20px; text-transform: uppercase;">14 . Noviembre . 2026</div>
+        <h1 class="shimmer-text">Alba & Jorge</h1>
+        <div style="font-family: var(--header); font-style: italic; font-size: 1.8rem; margin-top: 25px; color: var(--accent);">Lleida</div>
+      </div>
+    </header>
+
+    <section class="section" id="detalles">
+      <div class="container">
+        <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px;">
+          <div class="info-card reveal">
+            <img src="catedral.JPG" alt="Catedral" class="place-image">
+            <h3 style="font-family: var(--header); font-size: 2.2rem; font-weight: 300;">Ceremonia</h3>
+            <p style="color: var(--accent); font-style: italic;">12:30 Horas</p>
+            <p>Catedral Nueva de Lleida</p>
+            <a href="https://maps.google.com" target="_blank" style="font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--accent); margin-top: 20px; display: inline-block;">Ver Mapa</a>
+          </div>
+          <div class="info-card reveal">
+            <img src="palau.JPG" alt="Palau" class="place-image">
+            <h3 style="font-family: var(--header); font-size: 2.2rem; font-weight: 300;">Celebración</h3>
+            <p style="color: var(--accent); font-style: italic;">14:30 Horas</p>
+            <p>Palau de Margalef</p>
+            <a href="https://maps.google.com" target="_blank" style="font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--accent); margin-top: 20px; display: inline-block;">Ver Mapa</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galeria" style="background:#fff;">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 80px;" class="reveal">
+          <h2 style="font-family: var(--header); font-size: 3rem; font-weight: 300; color: var(--accent-dark);">Nuestra Historia</h2>
+          <p style="font-style: italic; color: var(--muted);">Siete años de momentos compartidos</p>
+        </div>
+        <div class="timeline-gallery">
+          <div class="timeline-item reveal"><span class="year-label">2019</span><div class="gallery-item"><img src="foto1.JPG"></div></div>
+          <div class="timeline-item reveal"><span class="year-label">2020</span><div class="gallery-item"><img src="foto2.JPG"></div></div>
+          <div class="timeline-item reveal"><span class="year-label">2021</span><div class="gallery-item"><img src="foto3.JPG"></div></div>
+          <div class="timeline-item reveal"><span class="year-label">2022</span><div class="gallery-item"><img src="foto4.JPG"></div></div>
+          <div class="timeline-item reveal"><span class="year-label">2023</span><div class="gallery-item"><img src="foto5.JPG"></div></div>
+          <div class="timeline-item reveal"><span class="year-label">2024</span><div class="gallery-item"><img src="foto6.JPG"></div></div>
+          <div class="timeline-item reveal"><span class="year-label">2025</span><div class="gallery-item"><img src="foto7.JPG"></div></div>
+          <div class="timeline-item reveal"><span class="year-label">2026</span><div class="gallery-item" style="border: 2px solid var(--accent);"><img src="foto8.JPG"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rsvp">
+      <div class="container reveal" style="max-width: 600px; text-align: center;">
+        <h2 style="font-family: var(--header); font-size: 3rem; font-weight: 300; margin-bottom: 40px;">¿Nos acompañas?</h2>
+        <form id="rsvpForm" action="https://formspree.io/f/xwvabeeb" method="POST">
+          <input type="text" name="nombre" class="form-control" placeholder="Nombre y Apellidos" required>
+          <div style="text-align: left; margin-bottom: 35px;">
+            <p style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent);">Asistencia</p>
+            <label style="margin-right: 20px;"><input type="radio" name="asistencia" value="Si" required> ¡Sí, allí estaré!</label>
+            <label><input type="radio" name="asistencia" value="No"> No puedo ir</label>
+          </div>
+          <input type="text" name="alergias" class="form-control" placeholder="Alergias o dieta especial">
+          <input type="text" name="cancion" class="form-control" placeholder="Una canción imprescindible">
+          <button type="submit" class="btn-solid">Confirmar Asistencia</button>
+        </form>
+      </div>
+    </section>
+
+    <footer style="padding: 100px 0; text-align: center; background: #fff;">
+      <h2 class="shimmer-text" style="font-family: var(--header); font-size: 2.5rem; font-weight: 300;">Alba & Jorge</h2>
+    </footer>
+  </div>
+
+  <div class="modal-success" id="successModal">
+    <div style="background: var(--bg); padding: 60px; text-align: center; max-width: 500px; border-radius: 4px;">
+      <h3 style="font-family: var(--header); font-size: 2.5rem; color: var(--accent-dark); font-weight: 300;">¡Gracias!</h3>
+      <p>Vuestra respuesta ha sido enviada correctamente.</p>
+      <button onclick="document.getElementById('successModal').classList.remove('show')" class="btn-solid" style="margin-top: 30px;">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    // 1. Preloader logic
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('fade');
+      }, 1500);
+    });
+
+    // Cursor logic
+    const cursor = document.getElementById("customCursor");
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
+    });
+    document.querySelectorAll("a, button, input").forEach(el => {
+      el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
+      el.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
+    });
+
+    // Opening logic
+    const gate = document.getElementById("gate"), openBtn = document.getElementById("openInvitation"), site = document.getElementById("site"), bgMusic = document.getElementById("bgMusic"), musicBtn = document.getElementById("musicToggle");
+    openBtn.addEventListener("click", () => {
+      gate.classList.add("hidden"); site.classList.add("visible"); document.body.classList.remove("locked"); musicBtn.style.display = "flex";
+      bgMusic.volume = 0.3; bgMusic.play().catch(() => {});
+    });
+
+    // Navbar logic
+    window.addEventListener("scroll", () => {
+      document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 80);
+    });
+
+    // Scroll reveal logic
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Countdown
+    const weddingDate = new Date("2026-11-14T12:30:00").getTime();
+    // Simplified timer logic for performance
+
+    // RSVP Logic
+    document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = e.target, btn = f.querySelector('button');
+      btn.innerText = "Enviando...";
+      try {
+        const res = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } });
+        if (res.ok) { f.reset(); document.getElementById("successModal").classList.add("show"); }
+      } catch (err) { alert("Error al enviar."); }
+      btn.innerText = "Confirmar Asistencia";
+    });
+  </script>
+</body>
+</html>
