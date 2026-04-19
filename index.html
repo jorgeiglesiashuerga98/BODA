@@ -164,7 +164,7 @@
 
     .nav.scrolled {
       background: rgba(249, 248, 244, 0.96); backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.03);
     }
     .nav.scrolled .menu a, .nav.scrolled .nav-brand { color: var(--text); text-shadow: none; }
     .nav.scrolled .menu a:hover, .nav.scrolled .nav-brand { color: var(--accent-dark); }
@@ -213,16 +213,39 @@
     .hero-location { color: var(--accent); font-family: var(--header); font-style: italic; font-size: 1.85rem; margin-top: 10px; }
 
     /* --- CUENTA ATRÁS --- */
-    .countdown-wrapper { text-align: center; padding: 96px 0; background: var(--bg); border-bottom: 1px solid var(--line); position: relative; z-index: 10; }
+    .countdown-wrapper { text-align: center; padding: 96px 0; background: var(--bg); position: relative; z-index: 10; }
     .countdown { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
     .count-item { min-width: 132px; padding: 26px 18px; background: var(--paper); border: 1px solid var(--line-soft); box-shadow: var(--shadow-soft); border-radius: var(--radius); }
     .count-item strong { display: block; font-family: var(--header); font-size: 3.5rem; color: var(--accent-dark); line-height: 1; font-weight: 300; margin-bottom: 8px; }
     .count-item span { font-size: 0.70rem; letter-spacing: 0.20em; text-transform: uppercase; color: var(--muted); }
 
-    /* --- SECCIONES COMUNES --- */
-    .section { padding: 160px 0; border-bottom: 1px solid var(--line); }
+    /* --- SECCIONES COMUNES Y LÍNEAS VERTICALES --- */
+    .section { padding: 160px 0; position: relative; }
     .section-alt { background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0.3)); }
-    .section-title { font-family: var(--header); font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 300; color: var(--accent-dark); text-align: center; margin: 0 0 24px; line-height: 1.04; }
+    
+    .section-title { 
+      font-family: var(--header); 
+      font-size: clamp(2.8rem, 5vw, 4rem); 
+      font-weight: 300; 
+      color: var(--accent-dark); 
+      text-align: center; 
+      margin: 0 0 24px; 
+      line-height: 1.04; 
+      position: relative;
+    }
+    
+    /* SEPARADOR VERTICAL EDITORIAL */
+    .section-title::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -80px;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+    }
+
     .section-intro { text-align: center; max-width: 760px; margin: 0 auto 70px; color: var(--muted); font-size: 1rem; }
 
     /* --- TARJETAS INFO --- */
@@ -265,7 +288,7 @@
     .gallery-item:hover img { transform: scale(1.05); filter: brightness(1.02) saturate(1.1); opacity: 1; }
 
     /* --- CAJAS, FORMULARIO Y REGALOS --- */
-    .info-text-box, .rsvp-container { max-width: 780px; margin: 0 auto; text-align: center; background: var(--paper); border: 1px solid var(--line-soft); border-radius: var(--radius); box-shadow: var(--shadow-soft); padding: 55px 45px; }
+    .info-text-box, .rsvp-container { max-width: 780px; margin: 0 auto; text-align: center; background: var(--paper); border: 1px solid var(--line-soft); border-radius: var(--radius); box-shadow: var(--shadow-soft); padding: 55px 45px; position: relative;}
     .rsvp-container { max-width: 660px; }
     .rsvp-lead { font-family: var(--header); font-style: italic; font-size: 1.7rem; margin: 0 0 40px; }
 
@@ -273,7 +296,14 @@
     .gift-box {
       margin-top: 50px;
       padding-top: 40px;
-      border-top: 1px solid var(--line);
+      position: relative;
+    }
+    .gift-box::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 60px; height: 1px;
+      background: var(--accent);
     }
     .gift-text {
       font-family: var(--header);
@@ -324,9 +354,31 @@
     }
     .copy-msg.show { opacity: 1; }
 
-    .form-control { width: 100%; padding: 14px 0; background: transparent; border: none; border-bottom: 1px solid var(--line); font-family: var(--body); font-size: 1.04rem; margin-bottom: 35px; outline: none; transition: border-color 0.3s; color: var(--text); }
-    .form-control::placeholder { color: #aba098; }
-    .form-control:focus { border-color: var(--accent); }
+    /* INPUTS ANIMADOS EDITORIALES */
+    .form-control { 
+      width: 100%; 
+      padding: 14px 0; 
+      background-color: transparent; 
+      border: none; 
+      border-bottom: 1px solid var(--line); 
+      font-family: var(--body); 
+      font-size: 1.04rem; 
+      margin-bottom: 35px; 
+      outline: none; 
+      color: var(--text);
+      /* Efecto mágico de llenado */
+      background-image: linear-gradient(var(--accent), var(--accent));
+      background-position: center bottom;
+      background-size: 0% 2px;
+      background-repeat: no-repeat;
+      transition: background-size 0.4s ease-out, border-color 0.4s ease;
+    }
+    .form-control::placeholder { color: #aba098; transition: color 0.3s ease; }
+    .form-control:focus { 
+      border-bottom-color: transparent; 
+      background-size: 100% 2px; 
+    }
+    .form-control:focus::placeholder { color: transparent; }
 
     .btn-solid { background: var(--accent-dark); color: #fff; padding: 16px 40px; border: none; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 400; width: 100%; transition: all 0.4s ease; font-family: var(--body); border-radius: var(--radius); cursor: pointer; }
     .btn-solid:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
@@ -341,8 +393,15 @@
     .modal-success.show { display: grid; }
     .modal-card { background: var(--bg); padding: 60px; border-radius: var(--radius); text-align: center; max-width: 450px; width: 100%; box-shadow: var(--shadow-medium); }
 
+    /* BOTÓN MÚSICA PULSE */
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(186, 150, 83, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(186, 150, 83, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(186, 150, 83, 0); }
+    }
     .music-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: #fff; color: var(--accent-dark); border: 1px solid var(--line); z-index: 9000; display: none; align-items: center; justify-content: center; box-shadow: var(--shadow-soft); font-size: 1.2rem; cursor: pointer; transition: transform 0.3s ease; }
     .music-btn:hover { transform: scale(1.05); }
+    .music-btn.playing { animation: pulse-ring 2.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1); color: var(--accent); border-color: var(--accent); }
 
     .lightbox { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 20px; z-index: 9999; background: rgba(44, 39, 36, 0.95); backdrop-filter: blur(6px); }
     .lightbox-content { position: relative; max-width: 95vw; max-height: 92vh; }
@@ -362,6 +421,7 @@
       .section { padding: 100px 0; } 
       .hero { background-attachment: scroll !important; background-position: center top; }
       .iban-container { flex-direction: column; gap: 10px; padding: 15px; }
+      .section-title::before { top: -50px; height: 40px; }
     }
     @media (max-width: 600px) { 
       .gallery { column-count: 1; } 
@@ -507,7 +567,7 @@
           <div class="gift-box">
             <p class="gift-text">El mejor regalo es vuestra compañía. Pero si deseáis tener un detalle con nosotros...</p>
             <div class="iban-container">
-              <span class="iban-number" id="ibanText">ES91 1234 5678 90 1234567890</span>
+              <span class="iban-number" id="ibanText">ES41 2100 0337 0502 0055 2554</span>
               <button class="btn-copy" id="copyIbanBtn">Copiar</button>
             </div>
             <p class="copy-msg" id="copyFeedback">¡Número copiado!</p>
@@ -584,16 +644,20 @@
       document.body.classList.remove("locked");
       musicBtn.style.display = "flex";
       bgMusic.volume = 0.3;
-      bgMusic.play().catch(() => console.log("Música manual requerida"));
+      bgMusic.play().then(() => {
+        musicBtn.classList.add("playing");
+      }).catch(() => console.log("Música manual requerida"));
     });
 
     musicBtn.addEventListener("click", () => {
       if (bgMusic.paused) {
         bgMusic.play();
         musicBtn.style.opacity = "1";
+        musicBtn.classList.add("playing");
       } else {
         bgMusic.pause();
         musicBtn.style.opacity = "0.5";
+        musicBtn.classList.remove("playing");
       }
     });
 
@@ -645,13 +709,11 @@
     lightboxObj.addEventListener("click", (e) => { if (e.target === lightboxObj) lightboxObj.style.display = "none"; });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") lightboxObj.style.display = "none"; });
 
-    // Lógica para copiar el IBAN
     const copyIbanBtn = document.getElementById("copyIbanBtn");
     const ibanText = document.getElementById("ibanText").innerText;
     const copyFeedback = document.getElementById("copyFeedback");
 
     copyIbanBtn.addEventListener("click", () => {
-      // Elimina los espacios para que se copie limpio para las apps de los bancos
       const cleanIban = ibanText.replace(/\s+/g, '');
       navigator.clipboard.writeText(cleanIban).then(() => {
         copyFeedback.classList.add("show");
