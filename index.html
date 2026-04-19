@@ -1,88 +1,356 @@
-<style>
-  /* Estilo para el contenedor del mapa premium */
-  .map-container {
-    width: 100%;
-    height: 200px;
-    margin-top: 20px;
-    border-radius: 8px;
-    overflow: hidden;
-    filter: grayscale(0.5) sepia(0.2) contrast(0.9); /* Filtro para look editorial */
-    border: 1px solid var(--line-soft);
-    transition: filter 0.5s ease;
-  }
-  .info-card:hover .map-container {
-    filter: grayscale(0) sepia(0) contrast(1);
-  }
-  .map-container iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alba & Jorge | 14.11.2026</title>
 
-  /* Botón de Calendario */
-  .btn-calendar {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 25px;
-    padding: 10px 20px;
-    border: 1px solid var(--accent);
-    color: var(--accent-dark);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-  }
-  .btn-calendar:hover {
-    background: var(--accent);
-    color: white;
-  }
-</style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
-<section class="section" id="detalles">
-  <div class="container">
-    <h2 class="section-title reveal">Cuándo & Dónde</h2>
-    <p class="section-intro reveal">Los momentos y lugares principales de nuestro día para que podáis acompañarnos sin perderos nada.</p>
+  <style>
+    :root {
+      --bg: #f9f8f4;
+      --paper: #ffffff;
+      --text: #2c2724;
+      --muted: #7a736e;
+      --accent: #ba9653;
+      --accent-dark: #6e1a22;
+      --line: #e8e4dc;
+      --radius: 4px; /* Bordes más rectos = más elegante/arquitectónico */
+      --header: 'Cormorant Garamond', serif;
+      --body: 'Jost', sans-serif;
+    }
 
-    <div class="info-grid">
-      <div class="info-card reveal">
-        <img src="catedral.JPG" alt="Catedral Nueva de Lleida" class="place-image" loading="lazy">
-        <div class="place-time">12:30 Hrs</div>
-        <h3 class="place-title">La Ceremonia</h3>
-        <p>Catedral Nueva de Lleida</p>
-        
-        <div class="map-container">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2989.432320491023!2d0.6198565765582845!3d41.61392667127116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a7215907471a2b%3A0x280e81084b6f70e!2sCatedral%20Nova%20de%20Lleida!5e0!3m2!1ses!2ses!4v1710000000000!5m2!1ses!2ses" 
-            allowfullscreen="" loading="lazy"></iframe>
-        </div>
-        <a href="https://maps.app.goo.gl/uXpLgE4LwR8v9Y6a8" target="_blank" class="place-link">Abrir en Google Maps</a>
-      </div>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-      <div class="info-card reveal">
-        <img src="palau.JPG" alt="Palau de Margalef" class="place-image" loading="lazy">
-        <div class="place-time">14:30 Hrs</div>
-        <h3 class="place-title">La Celebración</h3>
-        <p>Palau de Margalef</p>
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: var(--body);
+      line-height: 1.7;
+      background-color: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-        <div class="map-container">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2991.234567890123!2d0.6854321!3d41.5876543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a7238217336767%3A0x7c49b6b7768e1694!2sPalau%20de%20Margalef!5e0!3m2!1ses!2ses!4v1710000000000!5m2!1ses!2ses" 
-            allowfullscreen="" loading="lazy"></iframe>
-        </div>
-        <a href="https://maps.app.goo.gl/p7Gz5SDRYV8U7L3p9" target="_blank" class="place-link">Abrir en Google Maps</a>
-      </div>
-    </div>
+    /* 1. TEXTURA DE PAPEL PREMIUM SOBRE TODA LA WEB */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+    }
 
-    <div style="text-align: center; margin-top: 50px;" class="reveal">
-      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Alba+%26+Jorge&dates=20261114T113000Z/20261115T040000Z&details=¡Nos+casamos!+Os+esperamos+en+la+Catedral+Nueva+de+Lleida.&location=Catedral+Nueva+de+Lleida" 
-         target="_blank" class="btn-calendar">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-        </svg>
-        Guardar fecha en mi calendario
-      </a>
-    </div>
+    body.locked { overflow: hidden; }
+
+    /* 2. ESPACIADO EDITORIAL (Aire) */
+    .section {
+      padding: 160px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .container {
+      width: min(1000px, calc(100% - 60px));
+      margin: 0 auto;
+    }
+
+    /* 3. NAVEGACIÓN MINIMALISTA */
+    .nav {
+      position: fixed;
+      top: 0; width: 100%; z-index: 100;
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+      padding: 20px 0;
+    }
+
+    .nav.scrolled {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      padding: 12px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+
+    .nav-inner {
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .menu a {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav.scrolled .menu a, .nav.scrolled .nav-brand { color: var(--text); }
+    .nav.scrolled .menu a:hover { color: var(--accent); }
+
+    .nav-brand {
+      font-family: var(--header);
+      font-size: 1.6rem;
+      font-style: italic;
+      color: #fff;
+    }
+
+    /* 4. HERO CON TIPOGRAFÍA DE REVISTA */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), 
+                  url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80") center/cover;
+      background-attachment: fixed;
+      color: #fff;
+      text-align: center;
+    }
+
+    .elegant-title {
+      font-family: var(--header);
+      font-weight: 200;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      margin: 20px 0;
+      animation: tracking-in 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+    }
+
+    @keyframes tracking-in {
+      0% { letter-spacing: -0.5em; opacity: 0; }
+      40% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    /* 5. TARJETAS CON SOMBRAS PROFUNDAS */
+    .info-card {
+      background: var(--paper);
+      padding: 50px 40px;
+      border-radius: var(--radius);
+      box-shadow: 0 40px 100px -20px rgba(0,0,0,0.05);
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .info-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 60px 120px -20px rgba(0,0,0,0.1);
+    }
+
+    .place-image {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      margin-bottom: 30px;
+      filter: grayscale(100%);
+      transition: filter 0.8s ease;
+    }
+
+    .info-card:hover .place-image { filter: grayscale(0%); }
+
+    /* 6. GALERÍA ASIMÉTRICA (Look Editorial) */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-gap: 30px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      background: #000;
+    }
+
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.5s;
+      opacity: 0.85;
+    }
+
+    .gallery-item:hover img { transform: scale(1.1); opacity: 1; }
+
+    /* Configuración de mosaico */
+    .gallery-item:nth-child(1) { grid-column: span 3; grid-row: span 3; }
+    .gallery-item:nth-child(2) { grid-column: span 3; grid-row: span 2; }
+    .gallery-item:nth-child(3) { grid-column: span 2; grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-column: span 4; grid-row: span 3; }
+
+    /* 7. MAPAS Y BOTONES */
+    .map-container {
+      height: 250px; margin: 25px 0;
+      filter: grayscale(1) invert(0.05); /* Mapa elegante */
+      border-radius: 2px;
+      transition: filter 0.5s;
+    }
+    .info-card:hover .map-container { filter: grayscale(0.2); }
+
+    .btn-calendar {
+      display: inline-block;
+      padding: 18px 35px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      transition: all 0.4s;
+      margin-top: 40px;
+    }
+
+    .btn-calendar:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    /* REVEAL ANIMATION MEJORADA */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px) scale(0.98);
+      transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* GATE (SOBRE) */
+    .gate {
+      position: fixed; inset: 0; z-index: 5000;
+      background: var(--bg); display: flex; align-items: center; justify-content: center;
+      transition: transform 1.5s cubic-bezier(0.86, 0, 0.07, 1);
+    }
+    .gate.hidden { transform: translateY(-100%); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .gallery { grid-template-columns: 1fr; }
+      .gallery-item { grid-column: span 6 !important; height: 400px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .section { padding: 100px 0; }
+    }
+  </style>
+</head>
+<body class="locked">
+
+  <audio id="bgMusic" loop><source src="vuestra-cancion.mp3" type="audio/mpeg"></audio>
+
+  <div class="gate" id="gate">
+    <button class="seal-btn" id="openInvitation" style="background: none; border: none; cursor: pointer;">
+       <img src="sello.png" alt="Abrir" style="width: 120px; transition: transform 0.5s;">
+    </button>
   </div>
-</section>
+
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <div class="menu"><a href="#detalles">Evento</a></div>
+      <div class="nav-brand">A & J</div>
+      <div class="menu"><a href="#rsvp">RSVP</a></div>
+    </div>
+  </nav>
+
+  <div class="site" id="site">
+    <header class="hero">
+      <div class="hero-content">
+        <p class="hero-date" style="letter-spacing: 0.4em;">14 . 11 . 2026</p>
+        <h1 class="elegant-title">Alba & Jorge</h1>
+        <p class="hero-location" style="font-family: var(--header); font-style: italic; font-size: 1.5rem;">Lleida, España</p>
+      </div>
+    </header>
+
+    <section class="section" id="detalles">
+      <div class="container">
+        <h2 class="section-title reveal">Cuándo & Dónde</h2>
+        <div class="info-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 80px;">
+          
+          <div class="info-card reveal">
+            <img src="catedral.JPG" alt="Ceremonia" class="place-image">
+            <h3 class="place-title">La Ceremonia</h3>
+            <p style="color: var(--accent); font-style: italic;">12:30 Horas</p>
+            <p>Catedral Nueva de Lleida</p>
+            <div class="map-container">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2990.2!2d0.62!3d41.61" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <a href="#" class="place-link">Ver en el mapa</a>
+          </div>
+
+          <div class="info-card reveal">
+            <img src="palau.JPG" alt="Banquete" class="place-image">
+            <h3 class="place-title">La Celebración</h3>
+            <p style="color: var(--accent); font-style: italic;">14:30 Horas</p>
+            <p>Palau de Margalef</p>
+            <div class="map-container">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2990.2!2d0.62!3d41.61" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <a href="#" class="place-link">Ver en el mapa</a>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <a href="#" class="btn-calendar reveal">Añadir a mi Calendario</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galeria">
+      <div class="container">
+        <h2 class="section-title reveal" style="margin-bottom: 100px;">Nuestra Historia</h2>
+        <div class="gallery">
+          <div class="gallery-item reveal"><img src="foto1.JPG" alt="Momentos"></div>
+          <div class="gallery-item reveal"><img src="foto2.JPG" alt="Momentos"></div>
+          <div class="gallery-item reveal"><img src="foto3.JPG" alt="Momentos"></div>
+          <div class="gallery-item reveal"><img src="foto4.JPG" alt="Momentos"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rsvp" style="background: #fff;">
+      <div class="container" style="max-width: 600px;">
+        <h2 class="section-title reveal">RSVP</h2>
+        <p class="section-intro reveal">Sería un honor contar con vuestra presencia. Por favor, confirmad antes del 30 de Septiembre.</p>
+        <form class="reveal" id="rsvpForm" style="margin-top: 60px;">
+          <input type="text" placeholder="NOMBRE COMPLETO" class="form-control" style="border-bottom: 1px solid #ccc; width: 100%; padding: 15px 0; margin-bottom: 30px; border-top:none; border-left:none; border-right:none; font-family: inherit; outline: none;">
+          <button type="submit" class="btn-calendar" style="width: 100%; cursor: pointer;">Enviar Confirmación</button>
+        </form>
+      </div>
+    </section>
+
+    <footer style="padding: 100px 0; text-align: center; background: var(--bg);">
+      <p style="font-family: var(--header); font-size: 2rem; font-style: italic;">A & J</p>
+    </footer>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById("openInvitation");
+    const gate = document.getElementById("gate");
+    const bgMusic = document.getElementById("bgMusic");
+
+    openBtn.addEventListener("click", () => {
+      gate.classList.add("hidden");
+      document.body.classList.remove("locked");
+      bgMusic.volume = 0.2;
+      bgMusic.play().catch(e => console.log("Audio block"));
+    });
+
+    window.addEventListener("scroll", () => {
+      document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 100);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("active");
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
