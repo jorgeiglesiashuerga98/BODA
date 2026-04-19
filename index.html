@@ -28,8 +28,24 @@
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
 
+    /* --- BARRA DE DESPLAZAMIENTO PERSONALIZADA (SCROLLBAR) --- */
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--bg);
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--accent);
+      border-radius: 10px;
+      border: 2px solid var(--bg); 
+    }
+    ::-webkit-scrollbar-thumb:hover { background-color: #a68545; }
+
+    /* --- ESTILOS GLOBALES --- */
     body {
       margin: 0;
       color: var(--text);
@@ -60,7 +76,7 @@
       margin: 0 auto;
     }
 
-    /* SOBRE INICIAL */
+    /* --- SOBRE INICIAL --- */
     .gate {
       position: fixed;
       inset: 0;
@@ -103,7 +119,7 @@
     }
     .seal-btn:hover { transform: translate(-50%, -50%) scale(1.05); }
 
-    /* ANIMACIONES GLOBALES */
+    /* --- ANIMACIONES GLOBALES --- */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -114,7 +130,7 @@
     .site { opacity: 0; transition: opacity 1.5s ease; }
     .site.visible { opacity: 1; }
 
-    /* NAVEGACIÓN */
+    /* --- NAVEGACIÓN --- */
     .nav {
       position: fixed;
       top: 0; width: 100%; z-index: 100;
@@ -148,7 +164,7 @@
     .nav.scrolled .menu a, .nav.scrolled .nav-brand { color: var(--text); text-shadow: none; }
     .nav.scrolled .menu a:hover, .nav.scrolled .nav-brand { color: var(--accent-dark); }
 
-    /* HERO */
+    /* --- HERO --- */
     .hero {
       height: 100vh; min-height: 780px;
       display: flex; align-items: center; justify-content: center;
@@ -165,23 +181,23 @@
     .hero-content { position: relative; z-index: 2; padding: 0 20px; max-width: 920px; }
     .hero-date { font-size: 0.80rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 24px; color: rgba(255,255,255,0.92); }
 
-    /* TITULO DORADO MEJORADO */
+    /* TITULO DORADO MEJORADO CON CORRECCIÓN DE LA J */
     .golden-title {
       font-family: var(--header);
       font-size: clamp(3.5rem, 9vw, 7.5rem);
       font-weight: 300;
       margin: 0;
-      line-height: 1;
+      line-height: 1.15; /* Aumentado para que no corte por arriba o abajo */
+      padding-bottom: 0.15em; /* Espacio extra abajo para la cola de la J */
+      padding-right: 0.05em; /* Espacio extra derecha */
       letter-spacing: 0.05em;
       
-      /* Gradiente oro metálico premium */
       background: linear-gradient(110deg, #ba9653 20%, #e8d5a5 40%, #fff6df 50%, #e8d5a5 60%, #ba9653 80%);
       background-size: 200% auto;
       color: transparent;
       -webkit-background-clip: text;
       background-clip: text;
       
-      /* Combina la animación de aparecer con la del brillo */
       animation: titleReveal 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards, shine 6s linear infinite;
       opacity: 0;
       transform: translateY(20px);
@@ -190,35 +206,47 @@
     @keyframes titleReveal { to { opacity: 1; transform: translateY(0); } }
     @keyframes shine { to { background-position: 200% center; } }
 
-    .hero-location { color: var(--accent); font-family: var(--header); font-style: italic; font-size: 1.85rem; margin-top: 30px; }
+    .hero-location { color: var(--accent); font-family: var(--header); font-style: italic; font-size: 1.85rem; margin-top: 10px; }
 
-    /* CUENTA ATRÁS */
+    /* --- CUENTA ATRÁS --- */
     .countdown-wrapper { text-align: center; padding: 96px 0; background: var(--bg); border-bottom: 1px solid var(--line); position: relative; z-index: 10; }
     .countdown { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
     .count-item { min-width: 132px; padding: 26px 18px; background: var(--paper); border: 1px solid var(--line-soft); box-shadow: var(--shadow-soft); border-radius: var(--radius); }
     .count-item strong { display: block; font-family: var(--header); font-size: 3.5rem; color: var(--accent-dark); line-height: 1; font-weight: 300; margin-bottom: 8px; }
     .count-item span { font-size: 0.70rem; letter-spacing: 0.20em; text-transform: uppercase; color: var(--muted); }
 
-    /* SECCIONES COMUNES */
+    /* --- SECCIONES COMUNES --- */
     .section { padding: 160px 0; border-bottom: 1px solid var(--line); }
     .section-alt { background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0.3)); }
     .section-title { font-family: var(--header); font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 300; color: var(--accent-dark); text-align: center; margin: 0 0 24px; line-height: 1.04; }
     .section-intro { text-align: center; max-width: 760px; margin: 0 auto 70px; color: var(--muted); font-size: 1rem; }
 
-    /* TARJETAS INFO */
+    /* --- TARJETAS INFO --- */
     .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
     .info-card { text-align: center; padding: 35px 30px; background: var(--paper); border: 1px solid var(--line-soft); border-radius: var(--radius); box-shadow: var(--shadow-soft); transition: transform 0.5s ease, box-shadow 0.5s ease; }
     .info-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-medium); }
 
-    .place-image { width: 100%; height: auto; max-height: 400px; border-radius: 2px; margin-bottom: 30px; filter: grayscale(100%); object-fit: cover; transition: filter 0.6s ease; }
-    .info-card:hover .place-image { filter: grayscale(0%); }
+    /* CORRECCIÓN DE IMÁGENES: Sin cortes y con color apagado */
+    .place-image { 
+      width: 100%; 
+      height: auto; /* Altura natural para que no se corte */
+      border-radius: 2px; 
+      margin-bottom: 30px; 
+      /* Tono ligeramente apagado en lugar de gris total */
+      filter: brightness(0.85) saturate(0.8); 
+      transition: filter 0.6s ease; 
+    }
+    .info-card:hover .place-image { 
+      /* Se ilumina y coge color al pasar el ratón */
+      filter: brightness(1.02) saturate(1.1); 
+    }
 
     .place-time { font-family: var(--header); font-style: italic; font-size: 1.45rem; color: var(--accent); margin-bottom: 6px; }
     .place-title { font-family: var(--header); font-size: 2.15rem; font-weight: 400; margin: 0 0 10px; line-height: 1.05; }
     .place-link { display: inline-block; margin-top: 18px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; padding-bottom: 4px; }
     .place-link:hover { color: var(--accent-dark); border-color: var(--accent-dark); }
 
-    /* BOTÓN CALENDARIO */
+    /* --- BOTÓN CALENDARIO --- */
     .btn-calendar {
       display: inline-block;
       padding: 16px 36px;
@@ -238,13 +266,24 @@
       box-shadow: 0 10px 20px rgba(186, 150, 83, 0.15);
     }
 
-    /* GALERÍA */
+    /* --- GALERÍA --- */
     .gallery { column-count: 3; column-gap: 25px; }
     .gallery-item { break-inside: avoid; margin-bottom: 25px; overflow: hidden; border-radius: var(--radius); box-shadow: var(--shadow-soft); background: #000; cursor: pointer; }
-    .gallery-item img { width: 100%; transition: transform 1s ease, filter 0.6s ease, opacity 0.6s ease; filter: grayscale(100%); opacity: 0.9; }
-    .gallery-item:hover img { transform: scale(1.05); filter: grayscale(0%); opacity: 1; }
+    
+    /* CORRECCIÓN GALERÍA: Tono apagado */
+    .gallery-item img { 
+      width: 100%; 
+      transition: transform 1s ease, filter 0.6s ease, opacity 0.6s ease; 
+      filter: brightness(0.85) saturate(0.8); 
+      opacity: 0.95; 
+    }
+    .gallery-item:hover img { 
+      transform: scale(1.05); 
+      filter: brightness(1.02) saturate(1.1); 
+      opacity: 1; 
+    }
 
-    /* CAJAS Y FORMULARIO */
+    /* --- CAJAS Y FORMULARIO --- */
     .info-text-box, .rsvp-container { max-width: 780px; margin: 0 auto; text-align: center; background: var(--paper); border: 1px solid var(--line-soft); border-radius: var(--radius); box-shadow: var(--shadow-soft); padding: 55px 45px; }
     .rsvp-container { max-width: 660px; }
     .rsvp-lead { font-family: var(--header); font-style: italic; font-size: 1.7rem; margin: 0 0 40px; }
@@ -261,7 +300,7 @@
     .radio-options { display: flex; gap: 20px; flex-wrap: wrap; }
     .radio-options label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
 
-    /* MODALES Y BOTONES FLOTANTES */
+    /* --- MODALES Y BOTONES FLOTANTES --- */
     .modal-success { position: fixed; inset: 0; background: rgba(44, 39, 36, 0.9); z-index: 9999; display: none; place-items: center; backdrop-filter: blur(8px); padding: 20px; }
     .modal-success.show { display: grid; }
     .modal-card { background: var(--bg); padding: 60px; border-radius: var(--radius); text-align: center; max-width: 450px; width: 100%; box-shadow: var(--shadow-medium); }
@@ -278,10 +317,23 @@
     footer { padding: 120px 0; text-align: center; }
     .footer-name { font-family: var(--header); font-size: 3.2rem; font-weight: 300; color: var(--accent-dark); margin: 0; display: inline-block; }
 
-    /* RESPONSIVE */
+    /* --- RESPONSIVE Y CORRECCIÓN BUG MÓVIL --- */
     @media (max-width: 900px) { .info-grid { grid-template-columns: 1fr; } .gallery { column-count: 2; } }
-    @media (max-width: 768px) { .menu { display: none; } .count-item { min-width: 120px; } .music-btn { bottom: 20px; right: 20px; } .section { padding: 100px 0; } }
-    @media (max-width: 600px) { .gallery { column-count: 1; } .countdown { gap: 16px; } .count-item { min-width: 130px; padding: 20px 14px; } .count-item strong { font-size: 2.7rem; } .info-card, .info-text-box, .rsvp-container, .modal-card { padding: 35px 25px; } }
+    @media (max-width: 768px) { 
+      .menu { display: none; } 
+      .count-item { min-width: 120px; } 
+      .music-btn { bottom: 20px; right: 20px; } 
+      .section { padding: 100px 0; } 
+      /* CORRECCIÓN MÓVIL: Quita el fixed que rompía Safari en iPhone */
+      .hero { background-attachment: scroll !important; background-position: center top; }
+    }
+    @media (max-width: 600px) { 
+      .gallery { column-count: 1; } 
+      .countdown { gap: 16px; } 
+      .count-item { min-width: 130px; padding: 20px 14px; } 
+      .count-item strong { font-size: 2.7rem; } 
+      .info-card, .info-text-box, .rsvp-container, .modal-card { padding: 35px 25px; } 
+    }
   </style>
 </head>
 <body class="locked">
