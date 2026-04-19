@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alba & Jorge | 14.11.2026</title>
 
+  <meta property="og:title" content="Alba & Jorge | Nuestra Boda" />
+  <meta property="og:description" content="¡Nos casamos! Nos haría mucha ilusión compartir este día tan especial contigo. Descubre todos los detalles." />
+  <meta property="og:image" content="tu-foto-whatsapp.jpg" /> <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -181,15 +186,14 @@
     .hero-content { position: relative; z-index: 2; padding: 0 20px; max-width: 920px; }
     .hero-date { font-size: 0.80rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 24px; color: rgba(255,255,255,0.92); }
 
-    /* TITULO DORADO MEJORADO CON CORRECCIÓN DE LA J */
     .golden-title {
       font-family: var(--header);
       font-size: clamp(3.5rem, 9vw, 7.5rem);
       font-weight: 300;
       margin: 0;
-      line-height: 1.15; /* Aumentado para que no corte por arriba o abajo */
-      padding-bottom: 0.15em; /* Espacio extra abajo para la cola de la J */
-      padding-right: 0.05em; /* Espacio extra derecha */
+      line-height: 1.15;
+      padding-bottom: 0.15em;
+      padding-right: 0.05em;
       letter-spacing: 0.05em;
       
       background: linear-gradient(110deg, #ba9653 20%, #e8d5a5 40%, #fff6df 50%, #e8d5a5 60%, #ba9653 80%);
@@ -226,20 +230,8 @@
     .info-card { text-align: center; padding: 35px 30px; background: var(--paper); border: 1px solid var(--line-soft); border-radius: var(--radius); box-shadow: var(--shadow-soft); transition: transform 0.5s ease, box-shadow 0.5s ease; }
     .info-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-medium); }
 
-    /* CORRECCIÓN DE IMÁGENES: Sin cortes y con color apagado */
-    .place-image { 
-      width: 100%; 
-      height: auto; /* Altura natural para que no se corte */
-      border-radius: 2px; 
-      margin-bottom: 30px; 
-      /* Tono ligeramente apagado en lugar de gris total */
-      filter: brightness(0.85) saturate(0.8); 
-      transition: filter 0.6s ease; 
-    }
-    .info-card:hover .place-image { 
-      /* Se ilumina y coge color al pasar el ratón */
-      filter: brightness(1.02) saturate(1.1); 
-    }
+    .place-image { width: 100%; height: auto; border-radius: 2px; margin-bottom: 30px; filter: brightness(0.85) saturate(0.8); transition: filter 0.6s ease; }
+    .info-card:hover .place-image { filter: brightness(1.02) saturate(1.1); }
 
     .place-time { font-family: var(--header); font-style: italic; font-size: 1.45rem; color: var(--accent); margin-bottom: 6px; }
     .place-title { font-family: var(--header); font-size: 2.15rem; font-weight: 400; margin: 0 0 10px; line-height: 1.05; }
@@ -269,24 +261,68 @@
     /* --- GALERÍA --- */
     .gallery { column-count: 3; column-gap: 25px; }
     .gallery-item { break-inside: avoid; margin-bottom: 25px; overflow: hidden; border-radius: var(--radius); box-shadow: var(--shadow-soft); background: #000; cursor: pointer; }
-    
-    /* CORRECCIÓN GALERÍA: Tono apagado */
-    .gallery-item img { 
-      width: 100%; 
-      transition: transform 1s ease, filter 0.6s ease, opacity 0.6s ease; 
-      filter: brightness(0.85) saturate(0.8); 
-      opacity: 0.95; 
-    }
-    .gallery-item:hover img { 
-      transform: scale(1.05); 
-      filter: brightness(1.02) saturate(1.1); 
-      opacity: 1; 
-    }
+    .gallery-item img { width: 100%; transition: transform 1s ease, filter 0.6s ease, opacity 0.6s ease; filter: brightness(0.85) saturate(0.8); opacity: 0.95; }
+    .gallery-item:hover img { transform: scale(1.05); filter: brightness(1.02) saturate(1.1); opacity: 1; }
 
-    /* --- CAJAS Y FORMULARIO --- */
+    /* --- CAJAS, FORMULARIO Y REGALOS --- */
     .info-text-box, .rsvp-container { max-width: 780px; margin: 0 auto; text-align: center; background: var(--paper); border: 1px solid var(--line-soft); border-radius: var(--radius); box-shadow: var(--shadow-soft); padding: 55px 45px; }
     .rsvp-container { max-width: 660px; }
     .rsvp-lead { font-family: var(--header); font-style: italic; font-size: 1.7rem; margin: 0 0 40px; }
+
+    /* Diseño del bloque de Regalo (IBAN) */
+    .gift-box {
+      margin-top: 50px;
+      padding-top: 40px;
+      border-top: 1px solid var(--line);
+    }
+    .gift-text {
+      font-family: var(--header);
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .iban-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      background: var(--bg);
+      padding: 12px 25px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius);
+    }
+    .iban-number {
+      font-family: monospace;
+      font-size: 1.1rem;
+      color: var(--accent-dark);
+      letter-spacing: 1px;
+    }
+    .btn-copy {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 6px 16px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-copy:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    .copy-msg {
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-top: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .copy-msg.show { opacity: 1; }
 
     .form-control { width: 100%; padding: 14px 0; background: transparent; border: none; border-bottom: 1px solid var(--line); font-family: var(--body); font-size: 1.04rem; margin-bottom: 35px; outline: none; transition: border-color 0.3s; color: var(--text); }
     .form-control::placeholder { color: #aba098; }
@@ -324,8 +360,8 @@
       .count-item { min-width: 120px; } 
       .music-btn { bottom: 20px; right: 20px; } 
       .section { padding: 100px 0; } 
-      /* CORRECCIÓN MÓVIL: Quita el fixed que rompía Safari en iPhone */
       .hero { background-attachment: scroll !important; background-position: center top; }
+      .iban-container { flex-direction: column; gap: 10px; padding: 15px; }
     }
     @media (max-width: 600px) { 
       .gallery { column-count: 1; } 
@@ -467,6 +503,15 @@
           <p><strong>Autobús:</strong> podéis confirmarlo en el formulario de asistencia.</p>
           <p><strong>Niños:</strong> aquí podéis añadir la información que queráis comunicar.</p>
           <p><strong>Alojamiento:</strong> os dejamos arriba algunas opciones recomendadas.</p>
+          
+          <div class="gift-box">
+            <p class="gift-text">El mejor regalo es vuestra compañía. Pero si deseáis tener un detalle con nosotros...</p>
+            <div class="iban-container">
+              <span class="iban-number" id="ibanText">ES91 1234 5678 90 1234567890</span>
+              <button class="btn-copy" id="copyIbanBtn">Copiar</button>
+            </div>
+            <p class="copy-msg" id="copyFeedback">¡Número copiado!</p>
+          </div>
         </div>
       </div>
     </section>
@@ -599,6 +644,24 @@
     document.getElementById("lightboxClose").addEventListener("click", () => lightboxObj.style.display = "none");
     lightboxObj.addEventListener("click", (e) => { if (e.target === lightboxObj) lightboxObj.style.display = "none"; });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") lightboxObj.style.display = "none"; });
+
+    // Lógica para copiar el IBAN
+    const copyIbanBtn = document.getElementById("copyIbanBtn");
+    const ibanText = document.getElementById("ibanText").innerText;
+    const copyFeedback = document.getElementById("copyFeedback");
+
+    copyIbanBtn.addEventListener("click", () => {
+      // Elimina los espacios para que se copie limpio para las apps de los bancos
+      const cleanIban = ibanText.replace(/\s+/g, '');
+      navigator.clipboard.writeText(cleanIban).then(() => {
+        copyFeedback.classList.add("show");
+        copyIbanBtn.innerText = "Copiado ✓";
+        setTimeout(() => {
+          copyFeedback.classList.remove("show");
+          copyIbanBtn.innerText = "Copiar";
+        }, 3000);
+      }).catch(err => console.error('Error al copiar: ', err));
+    });
 
     document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
       e.preventDefault();
