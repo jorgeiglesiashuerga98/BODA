@@ -14,7 +14,6 @@
     :root {
       --bg: #f5f3ed;
       --paper: rgba(255, 255, 255, 0.94);
-      --paper-strong: #ffffff;
       --text: #342c27;
       --muted: #847971;
       --accent: #ba9653;
@@ -30,18 +29,6 @@
 
     * { box-sizing: border-box; }
 
-    @media (hover: hover) and (pointer: fine) {
-      body, a, button, input, label, img {
-        cursor: none !important;
-      }
-    }
-
-    @media (hover: none) and (pointer: coarse) {
-      body, a, button, input, label, img {
-        cursor: auto !important;
-      }
-    }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -53,12 +40,13 @@
       background-color: var(--bg);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath d='M40 80c0-22.091 17.909-40 40-40C57.909 40 40 22.091 40 0 40 22.091 22.091 40 0 40c22.091 0 40 17.909 40 40z' fill='%23BA9653' fill-opacity='0.03'/%3E%3C/svg%3E");
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
 
     body.locked { overflow: hidden; }
 
-    img { display: block; max-width: 100%; }
+    img { display: block; max-width: 100%; height: auto; }
 
     a {
       color: inherit;
@@ -71,36 +59,7 @@
       margin: 0 auto;
     }
 
-    .custom-cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 10px;
-      height: 10px;
-      background-color: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 10000;
-      transform: translate(-50%, -50%);
-      transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border 0.3s ease, opacity 0.3s ease;
-      mix-blend-mode: multiply;
-      opacity: 0;
-    }
-
-    .custom-cursor.visible { opacity: 1; }
-
-    .custom-cursor.hover {
-      width: 42px;
-      height: 42px;
-      background-color: rgba(186, 150, 83, 0.10);
-      border: 1px solid var(--accent);
-      backdrop-filter: blur(2px);
-    }
-
-    @media (hover: none) and (pointer: coarse) {
-      .custom-cursor { display: none; }
-    }
-
+    /* --- PUERTA DE ENTRADA (GATE) --- */
     .gate {
       position: fixed;
       inset: 0;
@@ -138,8 +97,15 @@
       background: transparent;
       z-index: 6;
       padding: 0;
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
+    .seal-btn:hover {
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    /* --- ANIMACIONES GLOBALES --- */
     .reveal {
       opacity: 0;
       transform: translateY(34px);
@@ -158,6 +124,7 @@
 
     .site.visible { opacity: 1; }
 
+    /* --- NAVEGACIÓN --- */
     .nav {
       position: fixed;
       top: 0;
@@ -223,27 +190,10 @@
       text-shadow: none;
     }
 
-    .nav.scrolled .menu a:hover {
-      color: var(--accent-dark);
-    }
+    .nav.scrolled .menu a:hover { color: var(--accent-dark); }
+    .nav.scrolled .nav-brand { color: var(--accent-dark); }
 
-    .nav.scrolled .nav-brand {
-      color: var(--accent-dark);
-    }
-
-    .shimmer-text {
-      background: linear-gradient(110deg, #BA9653 20%, #FFF3D4 40%, #FFF3D4 60%, #BA9653 80%);
-      background-size: 200% auto;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-      animation: shine 4s linear infinite;
-    }
-
-    @keyframes shine {
-      to { background-position: 200% center; }
-    }
-
+    /* --- HERO SECTION --- */
     .hero {
       height: 100vh;
       min-height: 780px;
@@ -282,7 +232,6 @@
         background-attachment: scroll;
         min-height: 640px;
       }
-
       .hero::after {
         height: 56px;
         bottom: 28px;
@@ -304,12 +253,25 @@
       color: rgba(255,255,255,0.92);
     }
 
-    .hero h1 {
+    /* Animación de entrada elegante para el título (reemplaza el shimmer) */
+    .elegant-title {
       font-family: var(--header);
       font-size: clamp(4.2rem, 10vw, 8.2rem);
       font-weight: 300;
       margin: 0;
       line-height: 0.93;
+      color: #FFF3D4;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      animation: fadeInUp 1.5s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero-location {
@@ -320,6 +282,7 @@
       margin-top: 24px;
     }
 
+    /* --- CUENTA ATRÁS --- */
     .countdown-wrapper {
       text-align: center;
       padding: 96px 0;
@@ -362,6 +325,7 @@
       color: var(--muted);
     }
 
+    /* --- SECCIONES COMUNES --- */
     .section {
       padding: 130px 0;
       border-bottom: 1px solid var(--line);
@@ -389,6 +353,7 @@
       font-size: 1rem;
     }
 
+    /* --- TARJETAS (INFO & ALOJAMIENTO) --- */
     .info-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -402,6 +367,11 @@
       border: 1px solid var(--line-soft);
       border-radius: var(--radius);
       box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
     }
 
     .place-image {
@@ -410,9 +380,15 @@
       max-height: 400px;
       border-radius: 6px;
       margin-bottom: 28px;
-      filter: sepia(10%);
+      /* Sustituido sepia por un filtro en escala de grises elegante que vuelve a color al pasar el ratón */
+      filter: grayscale(80%);
       object-fit: contain;
       background: #fff;
+      transition: filter 0.5s ease;
+    }
+
+    .info-card:hover .place-image {
+      filter: grayscale(0%);
     }
 
     .place-time {
@@ -447,6 +423,7 @@
       border-color: var(--accent-dark);
     }
 
+    /* --- GALERÍA --- */
     .gallery {
       column-count: 3;
       column-gap: 20px;
@@ -459,19 +436,21 @@
       border-radius: 6px;
       box-shadow: var(--shadow-medium);
       background: #fff;
+      cursor: pointer;
     }
 
     .gallery-item img {
       width: 100%;
-      transition: transform 0.7s ease, filter 0.4s ease;
-      filter: sepia(10%);
+      transition: transform 0.7s ease, filter 0.5s ease;
+      filter: grayscale(80%); /* Tono editorial */
     }
 
     .gallery-item:hover img {
       transform: scale(1.03);
-      filter: none;
+      filter: grayscale(0%);
     }
 
+    /* --- CAJA DE INFORMACIÓN --- */
     .info-text-box {
       max-width: 780px;
       margin: 0 auto;
@@ -487,6 +466,7 @@
       margin: 12px 0;
     }
 
+    /* --- FORMULARIO RSVP --- */
     .rsvp-container {
       max-width: 660px;
       margin: 0 auto;
@@ -519,12 +499,12 @@
       color: var(--text);
     }
 
-    .form-control::placeholder {
-      color: #9b9088;
-    }
-
-    .form-control:focus {
-      border-color: var(--accent);
+    .form-control::placeholder { color: #9b9088; }
+    .form-control:focus { border-color: var(--accent); }
+    
+    /* Pequeño feedback visual de accesibilidad para campos completados correctamente */
+    .form-control:required:valid {
+      border-color: #a3b899; 
     }
 
     .btn-solid {
@@ -541,6 +521,7 @@
       transition: background 0.3s;
       font-family: var(--body);
       border-radius: 4px;
+      cursor: pointer;
     }
 
     .btn-solid:hover { background: var(--accent); }
@@ -587,8 +568,10 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      cursor: pointer;
     }
 
+    /* --- MODALES Y LIGHTBOX --- */
     .modal-success {
       position: fixed;
       inset: 0;
@@ -628,6 +611,12 @@
       justify-content: center;
       box-shadow: var(--shadow-soft);
       font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .music-btn:hover {
+      transform: scale(1.1);
     }
 
     .lightbox {
@@ -664,6 +653,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
     }
 
     .lightbox img {
@@ -675,6 +665,7 @@
       box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     }
 
+    /* --- FOOTER --- */
     footer {
       padding: 96px 0;
       text-align: center;
@@ -684,10 +675,12 @@
       font-family: var(--header);
       font-size: 2.9rem;
       font-weight: 400;
+      color: var(--accent-dark);
       margin: 0;
       display: inline-block;
     }
 
+    /* --- MEDIA QUERIES RESPONSIVE --- */
     @media (max-width: 900px) {
       .info-grid { grid-template-columns: 1fr; }
       .gallery { column-count: 2; }
@@ -724,8 +717,6 @@
 </head>
 <body class="locked">
 
-  <div class="custom-cursor" id="customCursor"></div>
-
   <audio id="bgMusic" loop>
     <source src="vuestra-cancion.mp3" type="audio/mpeg">
   </audio>
@@ -757,7 +748,7 @@
     <header class="hero">
       <div class="hero-content">
         <div class="hero-date">14 de Noviembre, 2026</div>
-        <h1 class="shimmer-text">Alba & Jorge</h1>
+        <h1 class="elegant-title">Alba & Jorge</h1>
         <div class="hero-location">Lleida</div>
       </div>
     </header>
@@ -780,7 +771,7 @@
 
         <div class="info-grid">
           <div class="info-card reveal">
-            <img src="catedral.JPG" alt="Ceremonia" class="place-image">
+            <img src="catedral.JPG" alt="Catedral Nueva de Lleida - Lugar de la ceremonia" class="place-image" loading="lazy">
             <div class="place-time">12:30 Hrs</div>
             <h3 class="place-title">La Ceremonia</h3>
             <p>Catedral Nueva de Lleida</p>
@@ -788,7 +779,7 @@
           </div>
 
           <div class="info-card reveal">
-            <img src="palau.JPG" alt="Banquete" class="place-image">
+            <img src="palau.JPG" alt="Palau de Margalef - Lugar del banquete" class="place-image" loading="lazy">
             <div class="place-time">14:30 Hrs</div>
             <h3 class="place-title">La Celebración</h3>
             <p>Palau de Margalef</p>
@@ -805,14 +796,14 @@
 
         <div class="info-grid">
           <div class="info-card reveal">
-            <img src="hotel1.jpeg" alt="Hotel Ibis" class="place-image">
+            <img src="hotel1.jpeg" alt="Fachada del Hotel Ibis Lleida" class="place-image" loading="lazy">
             <h3 class="place-title" style="font-size:1.95rem;">Hotel Ibis Lleida</h3>
             <p>Calle Maria Montessori, 6, 25001 Lleida</p>
             <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Ibis+Lleida" target="_blank" class="place-link">Ver ubicación</a>
           </div>
 
           <div class="info-card reveal">
-            <img src="hotel2.jpeg" alt="Hotel Real" class="place-image">
+            <img src="hotel2.jpeg" alt="Fachada del Hotel Real Lleida" class="place-image" loading="lazy">
             <h3 class="place-title" style="font-size:1.95rem;">Hotel Real Lleida</h3>
             <p>Av. de Blondel, 22, 25002 Lleida</p>
             <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Real+Lleida" target="_blank" class="place-link">Ver ubicación</a>
@@ -827,14 +818,14 @@
         <p class="section-intro reveal">Una pequeña colección de momentos que nos han traído hasta aquí.</p>
 
         <div class="gallery">
-          <div class="gallery-item reveal"><img src="foto1.JPG" alt="1"></div>
-          <div class="gallery-item reveal"><img src="foto2.JPG" alt="2"></div>
-          <div class="gallery-item reveal"><img src="foto3.JPG" alt="3"></div>
-          <div class="gallery-item reveal"><img src="foto4.JPG" alt="4"></div>
-          <div class="gallery-item reveal"><img src="foto5.JPG" alt="5"></div>
-          <div class="gallery-item reveal"><img src="foto6.JPG" alt="6"></div>
-          <div class="gallery-item reveal"><img src="foto7.JPG" alt="7"></div>
-          <div class="gallery-item reveal"><img src="foto8.JPG" alt="8"></div>
+          <div class="gallery-item reveal"><img src="foto1.JPG" alt="Alba y Jorge en su primer viaje" loading="lazy"></div>
+          <div class="gallery-item reveal"><img src="foto2.JPG" alt="Alba y Jorge sonriendo juntos" loading="lazy"></div>
+          <div class="gallery-item reveal"><img src="foto3.JPG" alt="Retrato de pareja de Alba y Jorge" loading="lazy"></div>
+          <div class="gallery-item reveal"><img src="foto4.JPG" alt="Alba y Jorge en un paisaje natural" loading="lazy"></div>
+          <div class="gallery-item reveal"><img src="foto5.JPG" alt="Momento divertido de la pareja" loading="lazy"></div>
+          <div class="gallery-item reveal"><img src="foto6.JPG" alt="Alba y Jorge en una celebración" loading="lazy"></div>
+          <div class="gallery-item reveal"><img src="foto7.JPG" alt="Fotografía romántica de Alba y Jorge" loading="lazy"></div>
+          <div class="gallery-item reveal"><img src="foto8.JPG" alt="Alba y Jorge anunciando su compromiso" loading="lazy"></div>
         </div>
       </div>
     </section>
@@ -888,7 +879,7 @@
     </section>
 
     <footer>
-      <h2 class="shimmer-text footer-name">Alba & Jorge</h2>
+      <h2 class="footer-name">Alba & Jorge</h2>
     </footer>
   </div>
 
@@ -902,44 +893,30 @@
 
   <div class="lightbox" id="lightbox">
     <div class="lightbox-content">
-      <button id="lightboxClose" class="lightbox-close">×</button>
+      <button id="lightboxClose" class="lightbox-close" aria-label="Cerrar imagen ampliada">×</button>
       <img id="lightboxImg" src="" alt="Foto ampliada">
     </div>
   </div>
 
   <script>
-    const cursor = document.getElementById("customCursor");
-    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-    if (finePointer) {
-      document.addEventListener("mousemove", (e) => {
-        cursor.classList.add("visible");
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
-      });
-
-      const interactives = document.querySelectorAll("a, button, input, .seal-btn, img, label");
-      interactives.forEach(el => {
-        el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
-        el.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
-      });
-    }
-
+    // Variables principales
     const gate = document.getElementById("gate");
     const openBtn = document.getElementById("openInvitation");
     const site = document.getElementById("site");
     const bgMusic = document.getElementById("bgMusic");
     const musicBtn = document.getElementById("musicToggle");
 
+    // Lógica para abrir la invitación
     openBtn.addEventListener("click", () => {
       gate.classList.add("hidden");
       site.classList.add("visible");
       document.body.classList.remove("locked");
       musicBtn.style.display = "flex";
       bgMusic.volume = 0.3;
-      bgMusic.play().catch(() => console.log("Música manual"));
+      bgMusic.play().catch(() => console.log("Música manual requerida por el navegador"));
     });
 
+    // Control de la música
     musicBtn.addEventListener("click", () => {
       if (bgMusic.paused) {
         bgMusic.play();
@@ -950,10 +927,12 @@
       }
     });
 
+    // Efecto del Menú de navegación al hacer Scroll
     window.addEventListener("scroll", () => {
       document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 80);
     });
 
+    // Observer para animaciones "reveal"
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add("active");
@@ -962,6 +941,7 @@
 
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
+    // Lógica de la cuenta atrás
     const weddingDate = new Date("2026-11-14T12:30:00").getTime();
 
     function pad(n) {
@@ -986,12 +966,14 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
+    // Lógica de la Galería (Lightbox)
     const lightboxObj = document.getElementById("lightbox");
     const lightboxImgObj = document.getElementById("lightboxImg");
 
     document.querySelectorAll(".gallery-item img").forEach(img => {
       img.addEventListener("click", () => {
         lightboxImgObj.src = img.src;
+        lightboxImgObj.alt = img.alt;
         lightboxObj.style.display = "flex";
       });
     });
@@ -1008,6 +990,7 @@
       if (e.key === "Escape") lightboxObj.style.display = "none";
     });
 
+    // Lógica del Formulario
     document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const f = e.target;
