@@ -7,7 +7,8 @@
 
   <meta property="og:title" content="Alba & Jorge | Nuestra Boda" />
   <meta property="og:description" content="¡Nos casamos! Nos haría mucha ilusión compartir este día tan especial contigo. Descubre todos los detalles." />
-  <meta property="og:image" content="tu-foto-whatsapp.jpg" /> <meta property="og:type" content="website" />
+  <meta property="og:image" content="tu-foto-whatsapp.jpg" />
+  <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
@@ -81,7 +82,7 @@
       margin: 0 auto;
     }
 
-    /* --- SOBRE INICIAL --- */
+    /* --- SOBRE INICIAL Y ANIMACIÓN DE APERTURA --- */
     .gate {
       position: fixed;
       inset: 0;
@@ -92,7 +93,8 @@
       background-image: url('sobre-invernal.jpg');
       background-size: cover;
       background-position: center;
-      transition: opacity 1.2s ease, visibility 1.2s ease, transform 1.2s ease;
+      /* Transición fluida para que el sobre se deslice hacia arriba */
+      transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.2s;
       background-color: var(--bg);
     }
 
@@ -104,7 +106,7 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: scale(1.05);
+      transform: translateY(-100vh); /* El sobre se levanta simulando sacar la carta */
     }
 
     .seal-btn {
@@ -120,9 +122,18 @@
       z-index: 6;
       padding: 0;
       cursor: pointer;
-      transition: transform 0.4s ease;
+      /* Transición para el hover y la rotura del sello */
+      transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.5s ease;
     }
+    
     .seal-btn:hover { transform: translate(-50%, -50%) scale(1.05); }
+
+    /* Clase que se añade al hacer clic para "romper" el sello */
+    .seal-btn.broken {
+      transform: translate(-50%, -50%) scale(1.4);
+      opacity: 0;
+      pointer-events: none;
+    }
 
     /* --- ANIMACIONES GLOBALES --- */
     .reveal {
@@ -636,15 +647,23 @@
     const bgMusic = document.getElementById("bgMusic");
     const musicBtn = document.getElementById("musicToggle");
 
+    // NUEVA LÓGICA DE APERTURA EN DOS PASOS
     openBtn.addEventListener("click", () => {
-      gate.classList.add("hidden");
-      site.classList.add("visible");
-      document.body.classList.remove("locked");
-      musicBtn.style.display = "flex";
-      bgMusic.volume = 0.3;
-      bgMusic.play().then(() => {
-        musicBtn.classList.add("playing");
-      }).catch(() => console.log("Música manual requerida"));
+      // 1. Rompemos el sello
+      openBtn.classList.add("broken");
+      
+      // 2. Esperamos medio segundo y levantamos el sobre para revelar la web
+      setTimeout(() => {
+        gate.classList.add("hidden");
+        site.classList.add("visible");
+        document.body.classList.remove("locked");
+        musicBtn.style.display = "flex";
+        
+        bgMusic.volume = 0.3;
+        bgMusic.play().then(() => {
+          musicBtn.classList.add("playing");
+        }).catch(() => console.log("Música manual requerida"));
+      }, 500);
     });
 
     musicBtn.addEventListener("click", () => {
