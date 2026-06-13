@@ -86,6 +86,7 @@
     .gate {
       position: fixed;
       inset: 0;
+      height: 100dvh;
       z-index: 5000;
       display: flex;
       align-items: center;
@@ -182,7 +183,7 @@
 
     /* --- HERO --- */
     .hero {
-      height: 100vh; min-height: 780px;
+      height: 100dvh; min-height: 780px;
       display: flex; align-items: center; justify-content: center;
       background: linear-gradient(rgba(44, 39, 36, 0.5), rgba(44, 39, 36, 0.8)),
                   url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80") center/cover;
@@ -301,6 +302,51 @@
     .info-text-box, .rsvp-container { max-width: 780px; margin: 0 auto; text-align: center; background: var(--paper); border: 1px solid var(--line-soft); border-radius: var(--radius); box-shadow: var(--shadow-soft); padding: 55px 45px; position: relative;}
     .rsvp-container { max-width: 660px; }
     .rsvp-lead { font-family: var(--header); font-style: italic; font-size: 1.7rem; margin: 0 0 40px; }
+
+    /* --- CUADRÍCULA DE INFORMACIÓN --- */
+    .info-subtitle {
+      font-family: var(--header); 
+      font-style: italic; 
+      font-size: 1.65rem; 
+      margin: 0 0 40px; 
+      color: var(--text);
+    }
+    
+    .details-grid { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 20px; 
+      margin-bottom: 50px; 
+    }
+    
+    .detail-item { 
+      padding: 30px 20px; 
+      background: var(--bg);
+      border: 1px solid var(--line-soft); 
+      border-radius: var(--radius); 
+      transition: transform 0.4s ease; 
+    }
+    
+    .detail-item:hover { 
+      transform: translateY(-4px); 
+      box-shadow: var(--shadow-soft); 
+      border-color: var(--accent);
+    }
+    
+    .detail-label { 
+      font-family: var(--header); 
+      font-size: 1.5rem; 
+      color: var(--accent-dark); 
+      margin: 0 0 12px; 
+      font-style: italic; 
+    }
+    
+    .detail-desc { 
+      font-size: 0.9rem; 
+      line-height: 1.6; 
+      color: var(--muted); 
+      margin: 0; 
+    }
 
     /* Diseño del bloque de Regalo (IBAN) */
     .gift-box {
@@ -422,7 +468,10 @@
     .footer-name { font-family: var(--header); font-size: 3.2rem; font-weight: 300; color: var(--accent-dark); margin: 0; display: inline-block; }
 
     /* --- RESPONSIVE Y CORRECCIÓN BUG MÓVIL --- */
-    @media (max-width: 900px) { .info-grid { grid-template-columns: 1fr; } .gallery { column-count: 2; } }
+    @media (max-width: 900px) { 
+      .info-grid { grid-template-columns: 1fr; } 
+      .gallery { column-count: 2; } 
+    }
     @media (max-width: 768px) { 
       .menu { display: none; } 
       .count-item { min-width: 120px; } 
@@ -431,6 +480,8 @@
       .hero { background-attachment: scroll !important; background-position: center top; }
       .iban-container { flex-direction: column; gap: 10px; padding: 15px; }
       .section-title::before { top: -50px; height: 40px; }
+      /* Adaptación de la nueva cuadrícula de información a móviles */
+      .details-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) { 
       .gallery { column-count: 1; } 
@@ -568,11 +619,24 @@
       <div class="container">
         <h2 class="section-title reveal">Información</h2>
         <div class="info-text-box reveal">
-          <p style="font-family: var(--header); font-style: italic; font-size: 1.65rem; margin-bottom: 26px;">Todo lo importante para el día</p>
-          <p><strong>Dress code:</strong> elegante.</p>
-          <p><strong>Autobús:</strong> Habrá un autobús que os recogerá en la Catedral para llevaros al banquete. Al terminar la fiesta, también habrá un autobús de vuelta. Podéis confirmar vuestra plaza en el formulario de asistencia.</p>
-          <p><strong>Niños:</strong> aquí podéis añadir la información que queráis comunicar.</p>
-          <p><strong>Alojamiento:</strong> os dejamos arriba algunas opciones recomendadas.</p>
+          <p class="info-subtitle">Todo lo importante para el día</p>
+          
+          <div class="details-grid">
+            <div class="detail-item">
+              <h4 class="detail-label">Dress Code</h4>
+              <p class="detail-desc">Formal y elegante.<br>¡Preparaos para disfrutar y deslumbrar!</p>
+            </div>
+            
+            <div class="detail-item">
+              <h4 class="detail-label">Autobús</h4>
+              <p class="detail-desc">Servicio de ida desde la Catedral al banquete, y trayectos de vuelta al finalizar la fiesta.</p>
+            </div>
+            
+            <div class="detail-item">
+              <h4 class="detail-label">Niños</h4>
+              <p class="detail-desc">Los peques son más que bienvenidos a acompañarnos, aunque tened en cuenta que no contaremos con servicio de animación.</p>
+            </div>
+          </div>
           
           <div class="gift-box">
             <p class="gift-text">El mejor regalo es vuestra compañía. Pero si deseáis tener un detalle con nosotros...</p>
