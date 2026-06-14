@@ -656,28 +656,28 @@
         <div class="rsvp-container reveal">
           <p class="rsvp-lead">¿Nos acompañas?</p>
 
-          <form id="rsvpForm" action="https://formspree.io/f/xwvabeeb" method="POST">
-            <input type="text" name="nombre" class="form-control" placeholder="Tu nombre completo" required>
-            <input type="text" name="acompanante" class="form-control" placeholder="Nombre de tu acompañante (Opcional)">
+          <form id="rsvpForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfmfRhyuWI7eGxd2rQW08O1h9LJqd5MVxgoSbfgiicmiRrEKw/formResponse" method="POST">
+            <input type="text" name="entry.1016808381" class="form-control" placeholder="Tu nombre completo" required>
+            <input type="text" name="entry.1329802773" class="form-control" placeholder="Nombre de tu acompañante (Opcional)">
 
             <div class="radio-group">
               <p>¿Asistirás?</p>
               <div class="radio-options">
-                <label><input type="radio" name="asistencia" value="Si" required> ¡Sí!</label>
-                <label><input type="radio" name="asistencia" value="No"> No puedo</label>
+                <label><input type="radio" name="entry.2142566443" value="Sí" required> ¡Sí!</label>
+                <label><input type="radio" name="entry.2142566443" value="No"> No puedo</label>
               </div>
             </div>
 
             <div class="radio-group">
               <p>¿Necesitas plaza de autobús?</p>
               <div class="radio-options">
-                <label><input type="radio" name="autobus" value="Si"> Sí, por favor</label>
-                <label><input type="radio" name="autobus" value="No"> No, iré por mi cuenta</label>
+                <label><input type="radio" name="entry.1912041714" value="Sí"> Sí, por favor</label>
+                <label><input type="radio" name="entry.1912041714" value="No"> No, iré por mi cuenta</label>
               </div>
             </div>
 
-            <input type="text" name="alergias" class="form-control" placeholder="Alergias o dieta (Opcional)">
-            <input type="text" name="cancion" class="form-control" placeholder="Canción que no puede faltar">
+            <input type="text" name="entry.1894055496" class="form-control" placeholder="Alergias o dieta (Opcional)">
+            <input type="text" name="entry.1546334148" class="form-control" placeholder="Canción que no puede faltar">
 
             <button type="submit" class="btn-solid">Enviar confirmación</button>
           </form>
@@ -817,19 +817,14 @@
       btn.disabled = true;
 
       try {
-        const res = await fetch(f.action, {
+        await fetch(f.action, {
           method: "POST",
           body: new FormData(f),
-          headers: { "Accept": "application/json" }
+          mode: "no-cors"
         });
 
-        if (res.ok) {
-          f.reset();
-          document.getElementById("successModal").classList.add("show");
-        } else {
-          const data = await res.json();
-          alert("Error: " + (data.error || "No se pudo enviar. Revisa Formspree."));
-        }
+        f.reset();
+        document.getElementById("successModal").classList.add("show");
       } catch (error) {
         alert("Parece que hay un problema de conexión.");
       } finally {
