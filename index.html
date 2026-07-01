@@ -272,6 +272,29 @@
     .place-link { display: inline-block; margin-top: 18px; border-bottom: 1px solid var(--accent); color: var(--text); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; padding-bottom: 4px; }
     .place-link:hover { color: var(--accent-dark); border-color: var(--accent-dark); }
 
+    /* --- TARJETA DESTACADA (HOTEL PRINCIPAL) --- */
+    .featured-card {
+      border: 1.5px solid var(--accent) !important;
+      box-shadow: 0 15px 35px rgba(186, 150, 83, 0.15) !important;
+      position: relative;
+    }
+    .featured-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #fff;
+      padding: 6px 22px;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-radius: 30px;
+      z-index: 10;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
     /* --- BOTÓN CALENDARIO --- */
     .btn-calendar {
       display: inline-block;
@@ -579,11 +602,13 @@
         <p class="section-intro reveal">Algunas opciones recomendadas para que podáis organizar la estancia con comodidad.</p>
 
         <div class="info-grid">
-          <div class="info-card reveal">
+          <div class="info-card featured-card reveal">
+            <div class="featured-badge">Hotel Principal</div>
             <img src="hotel2.jpeg" alt="Hotel Real" class="place-image" loading="lazy">
             <h3 class="place-title" style="font-size:1.95rem;">Hotel Real Lleida</h3>
             <p>Av. de Blondel, 22, 25002 Lleida<br>
-            <span style="color: var(--accent-dark); font-size: 0.9em; display: block; margin-top: 8px;"><em>* Hemos reservado habitaciones para nuestro enlace. Indicad que venís a la boda de Alba y Jorge al hacer vuestra reserva.</em></span></p>
+            <span style="color: var(--accent-dark); font-size: 0.9em; display: block; margin-top: 8px;"><em>* Hemos reservado habitaciones para nuestro enlace. Indicad que venís a la boda de Alba y Jorge al hacer vuestra reserva.</em></span>
+            <span style="color: var(--muted); font-size: 0.9em; display: block; margin-top: 8px;">Su gran ventaja es la cercanía a la Catedral, por lo que será el punto oficial de salida y llegada del autobús.</span></p>
             <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Real+Lleida" target="_blank" class="place-link">Ver ubicación</a>
           </div>
 
