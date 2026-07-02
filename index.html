@@ -492,7 +492,7 @@
 
     /* --- RESPONSIVE Y CORRECCIÓN BUG MÓVIL --- */
     @media (max-width: 900px) { 
-      .info-grid { grid-template-columns: 1fr !important; } 
+      .info-grid { grid-template-columns: 1fr; } 
       .gallery { column-count: 2; } 
     }
     @media (max-width: 768px) { 
@@ -601,9 +601,7 @@
         <h2 class="section-title reveal">Alojamiento</h2>
         <p class="section-intro reveal">Algunas opciones recomendadas para que podáis organizar la estancia con comodidad.</p>
 
-        <!-- Se ha añadido style para que las tres tarjetas se adapten bien al contenedor -->
-        <div class="info-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-          
+        <div class="info-grid">
           <div class="info-card featured-card reveal">
             <div class="featured-badge">Hotel Principal</div>
             <img src="hotel2.jpeg" alt="Hotel Real" class="place-image" loading="lazy">
@@ -620,15 +618,6 @@
             <p>Calle Maria Montessori, 6, 25001 Lleida</p>
             <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Ibis+Lleida" target="_blank" class="place-link">Ver ubicación</a>
           </div>
-
-          <!-- NUEVO HOTEL: Hotel Ramon Berenguer IV -->
-          <div class="info-card reveal">
-            <img src="HOTEL RAMON.jpg" alt="Hotel Ramon Berenguer IV" class="place-image" loading="lazy">
-            <h3 class="place-title" style="font-size:1.95rem;">Hotel Ramon Berenguer IV</h3>
-            <p>Plaça de Ramon Berenguer IV, 2, 25007 Lleida</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Ramon+Berenguer+IV+Lleida" target="_blank" class="place-link">Ver ubicación</a>
-          </div>
-
         </div>
       </div>
     </section>
